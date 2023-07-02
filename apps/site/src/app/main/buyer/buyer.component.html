@@ -1,0 +1,50 @@
+<div class="flex lg:flex-row flex-col lg:space-x-4">
+  <div class="flex flex-col">
+    <mat-form-field appearance="outline">
+      <mat-label>Số Lượng VND Mua</mat-label>
+      <input type="number" (change)="OnChangeSL()" [(ngModel)]="BuyData.Soluong" [ngModelOptions]="{standalone: true}"
+       matInput placeholder="Số Lượng 1 Bán">
+       <mat-hint><span class="text-blue-500">{{(BuyData.Soluong| number:'1.0-0')||'0'}}đ</span></mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Phí Giao Dịch</mat-label>
+      <input type="number" disabled [(ngModel)]="BuyData.Phimua" [ngModelOptions]="{standalone: true}" matInput placeholder="Phí Giao Dịch">
+      <mat-hint><span class="text-blue-500">{{(BuyData.Phimua| number:'1.0-0')||'0'}}đ</span></mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>JPY Thanh Toán</mat-label>
+      <input type="number" disabled [(ngModel)]="BuyData.DVTra" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">
+      <mat-hint><span class="text-blue-500">{{(BuyData.DVTra| number:'1.0-0')||'0'}} JPY</span></mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="flex flex-col">
+    <mat-form-field appearance="outline">
+      <mat-label>TK VND Khách Hàng</mat-label>
+      <input [(ngModel)]="BuyData.TK1KH" [ngModelOptions]="{standalone: true}" matInput placeholder="TK JPY Khách Hàng"> 
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.TK1KH" (click)="openSnackBar('Coppy '+ BuyData.TK1KH, 'Close')">
+        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email Khách Hàng</mat-label>
+      <input [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" matInput placeholder="Email Khách Hàng">
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.Email" (click)="openSnackBar('Coppy '+ BuyData.Email, 'Close')">
+        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>TK JPY Công Ty</mat-label>
+      <input [(ngModel)]="BuyData.TK2Cty" [ngModelOptions]="{standalone: true}" matInput placeholder="TK JPY Công Ty">
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.TK2Cty" (click)="openSnackBar('Coppy '+ BuyData.TK2Cty, 'Close')">
+        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>Nội Dung</mat-label>
+  <textarea matInput [(ngModel)]="BuyData.Noidungmua" [ngModelOptions]="{standalone: true}"></textarea>
+</mat-form-field>
+<div class="text-center">
+  <a mat-raised-button color="primary" [routerLink]="['/transfer']" [queryParams]="BuyData" (click)="CreateBuy(BuyData)">Xác Nhận</a>
+</div>

@@ -1,0 +1,31 @@
+  <div class="!flex flex-col flex-auto relative bg-white !h-full">
+      <div class="relative flex flex-col py-2">
+          <div class="text-center">Live Chat</div>
+      </div>
+      <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
+              <div *ngFor="let message of chatMessages" class="message max-w-[70%] w-auto p-2 rounded bg-white">
+                <div class="min-w-4 leading-5">
+                  <ng-container *ngIf="message.image; else textMessage">
+                    <strong>{{ message.sender }}:</strong>
+                    <img [src]="message.image" alt="Uploaded Image" />
+                </ng-container>
+                <ng-template #textMessage>
+                    <strong>{{ message.sender }}:</strong> {{ message.message }}
+                </ng-template>
+                </div>
+          </div>
+      </div>
+      <div class="flex flex-col space-x-2 p-2">
+          <img [src]="GetImg(fileURL)" *ngIf="fileURL"/>
+          <div class="input-area flex flex-row space-x-2 items-center">
+              <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Type your message</mat-label>
+                  <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded" matInput
+                      [(ngModel)]="newMessage" placeholder="Type your message..." />
+                  <span matSuffix class="material-icons ml-2" (click)="sendMessage()">send</span>
+                  <span matPrefix class="material-icons mr-2" (click)="image.click()">image</span>
+              </mat-form-field>
+              <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
+          </div>
+      </div>
+  </div>
