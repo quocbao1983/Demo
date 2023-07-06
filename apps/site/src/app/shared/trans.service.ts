@@ -17,7 +17,7 @@ export class ExchangeService {
     return this._exchange.asObservable();
   }
   getByid(id: any): Observable<any> {
-    return this._httpClient.get<any>(`${this.APIURL}/demo_trans/id`).pipe(
+    return this._httpClient.get<any>(`${this.APIURL}/demo_trans/${id}`).pipe(
       tap((response: any) => {
         this._exchange.next(response);
       })

@@ -31,7 +31,7 @@ import { HttpClient } from '@angular/common/http';
           { path: '', loadChildren: () => import('./hompage/hompage.module').then(m => m.HompageModule) },
           { path: 'buyer', loadChildren: () => import('./buyer/buyer.module').then(m => m.BuyerModule) },
           { path: 'seller', loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule) },
-          { path: 'transfer', loadChildren: () => import('./transfer/transfer.module').then(m => m.TransferModule) },
+          { path: 'transfer/:id', loadChildren: () => import('./transfer/transfer.module').then(m => m.TransferModule) },
         ]
       },
     ])

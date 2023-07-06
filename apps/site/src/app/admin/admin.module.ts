@@ -6,12 +6,23 @@ import { MaterialModule } from '../shared/material.module';
 import { ConfigComponent } from './config/config.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     RouterModule.forChild([
       { path: '', redirectTo: 'config', pathMatch: 'full' },
       {

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../shared/local-storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { ConfigService } from '../../shared/config.service';
+import { ExchangeService } from '../../shared/trans.service';
+import { generateOrderId } from '../../shared/shared.utils';
 
 @Component({
   selector: 'app-seller',
@@ -8,12 +13,29 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./seller.component.css']
 })
 export class SellerComponent implements OnInit {
-  SellData:any={type:1,Trangthai:0}
+  SellData: any = {
+    QuantityIn: 0,
+    QuantityOut: 0,
+    // CompanyAccount1: string,
+    // CompanyAccount2: string,
+    // CustomAccount1: string,
+    // CustomAccount2: string,
+    // Content: string,
+    // Email
+    Fee: 0,
+    // Note: string,
+    Type: 2,
+    Status: 0
+  }
   Config:any={}
   Trans:any[]=[]
   constructor(
     private _LocalStorageService:LocalStorageService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _ExchangeService: ExchangeService,
+    private _ConfigService: ConfigService,
+    private _NotifierService: NotifierService,
+    private router: Router
   ) { 
  
   }
@@ -23,19 +45,25 @@ export class SellerComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.Config = this._LocalStorageService.getItem('config')
-    this.Trans = this._LocalStorageService.getItem('trans')||[]
-    this.SellData.Phiban = this.Config.Phiban
-
+    this._ConfigService.getAll().subscribe(data => {
+      this.Config = data[0]
+      console.log(this.Config);
+      this.SellData.Fee = this.Config.SellFee
+    })
   }
   CreateSell(data:any)
   {
-    this.Trans.push(data)
-    this._LocalStorageService.setItem('trans',this.Trans)
+    data.Code = generateOrderId(11);
+    this._ExchangeService.createExchange(data).subscribe(data => 
+      {
+        this._NotifierService.notify("success", "Create Success")
+          this.router.navigate(['transfer',data.id]);
+        }
+      )
   }
-  OnChangeSL()
+  OnChange()
   {   
-    this.SellData.DVNhan = (this.SellData.Soluong * (1 - (this.SellData.Phiban / 100))).toFixed();
+    this.SellData.QuantityOut = (this.SellData.QuantityIn * (1 - (this.SellData.Fee / 100))).toFixed();
   }
 
 }

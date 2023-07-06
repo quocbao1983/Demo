@@ -3,6 +3,8 @@ import {Entity,Column,PrimaryGeneratedColumn,CreateDateColumn, ManyToOne, JoinCo
 export class TransEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
+    @Column({ type: 'text', collation: 'utf8_general_ci' })
+    Code: string;
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     QuantityIn: number;
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})

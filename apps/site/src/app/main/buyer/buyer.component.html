@@ -1,40 +1,40 @@
 <div class="flex lg:flex-row flex-col lg:space-x-4">
   <div class="flex flex-col">
     <mat-form-field appearance="outline">
-      <mat-label>Số Lượng VND Mua</mat-label>
+      <mat-label>{{'Quantity_In'| translate }}</mat-label>
       <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
-       matInput placeholder="Số Lượng 1 Bán">
+       matInput placeholder="{{'Quantity_In'| translate }}">
        <mat-hint><span class="text-blue-500">{{(BuyData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Phí Giao Dịch</mat-label>
-      <input type="number" disabled [(ngModel)]="BuyData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="Phí Giao Dịch">
+      <mat-label>{{'Fee'| translate }}</mat-label>
+      <input type="number" disabled [(ngModel)]="BuyData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Fee'| translate }}">
       <mat-hint><span class="text-blue-500">{{(BuyData.Fee| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>JPY Thanh Toán</mat-label>
+      <mat-label>{{'Quantity_Out'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="BuyData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">
       <mat-hint><span class="text-blue-500">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} JPY</span></mat-hint>
     </mat-form-field>
   </div>
   <div class="flex flex-col">
     <mat-form-field appearance="outline">
-      <mat-label>TK VND Khách Hàng</mat-label>
-      <input [(ngModel)]="BuyData.CustomAccount1" [ngModelOptions]="{standalone: true}" matInput placeholder="TK JPY Khách Hàng"> 
+      <mat-label>{{'Custom_Account1'| translate }}</mat-label>
+      <input [(ngModel)]="BuyData.CustomAccount1" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Custom_Account1'| translate }}"> 
       <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.CustomAccount1" (click)="openSnackBar('Coppy '+ BuyData.CustomAccount1, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Email Khách Hàng</mat-label>
-      <input [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" matInput placeholder="Email Khách Hàng">
+      <mat-label>{{'Email'| translate }}</mat-label>
+      <input [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Email'| translate }}">
       <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.Email" (click)="openSnackBar('Coppy '+ BuyData.Email, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>TK JPY Công Ty</mat-label>
-      <input [(ngModel)]="BuyData.CompanyAccount2" [ngModelOptions]="{standalone: true}" matInput placeholder="TK JPY Công Ty">
+      <mat-label>{{'Company_Account2'| translate }}</mat-label>
+      <input [(ngModel)]="BuyData.CompanyAccount2" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Company_Account2'| translate }}">
       <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.CompanyAccount2" (click)="openSnackBar('Coppy '+ BuyData.CompanyAccount2, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
@@ -42,9 +42,9 @@
   </div>
 </div>
 <mat-form-field appearance="outline" class="w-full">
-  <mat-label>Nội Dung</mat-label>
+  <mat-label>{{'Note'| translate }}</mat-label>
   <textarea matInput [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}"></textarea>
 </mat-form-field>
 <div class="text-center">
-  <a mat-raised-button color="primary" [routerLink]="['/transfer']" [queryParams]="BuyData" (click)="CreateBuy(BuyData)">Xác Nhận</a>
+  <a mat-raised-button color="primary" (click)="CreateBuy(BuyData)">{{'Confirm'| translate }}</a>
 </div>

@@ -1,50 +1,50 @@
 <div class="flex lg:flex-row flex-col lg:space-x-4">
   <div class="flex flex-col">
     <mat-form-field appearance="outline">
-      <mat-label>Số Lượng VND Bán</mat-label>
-      <input type="number" (change)="OnChangeSL()" [(ngModel)]="SellData.Soluong" [ngModelOptions]="{standalone: true}"
+      <mat-label>{{'Sell_Quantity_In'| translate }}</mat-label>
+      <input type="number" (change)="OnChange()" [(ngModel)]="SellData.QuantityIn" [ngModelOptions]="{standalone: true}"
        matInput placeholder="Số Lượng 1 Bán">
-       <mat-hint><span class="text-blue-500">{{(SellData.Soluong| number:'1.0-0')||'0'}}đ</span></mat-hint>
+       <mat-hint><span class="text-blue-500">{{(SellData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Phí Giao Dịch</mat-label>
-      <input type="number" disabled [(ngModel)]="SellData.Phiban" [ngModelOptions]="{standalone: true}" matInput placeholder="Phí Giao Dịch">
-      <mat-hint><span class="text-blue-500">{{(SellData.Phiban| number:'1.0-0')||'0'}}đ</span></mat-hint>
+      <mat-label>{{'Sell_Fee'| translate }}</mat-label>
+      <input type="number" disabled [(ngModel)]="SellData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Sell_Fee'| translate }}">
+      <mat-hint><span class="text-blue-500">{{(SellData.Fee| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>JPY Nhận Được</mat-label>
-      <input type="number" disabled [(ngModel)]="SellData.DVNhan" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">
-      <mat-hint><span class="text-blue-500">{{(SellData.DVNhan| number:'1.0-0')||'0'}}JPY</span></mat-hint>
+      <mat-label>{{'Sell_Quantity_Out'| translate }}</mat-label>
+      <input type="number" disabled [(ngModel)]="SellData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Sell_Quantity_Out'| translate }}">
+      <mat-hint><span class="text-blue-500">{{(SellData.QuantityOut| number:'1.0-0')||'0'}}JPY</span></mat-hint>
     </mat-form-field>
   </div>
   <div class="flex flex-col">
     <mat-form-field appearance="outline">
-      <mat-label>TK JPY Khách Hàng</mat-label>
-      <input [(ngModel)]="SellData.TK2KH" [ngModelOptions]="{standalone: true}" matInput placeholder="TK JPY Khách Hàng">
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.TK2KH" (click)="openSnackBar('Coppy '+ SellData.TK2KH, 'Close')">
+      <mat-label>{{'Custom_Account2'| translate }}</mat-label>
+      <input [(ngModel)]="SellData.CustomAccount2" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Custom_Account2'| translate }}">
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.CustomAccount2" (click)="openSnackBar('Coppy '+ SellData.CustomAccount2, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>TK VN Khách Hàng</mat-label>
-      <input [(ngModel)]="SellData.TK1KH" [ngModelOptions]="{standalone: true}" matInput placeholder="TK VN Khách Hàng">
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.TK1KH" (click)="openSnackBar('Coppy '+ SellData.TK1KH, 'Close')">
+      <mat-label>{{'Custom_Account1'| translate }}</mat-label>
+      <input [(ngModel)]="SellData.CustomAccount1" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Custom_Account1'| translate }}">
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.CustomAccount1" (click)="openSnackBar('Coppy '+ SellData.CustomAccount1, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>TK VN Công Ty</mat-label>
-      <input [(ngModel)]="SellData.TK1Cty" [ngModelOptions]="{standalone: true}" matInput placeholder="TK VN Công Ty">
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.TK1Cty" (click)="openSnackBar('Coppy '+ SellData.TK1Cty, 'Close')">
+      <mat-label>{{'Company_Account1'| translate }}</mat-label>
+      <input [(ngModel)]="SellData.CompanyAccount1" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Company_Account1'| translate }}">
+      <button matSuffix mat-icon-button [cdkCopyToClipboard]="SellData.CompanyAccount1" (click)="openSnackBar('Coppy '+ SellData.TK1Cty, 'Close')">
         <mat-icon><span class="material-icons">content_copy</span></mat-icon>
       </button>
     </mat-form-field>
   </div>
 </div>
 <mat-form-field appearance="outline" class="w-full">
-  <mat-label>Nội Dung</mat-label>
-  <textarea [(ngModel)]="SellData.Noidungban" [ngModelOptions]="{standalone: true}" matInput placeholder="Nội Dung"></textarea>
+  <mat-label>{{'Note'| translate }}</mat-label>
+  <textarea [(ngModel)]="SellData.Note" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Note'| translate }}"></textarea>
 </mat-form-field>
 <div class="text-center">
-  <a mat-raised-button color="primary" [routerLink]="['/transfer']" [queryParams]="SellData" (click)="CreateSell(SellData)">Xác Nhận</a>
+  <a mat-raised-button color="primary" (click)="CreateSell(SellData)">{{'Confirm'| translate }}</a>
 </div>
