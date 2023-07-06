@@ -1,7 +1,9 @@
 {
-	"SITE_BUY": "Buy",
-	"SITE_SELL": "Sell",
-	"Sell_Quantity_In": "Quantity In",
-	"Sell_Fee": "Fee",
-	"Sell_Quantity_Out": "Quantity Out"
+	"Tong_quy_mua":"TỔNG QUỸ JPY CÓ THỂ MUA",
+	"Gia_mua":"GIÁ MUA :",
+	"Mua_ngay":"MUA NGAY >",
+	"Gia_ban":"GIÁ BÁN :",
+	"Ban_ngay":"BÁN NGAY >",
+	"Noi_dung_trang_chu":"*Hoàn tất giao dịch trong vòng 15 phút hoặc được hoàn tiền",
+	"Cac_giao_dich_thanh_cong":"CÁC GIAO DỊCH THÀNH CÔNG"
 }

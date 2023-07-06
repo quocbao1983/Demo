@@ -1,20 +1,24 @@
 <div class="flex lg:flex-row flex-col lg:space-x-4">
   <div class="flex flex-col">
     <mat-form-field appearance="outline">
-      <mat-label>{{'Quantity_In'| translate }}</mat-label>
+      <mat-label>{{'Quantity'| translate }}</mat-label>
       <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
-       matInput placeholder="{{'Quantity_In'| translate }}">
+       matInput placeholder="{{'Quantity'| translate }}">
        <mat-hint><span class="text-blue-500">{{(BuyData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <!-- <mat-form-field appearance="outline">
       <mat-label>{{'Fee'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="BuyData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Fee'| translate }}">
-      <mat-hint><span class="text-blue-500">{{(BuyData.Fee| number:'1.0-0')||'0'}}đ</span></mat-hint>
+      <mat-hint><span class="text-blue-500">{{(BuyData.Fee| number:'1.0-0')||'0'}}%</span></mat-hint>
     </mat-form-field> -->
+    <div class="flex flex-row space-x-2 p-2">
+      <span>{{'Fee'| translate }}</span> <span>{{(BuyData.Fee| number:'1.0-0')||'0'}}%</span>
+    </div>
+   
     <mat-form-field appearance="outline">
-      <mat-label>{{'Quantity_Out'| translate }}</mat-label>
+      <mat-label>{{'Total'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="BuyData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">
-      <mat-hint><span class="text-blue-500">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} JPY</span></mat-hint>
+      <mat-hint><span class="text-blue-500">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} {{'Value'| translate }}</span></mat-hint>
     </mat-form-field>
   </div>
   <div class="flex flex-col">
