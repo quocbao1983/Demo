@@ -6,11 +6,11 @@
        matInput placeholder="{{'Quantity_In'| translate }}">
        <mat-hint><span class="text-blue-500">{{(BuyData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
       <mat-label>{{'Fee'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="BuyData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Fee'| translate }}">
       <mat-hint><span class="text-blue-500">{{(BuyData.Fee| number:'1.0-0')||'0'}}đ</span></mat-hint>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field appearance="outline">
       <mat-label>{{'Quantity_Out'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="BuyData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">

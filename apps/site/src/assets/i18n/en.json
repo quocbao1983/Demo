@@ -1,4 +1,7 @@
 {
 	"SITE_BUY": "Buy",
-	"SITE_SELL": "Sell"
+	"SITE_SELL": "Sell",
+	"Sell_Quantity_In": "Quantity In",
+	"Sell_Fee": "Fee",
+	"Sell_Quantity_Out": "Quantity Out"
 }

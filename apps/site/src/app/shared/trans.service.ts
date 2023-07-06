@@ -42,18 +42,11 @@ export class ExchangeService {
     );
   }
   updateExchange(dulieu: any): Observable<any> {
-    return this.exchanges$.pipe(
-      take(1),
-      switchMap((exchanges: any) =>
-        this._httpClient.patch(`${this.APIURL}/demo_trans/${dulieu.id}`, dulieu).pipe(
+    return this._httpClient.patch(`${this.APIURL}/demo_trans/${dulieu.id}`, dulieu).pipe(
           map((exchange: any) => {
-            const index = exchanges.findIndex((item: any) => item.id === exchange.id);
-            exchanges[index] = exchange;
-            this._exchanges.next(exchanges);
+            this._exchange.next(exchange);
             return exchange;
-          })
-        )
-      ))
+          }))
   }
   deleteExchange(dulieu: any) {
     return this.exchanges$.pipe(

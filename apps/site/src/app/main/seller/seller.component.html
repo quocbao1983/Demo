@@ -4,7 +4,7 @@
       <mat-label>{{'Sell_Quantity_In'| translate }}</mat-label>
       <input type="number" (change)="OnChange()" [(ngModel)]="SellData.QuantityIn" [ngModelOptions]="{standalone: true}"
        matInput placeholder="Số Lượng 1 Bán">
-       <mat-hint><span class="text-blue-500">{{(SellData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
+       <mat-hint><span class="text-blue-500">{{(SellData.QuantityIn*this.Config.Sellprice| number:'1.0-0')||'0'}}đ</span></mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>{{'Sell_Fee'| translate }}</mat-label>

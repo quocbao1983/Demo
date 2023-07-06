@@ -57,7 +57,7 @@ export class TransactionComponent implements OnInit {
   }
   UpdateTT(data:any)
   {
-    data.Trangthai=!data.Trangthai;
+    data.Status=!data.Status;
     this._ExchangeService.updateExchange(data).subscribe(data=>this._NotifierService.notify("success", "Update Success"))
   }
 }
