@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-main',
@@ -12,11 +13,27 @@ export class MainComponent implements OnInit {
   Lists: any[] = []
   FilterLists: any[] = []
   Sitemap: any = { loc: '', priority: '' }
+  langselect:any = 'en';
+  ListLang:any={
+    en:'English',
+    zh:'China',
+    ko:'South Korea',
+    ru:'Russia',
+    fr:'France',
+  }
   @ViewChild('drawer', { static: true }) drawer!: MatDrawer;
   constructor(
     private dialog: MatDialog,
     private _Notification: NotifierService,
+    public translate: TranslateService
   ) {
+    translate.addLangs(['en','zh','ko','ru','fr']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();  
+  }
+  ChangeLang(event:any)
+  {
+    this.translate.use(event)
   }
   ngOnInit(): void {
     // this._RedirectService.getAll().subscribe((data)=>{

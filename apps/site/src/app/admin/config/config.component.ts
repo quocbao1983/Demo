@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../shared/local-storage.service';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
+import { ConfigService } from '../../shared/config.service';
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent implements OnInit {
-  TransInit:any[]=[
+TransInit:any[]=[
     {
         "type": 1,
         "Trangthai": 0,
@@ -33,40 +34,49 @@ export class ConfigComponent implements OnInit {
     }
 ]
 ConfigInit:any ={
-  "Giaban": "21000",
-  "Giamua": "19000",
-  "Phiban": "10",
-  "Phimua": "5",
-  "MinGD": "5000000",
-  "MaxGD": "20000000",
-  "TongGD": "5000000000"
+  "Sellprice": "21000",
+  "Buyprice": "19000",
+  "SellFee": "10",
+  "BuyFee": "5",
+  "Mintrade": "5000000",
+  "Maxtrade": "20000000",
+  "Totaltrade": "5000000000"
 }
   Config:any={}
   editableContent: string = '';
   constructor(
     private _LocalStorageService:LocalStorageService,
     private _NotifierService:NotifierService,
-    private router: Router
+    private router: Router,
+    private _ConfigService: ConfigService,
+    
     ) { 
      
     }
   ngOnInit() {
-    this.Config = this._LocalStorageService.getItem('config')?this._LocalStorageService.getItem('config'):{};
+    this._ConfigService.getAll().subscribe((data)=>
+    {
+      this.Config=data[0]
+      console.log(data);  
+    }
+    );
   }
   LoadInit() {
-    this._LocalStorageService.setItem('config', this.ConfigInit)
-    this._LocalStorageService.setItem('trans', this.TransInit)
-    this._NotifierService.notify("success","Nhập Thành Công")
-    window.location.reload();
+    if(this.Config.length==0)
+    {
+      this._ConfigService.createConfig(this.ConfigInit).subscribe(data=>this._NotifierService.notify("success","Create Success"))
+    }
+    else
+    {
+     this._NotifierService.notify("success","Demo data has been loaded")
+    }
   }
   onContentChange(event: any,field:any) {
     this.Config[field] = event.target.innerHTML;
   }
   Update(data:any)
   {
-    this._LocalStorageService.setItem('config', data)
-    this._NotifierService.notify("success","Cập Nhật Thành Công")
-    window.location.reload();
+    this._ConfigService.updateConfig(data).subscribe(data=>this._NotifierService.notify("success","Update Success"))
   }
   ClearAll()
   {

@@ -1,30 +1,39 @@
-  <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav w-1/3" mode="over" position="end">
-      <app-livechat></app-livechat>
-    </mat-drawer>
-  
-    <div class="example-sidenav-content">
-      <section class="h-full gradient-form bg-gray-200 md:h-screen">
-        <div class="container py-12 px-6 h-full m-auto">
-          <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-            <div class="xl:w-6/12 w-full">
-              <div class="block bg-white shadow-lg rounded-lg">
-                <div class="lg:flex lg:flex-wrap g-0">
-                  <div class="lg:w-full px-4 md:px-0">
-                    <div class="md:p-12 md:mx-6">
-                      <div class="flex flex-col space-y-3 overflow-auto max-h-screen">
-                        <div class="flex flex-col justify-center space-y-4 mx-auto p-4 rounded-md bg-white">
-                          <div class="flex flex-col space-y-2 text-sm m-auto">
-                            <div class="flex flex-row">
-                              <a class="m-auto text-center w-48 border p-3 rounded" routerLink="/">Logo</a>
-                              <span class="material-icons text-2xl" (click)="drawer.toggle()">live_help</span>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav w-1/3" mode="over" position="end">
+    <app-livechat></app-livechat>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <section class="h-full gradient-form bg-gray-200 md:h-screen">
+      <div class="container py-12 px-6 h-full m-auto">
+        <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+          <div class="xl:w-6/12 w-full">
+            <div class="block bg-white shadow-lg rounded-lg">
+              <div class="lg:flex lg:flex-wrap g-0">
+                <div class="lg:w-full px-4 md:px-0">
+                  <div class="md:p-12 md:mx-6">
+                    <div class="flex flex-col space-y-3 overflow-auto max-h-screen">
+                      <div class="flex flex-col justify-center space-y-4 mx-auto p-4 rounded-md bg-white">
+                        <div class="flex flex-col space-y-2 text-sm m-auto">
+                          <div class="flex flex-row">
+                            <a class="m-auto text-center w-48 border p-3 rounded" routerLink="/">Logo</a>
+                            <span class="material-icons text-2xl" (click)="drawer.toggle()">live_help</span>
+                            <div class="text-xs">
+                              <mat-form-field appearance="outline" class="w-24">
+                                <mat-select (ngModelChange)="ChangeLang($event)" [(ngModel)]="langselect"
+                                  [ngModelOptions]="{standalone: true}">
+                                  <mat-option [value]="lang"
+                                    *ngFor="let lang of translate.getLangs()">{{ListLang[lang]}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
                             </div>
-                            <div class="flex flex-row justify-center space-x-4">
-                                <a mat-raised-button [routerLink]="[ '/seller' ]" routerLinkActive="!bg-blue-500 !text-white">Bán</a>
-                                <a mat-raised-button [routerLink]="[ '/buyer' ]" routerLinkActive="!bg-blue-500 !text-white">Mua</a>
-                              </div>
-                            <router-outlet></router-outlet>
                           </div>
+                          <div class="flex flex-row justify-center space-x-4">
+                            <a mat-raised-button [routerLink]="[ '/seller' ]"
+                              routerLinkActive="!bg-blue-500 !text-white">{{'SITE_SELL'| translate }}</a>
+                            <a mat-raised-button [routerLink]="[ '/buyer' ]"
+                              routerLinkActive="!bg-blue-500 !text-white">{{'SITE_BUY'| translate }}</a>
+                          </div>
+                          <router-outlet></router-outlet>
                         </div>
                       </div>
                     </div>
@@ -33,8 +42,8 @@
               </div>
             </div>
           </div>
-          </div>
-      </section>
-    </div>
-  
-  </mat-drawer-container>
+        </div>
+      </div>
+    </section>
+  </div>
+</mat-drawer-container>

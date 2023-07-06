@@ -12,40 +12,40 @@
                       <div class="flex flex-col space-y-3">
                         <mat-form-field appearance="outline">
                           <mat-label>Giá Bán</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Giaban" [ngModelOptions]="{standalone: true}">
-                          <mat-hint><span class="text-blue-500">{{(Config.Giaban| number:'1.0-0')||'0'}}đ</span></mat-hint>
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Sellprice" [ngModelOptions]="{standalone: true}">
+                          <mat-hint><span class="text-blue-500">{{(Config.Sellprice| number:'1.0-0')||'0'}}đ</span></mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                           <mat-label>Giá Mua</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Giamua" [ngModelOptions]="{standalone: true}">
-                          <mat-hint><span class="text-blue-500">{{(Config.Giamua| number:'1.0-0')||'0'}}đ</span></mat-hint>
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Buyprice" [ngModelOptions]="{standalone: true}">
+                          <mat-hint><span class="text-blue-500">{{(Config.Buyprice| number:'1.0-0')||'0'}}đ</span></mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                           <mat-label>Phí Bán</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Phiban" [ngModelOptions]="{standalone: true}">
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.SellFee" [ngModelOptions]="{standalone: true}">
                           <span matSuffix class="material-icons ml-2">%</span>
                         </mat-form-field>  
                         <mat-form-field appearance="outline">
                           <mat-label>Phí Mua</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Phimua" [ngModelOptions]="{standalone: true}">
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.BuyFee" [ngModelOptions]="{standalone: true}">
                           <span matSuffix class="material-icons ml-2">%</span>
                         </mat-form-field>
                       </div>
                       <div class="flex flex-col space-y-3 ">
                         <mat-form-field appearance="outline">
                           <mat-label>Min Giao Dịch</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.MinGD" [ngModelOptions]="{standalone: true}">
-                          <mat-hint><span class="text-blue-500">{{(Config.MinGD| number:'1.0-0')||'0'}}đ</span></mat-hint>
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Mintrade" [ngModelOptions]="{standalone: true}">
+                          <mat-hint><span class="text-blue-500">{{(Config.Mintrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                           <mat-label>Max Giao Dịch</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.MaxGD" [ngModelOptions]="{standalone: true}">
-                          <mat-hint><span class="text-blue-500">{{(Config.MaxGD| number:'1.0-0')||'0'}}đ</span></mat-hint>
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Maxtrade" [ngModelOptions]="{standalone: true}">
+                          <mat-hint><span class="text-blue-500">{{(Config.Maxtrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                           <mat-label>Tổng Giao Dịch</mat-label>
-                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.TongGD" [ngModelOptions]="{standalone: true}">
-                          <mat-hint><span class="text-blue-500">{{(Config.TongGD| number:'1.0-0')||'0'}}đ</span></mat-hint>
+                          <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Totaltrade" [ngModelOptions]="{standalone: true}">
+                          <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
                         </mat-form-field>
                       </div>
                   </div>
