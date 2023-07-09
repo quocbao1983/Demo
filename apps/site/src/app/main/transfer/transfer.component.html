@@ -1,94 +1,51 @@
-<div class="flex flex-col space-y-2">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
-                <table class="w-full text-sm text-left">
-                    <tbody>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th colspan="2" scope="row" class="text-center text-2xl px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Code_orders'| translate }} : {{Data.Code}}
-                            </th>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Transfer_status'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="{{Data.Status==0?'text-orange-500':'text-green-500'}}">{{Data.Status==0?'Waiting':'Done'}}</span>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Quantity_In'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.QuantityIn| number:'1.0-0'||'0'}}đ
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Fee'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.Fee| number:'1.0-0'||'0'}}%
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Quantity_Out'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.QuantityOut| number:'1.0-0'||'0'}} JPY
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Custom_Account1'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.CustomAccount1}}
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Custom_Account2'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.CustomAccount2}}
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Company_Account1'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.CompanyAccount1}}
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Company_Account2'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.CompanyAccount2}}
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Email'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.Email}}
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                {{'Note'| translate }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{Data.Note}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+<div class="max-w-5xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
+    <div class="flex flex-col justify-between space-y-4 bg-[#441E5B] rounded py-4 px-20">
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-white">
+                <thead class="text-xs text-white">
+                    <tr>
+                        <th colspan="2" scope="row" class="text-center text-2xl px-6 py-3">
+                            <span>Mã Đơn Hàng : </span>
+                            <span>#{{Data.Code}}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Trạng thái giao dịch</td>
+                        <td>{{Data.Status==0?'Waiting':'Done'}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Số Lượng Mua/Bán</td>
+                        <td>{{Data.QuantityIn| number:'1.0-0'||'0'}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Phí</td>
+                        <td>{{Data.Fee| number:'1.0-0'||'0'}}%</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Tổng Thanh Toán</td>
+                        <td>{{Data.QuantityOut| number:'1.0-0'||'0'}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Tài Khoản VND Khách Hàng</td>
+                        <td>{{Data.CustomAccount1}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Email</td>
+                        <td>{{Data.Email}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Tài Khoản VND Công Ty</td>
+                        <td>{{Data.CompanyAccount2}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">Nội dung</td>
+                        <td>{{Data.Note}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+    </div>
 </div>

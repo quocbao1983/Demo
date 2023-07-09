@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
+import { DangnhapComponent } from './dangnhap/dangnhap.component';
+import { NgonnguComponent } from './ngonngu/ngonngu.component';
+import { NoidungComponent } from './noidung/noidung.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,17 +27,19 @@ import { HttpLoaderFactory } from '../app.module';
       }
     }),
     RouterModule.forChild([
-      { path: '', redirectTo: 'config', pathMatch: 'full' },
+      { path: '', redirectTo: 'cauhinh', pathMatch: 'full' },
       {
         path: '',
         component: AdminComponent,
         children: [
+          { path: 'cauhinh', component: ConfigComponent },
           { path: 'transaction', component: TransactionComponent },
-          { path: 'config', component: ConfigComponent }
+          { path: 'ngonngu', component: NgonnguComponent },
+          { path: 'noidung', component: NoidungComponent }
         ],
       },
     ]),
   ],
-  declarations: [AdminComponent, ConfigComponent, TransactionComponent],
+  declarations: [AdminComponent, ConfigComponent, TransactionComponent,DangnhapComponent,NgonnguComponent],
 })
 export class AdminModule {}

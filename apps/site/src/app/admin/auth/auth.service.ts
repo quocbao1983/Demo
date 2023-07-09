@@ -11,8 +11,8 @@ import {
 } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { AuthUtils } from './auth.utils';
-import { environment } from 'apps/hdermaapp/src/environments/environment';
 import { UsersService } from '../../shared/users.service';
+import { environment } from 'apps/site/src/environments/environment';
 @Injectable()
 export class AuthService {
   private readonly _secret: any;
@@ -24,7 +24,7 @@ export class AuthService {
     private _httpClient: HttpClient,
     private _userService: UsersService
   ) {
-    this._secret = 'site.hderma.vn';
+    this._secret = 'DemoToken';
     //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     // this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -32,17 +32,17 @@ export class AuthService {
   //     return this.currentUserSubject.value;
   // }
   set accessToken(token: string) {
-    localStorage.setItem('TazagroupToken', token);
+    localStorage.setItem('DemoToken', token);
   }
 
   get accessToken(): string {
-    return localStorage.getItem('TazagroupToken') ?? '';
+    return localStorage.getItem('DemoToken') ?? '';
   }
   Dangnhap(user: any): Observable<any> {
     if (this._authenticated) {
       return of([false, 'User Đã Đăng Nhập']);
     }
-    return this._httpClient.post(`${this.APIURL}/hderma_auth/login`, user).pipe(
+    return this._httpClient.post(`${this.APIURL}/test_auth/login`, user).pipe(
       switchMap((response: any) => {
         console.log(response);
         
@@ -59,7 +59,7 @@ export class AuthService {
       return of(true);
     }
     if (!this.accessToken || this.accessToken === 'undefined') {
-      localStorage.removeItem('TazagroupToken');
+      localStorage.removeItem('DemoToken');
       return of(false);
     }
     if (AuthUtils.isTokenExpired(this.accessToken)) {
@@ -69,7 +69,7 @@ export class AuthService {
     // return this.signInUsingToken();
   }
   Dangxuat(): Observable<any> {
-    localStorage.removeItem('TazagroupToken');
+    localStorage.removeItem('DemoToken');
     this._authenticated = false;
     return of(true);
   }

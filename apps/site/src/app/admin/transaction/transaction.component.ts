@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LocalStorageService } from '../../shared/local-storage.service';
 import { NotifierService } from 'angular-notifier';
 import { ExchangeService } from '../../shared/trans.service';
 @Component({
@@ -33,7 +32,6 @@ export class TransactionComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-    private _LocalStorageService:LocalStorageService,
     private _ExchangeService: ExchangeService,
     private _NotifierService: NotifierService,
   ) {

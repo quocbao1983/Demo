@@ -15,7 +15,7 @@
         "polyfills": "apps/site/src/polyfills.ts",
         "tsConfig": "apps/site/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/site/src/favicon.ico", "apps/site/src/assets"],
+        "assets": ["apps/site/src/favicon.ico", "apps/site/src/assets","apps/site/src/demo/assets"],
         "styles": ["apps/site/src/styles.scss","./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"],
         "scripts": []
       },

@@ -1,15 +1,44 @@
-<div class="flex flex-col w-full">
-  <div class="flex flex-row space-x-4 justify-center p-3">
-      <a [routerLink]="['config']">
-        <button mat-raised-button [color]="isActive('/admin/config') ? 'primary' : null">
-            Cấu Hình
-        </button>
-      </a>
-      <a [routerLink]="['transaction']">
-        <button mat-raised-button [color]="isActive('/admin/transaction') ? 'primary' : null">
-          Quản Lý Giao Dịch
-        </button>
-      </a>
+<mat-drawer-container class="example-container w-full h-full" autosize>
+    <mat-drawer #drawer mode="side" opened class="!flex flex-col w-3/4 flex-auto relative h-full" position="end">
+        <div class="relative flex flex-col h-full w-full overflow-auto">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class="!flex flex-col w-1/4 flex-auto relative bg-white !h-[100vh]">
+        <div class="relative flex flex-col h-full w-full overflow-auto">
+          <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
+            <div class="flex flex-col">
+                <div [routerLink]="[item.Slug]" routerLinkActive="router-link-active" (click)="drawer.open()"
+                    class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
+                    *ngFor="let item of FilterLists; let i = index">
+                    <div class="flex flex-row space-x-2 items-center justify-between w-full">
+                        <div class="flex flex-col space-y-2">
+                            <span>{{item.Title}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  <ng-template #dialogTemplate>
+    <div class="min-w-[672px]">
+    <div mat-dialog-title>Thêm Mới</div>
+    <div mat-dialog-content>
+        <div class="flex flex-col w-full space-y-4 p-4">
+            <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tiêu Đề</mat-label>
+            <input matInput [(ngModel)]="Detail.Title" [ngModelOptions]="{standalone: true}" placeholder="Tiêu Đề">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Slug</mat-label>
+            <input matInput [(ngModel)]="Detail.Slug" [ngModelOptions]="{standalone: true}" placeholder="Slug">
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="justify-center">
+        <button mat-button class="bg-red-400 hover:bg-red-600 text-white" mat-dialog-close="false">Huỷ</button>
+        <button mat-button class="bg-blue-400 hover:bg-blue-600 text-white" mat-dialog-close="true">Đồng Ý</button>
+    </div>
   </div>
-  <router-outlet></router-outlet>
-</div>
+  </ng-template>

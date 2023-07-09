@@ -1,31 +1,59 @@
-  <div class="!flex flex-col flex-auto relative bg-white !h-full">
-      <div class="relative flex flex-col py-2">
-          <div class="text-center">Live Chat</div>
-      </div>
-      <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
-              <div *ngFor="let message of chatMessages" class="message max-w-[70%] w-auto p-2 rounded bg-white">
-                <div class="min-w-4 leading-5">
-                  <ng-container *ngIf="message.image; else textMessage">
-                    <strong>{{ message.sender }}:</strong>
-                    <img [src]="message.image" alt="Uploaded Image" />
+<div class="!flex flex-col flex-auto relative bg-white !h-screen">
+  <div class="relative flex flex-row py-2 px-4 items-center justify-between">
+    <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
+    <div class="text-center">Live Chat</div>
+    <div></div>
+  </div>
+  <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
+    <div class="flex flex-row space-x-2">
+        <div class="flex flex-col space-y-2 bg-white rounded" *ngIf="Role!='user'">
+          <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2" (click)="LoadChat(item.data)">{{item.data}}</div>
+        </div>
+        <div class="flex flex-col space-y-2 w-full">
+          <ng-container *ngIf="!isEmail; else elseTemplate">
+              <ng-container *ngIf="this.CUser.email; else elseTemplate1">
+                <div><button mat-raised-button color="primary" (click)="CreateChat(this.CUser.email)">Bắt Đầu</button></div>
+              </ng-container>
+              <ng-template #elseTemplate1>
+                <div class="flex flex-col space-y-3 bg-white rounded p-4">
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Email</mat-label>
+                    <input [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" type="text" matInput
+                      class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Email'" (keydown.enter)="CreateChat(Email)"/>
+                  </mat-form-field>
+                  <div class="text-center"><button mat-raised-button color="primary" (click)="CreateChat(Email);NotiTele(Email)">Bắt Đầu</button>
+                  </div>
+                </div>
+              </ng-template>
+             </ng-container>
+          <ng-template #elseTemplate>
+            <div *ngFor="let message of FilterchatMessages"
+              class="message max-w-[70%] w-auto p-2 rounded bg-white {{message.sender=='admin'?'ml-auto':'mr-auto'}} ">
+              <div class="min-w-4 leading-5">
+                <ng-container *ngIf="message.image; else textMessage">
+                  <strong>{{ message.sender }}:</strong>
+                  <img [src]="message.image" class="max-w-xs" />
                 </ng-container>
                 <ng-template #textMessage>
-                    <strong>{{ message.sender }}:</strong> {{ message.message }}
+                  <strong>{{ message.sender }}:</strong> {{ message.message }}
                 </ng-template>
-                </div>
-          </div>
-      </div>
-      <div class="flex flex-col space-x-2 p-2">
-          <img [src]="GetImg(fileURL)" *ngIf="fileURL"/>
-          <div class="input-area flex flex-row space-x-2 items-center">
-              <mat-form-field appearance="outline" class="w-full">
-                  <mat-label>Type your message</mat-label>
-                  <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded" matInput
-                      [(ngModel)]="newMessage" placeholder="Type your message..." />
-                  <span matSuffix class="material-icons ml-2" (click)="sendMessage()">send</span>
-                  <span matPrefix class="material-icons mr-2" (click)="image.click()">image</span>
-              </mat-form-field>
-              <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
-          </div>
-      </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+    </div>
   </div>
+  <div class="flex flex-col space-x-2 p-2" *ngIf="isEmail">
+    <img [src]="GetImg(fileURL)" *ngIf="fileURL" class="max-w-xs"/>
+    <div class="input-area flex flex-row space-x-2 items-center">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Type your message</mat-label>
+        <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded" matInput
+          [(ngModel)]="newMessage" placeholder="Type your message..." (keydown.enter)="onEnterPressed(isEmail)" />
+        <span matSuffix class="material-icons ml-2" (click)="sendMessage(isEmail)">send</span>
+        <span matPrefix class="material-icons mr-2" (click)="image.click()">image</span>
+      </mat-form-field>
+      <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
+    </div>
+  </div>
+</div>

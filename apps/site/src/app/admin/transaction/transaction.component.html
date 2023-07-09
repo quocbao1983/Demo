@@ -11,7 +11,7 @@
                   <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="{{'Search'| translate }}" #input>
                   <span matPrefix class="material-icons mr-2">search</span>
               </mat-form-field>
-                <div class="mat-elevation-z8 w-full">
+                <div class="mat-elevation-z8 w-full overflow-auto">
                   <table class="w-full" mat-table [dataSource]="dataSource" matSort>
                     <ng-container matColumnDef="Type">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Type'| translate }} </th>

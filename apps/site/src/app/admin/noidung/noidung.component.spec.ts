@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DiachiComponent } from './diachi.component';
+import { NoidungComponent } from './noidung.component';
 
-describe('DiachiComponent', () => {
-  let component: DiachiComponent;
-  let fixture: ComponentFixture<DiachiComponent>;
+describe('NoidungComponent', () => {
+  let component: NoidungComponent;
+  let fixture: ComponentFixture<NoidungComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiachiComponent ]
+      declarations: [ NoidungComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiachiComponent);
+    fixture = TestBed.createComponent(NoidungComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../../shared/local-storage.service';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../shared/config.service';
@@ -33,19 +32,38 @@ TransInit:any[]=[
         "Noidungmua": "Mua"
     }
 ]
-ConfigInit:any ={
-  "Sellprice": "21000",
-  "Buyprice": "19000",
-  "SellFee": "10",
-  "BuyFee": "5",
-  "Mintrade": "5000000",
-  "Maxtrade": "20000000",
-  "Totaltrade": "5000000000"
-}
+ConfigInit:any = {
+    "Sellprice": "21000.00",
+    "Buyprice": "8700.00",
+    "SellFee": "10.00",
+    "BuyFee": "20.00",
+    "Mintrade": "5000000.00",
+    "Maxtrade": "100000.00",
+    "Totaltrade": "99999999.99",
+    "Note": "",
+    "Type": 1,
+    "Ordering": 1,
+    "Status": 0,
+  }
+// {
+//   "id": "bec16d16-4f71-4399-b569-85a52e9a618c",
+//   "Sellprice": "21000.00",
+//   "Buyprice": "8700.00",
+//   "SellFee": "10.00",
+//   "BuyFee": "20.00",
+//   "Mintrade": "5000000.00",
+//   "Maxtrade": "100000.00",
+//   "Totaltrade": "99999999.99",
+//   "Note": "",
+//   "Type": 1,
+//   "Ordering": 1,
+//   "Status": 0,
+//   "CreateAt": "2023-07-05T15:05:54.228Z",
+//   "idCreate": null
+// }
   Config:any={}
   editableContent: string = '';
   constructor(
-    private _LocalStorageService:LocalStorageService,
     private _NotifierService:NotifierService,
     private router: Router,
     private _ConfigService: ConfigService,
@@ -80,7 +98,6 @@ ConfigInit:any ={
   }
   ClearAll()
   {
-    this._LocalStorageService.clear();
     this._NotifierService.notify("success","Xoá Thành Công")
     window.location.reload();
   }

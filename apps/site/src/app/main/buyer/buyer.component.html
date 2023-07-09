@@ -1,54 +1,68 @@
-<div class="flex lg:flex-row flex-col lg:space-x-4">
-  <div class="flex flex-col">
-    <mat-form-field appearance="outline">
-      <mat-label>{{'Quantity'| translate }}</mat-label>
-      <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
-       matInput placeholder="{{'Quantity'| translate }}">
-       <mat-hint><span class="text-blue-500">{{(BuyData.QuantityIn| number:'1.0-0')||'0'}}đ</span></mat-hint>
-    </mat-form-field>
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>{{'Fee'| translate }}</mat-label>
-      <input type="number" disabled [(ngModel)]="BuyData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Fee'| translate }}">
-      <mat-hint><span class="text-blue-500">{{(BuyData.Fee| number:'1.0-0')||'0'}}%</span></mat-hint>
-    </mat-form-field> -->
-    <div class="flex flex-row space-x-2 p-2">
-      <span>{{'Fee'| translate }}</span> <span>{{(BuyData.Fee| number:'1.0-0')||'0'}}%</span>
-    </div>
-   
-    <mat-form-field appearance="outline">
-      <mat-label>{{'Total'| translate }}</mat-label>
-      <input type="number" disabled [(ngModel)]="BuyData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="JPY Nhận Được">
-      <mat-hint><span class="text-blue-500">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} {{'Value'| translate }}</span></mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="flex flex-col">
-    <mat-form-field appearance="outline">
-      <mat-label>{{'Custom_Account1'| translate }}</mat-label>
-      <input [(ngModel)]="BuyData.CustomAccount1" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Custom_Account1'| translate }}"> 
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.CustomAccount1" (click)="openSnackBar('Coppy '+ BuyData.CustomAccount1, 'Close')">
-        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>{{'Email'| translate }}</mat-label>
-      <input [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Email'| translate }}">
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.Email" (click)="openSnackBar('Coppy '+ BuyData.Email, 'Close')">
-        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>{{'Company_Account2'| translate }}</mat-label>
-      <input [(ngModel)]="BuyData.CompanyAccount2" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Company_Account2'| translate }}">
-      <button matSuffix mat-icon-button [cdkCopyToClipboard]="BuyData.CompanyAccount2" (click)="openSnackBar('Coppy '+ BuyData.CompanyAccount2, 'Close')">
-        <mat-icon><span class="material-icons">content_copy</span></mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
-</div>
-<mat-form-field appearance="outline" class="w-full">
-  <mat-label>{{'Note'| translate }}</mat-label>
-  <textarea matInput [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}"></textarea>
-</mat-form-field>
-<div class="text-center">
-  <a mat-raised-button color="primary" (click)="CreateBuy(BuyData)">{{'Confirm'| translate }}</a>
-</div>
+      <div class="max-w-5xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
+        <div class="flex flex-row space-x-20 justify-center">
+          <img [src]="'assets/muangay1.png'" class="h-10" [routerLink]="['/buyer']">
+          <img [src]="'assets/banngay2.png'" class="h-10" [routerLink]="['/seller']">
+        </div>
+        <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
+          <div class="flex flex-row space-x-12 justify-between">
+            <div class="w-full flex flex-col">
+                <label for="first_name" class="block mb-2 text-white">*{{'So_luong'|translate}}</label>
+                <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
+                 class="w-full p-3 bg-[#291038] text-white rounded">
+                <span class="text-white font-bold">{{ 'Fee' | translate }} {{BuyData.Fee| number:'1.0-0'||'0'}} %</span>
+            </div>
+            <div class="w-full">
+              <label class="block mb-2 font-medium text-white">*STK abc</label>       
+              <input type="text" [(ngModel)]="BuyData.CustomAccount1" [ngModelOptions]="{standalone: true}" class="w-full p-3 bg-[#291038] text-white rounded">    
+          </div>
+          </div>
+          <div class="flex flex-row space-x-12 justify-between">
+            <div class="w-full">
+                <label class="block mb-2 font-medium text-white">*Email</label>
+                <input type="text" [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" class="w-full p-3 bg-[#291038] text-white rounded">
+            </div>
+            <div class="w-full"></div>
+          </div>
+          <div class="flex flex-row justify-between rounded border border-[#eab308] mx-4 px-8 p-4">
+              <div class="text-white italic font-bold">Tổng Giá Trị Thanh Toán : </div>
+              <div class="text-yellow-500 font-bold text-xl">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} <span class="text-white">usdt</span> </div>
+          </div>
+          <div class="flex flex-col space-y-1">
+            <label for="message" class="block mb-2 text-sm font-medium text-white">Nội Dung Giao Dịch :</label>
+            <textarea [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
+          </div>
+          <div class="flex flex-row justify-center px-4">
+            <img [src]="'assets/xacnhan.png'" class="h-10" (click)="CreateBuy(BuyData)">
+            <!-- <button (click)="CreateBuy(BuyData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
+          </div>
+          <div class="flex flex-col p-2 text-white italic">
+            Hoàn Tất giao dịch trong vòng 15 phút hoặc được hoàn tiền
+          </div>
+        </div>
+        <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
+          <div class="text-white ml-4">
+              <span>Hướng Dẫn Thanh Toán</span>
+          </div>
+          <div class="text-white">
+              <span>- Quý KH hãy chuyển số tiền 123usdt vào ví công ty theo địa chỉ sau.</span>
+          </div>
+          <div class="text-white flex flex-row space-x-2 items-center">
+            <span>- Địa chỉ ví abc của Công Ty: </span>           
+             <div [matMenuTriggerFor]="menu" class="!text-white flex flex-row items-center space-x-2">
+              <span>{{Network.Title}}</span>
+              <img [src]="Network.img" class="h-5 bg-white">
+              <span class="material-icons">
+                expand_circle_down
+                </span>
+             </div> 
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let item of ListNetwork" (click)="Network=item">{{item.Title}}</button>
+              </mat-menu>  
+              <span>xxxxx xxxáddfsgsdf </span>
+          </div>
+          <div class="text-white flex flex-row space-x-3 items-center">
+              <strong>*TRANSATION HASH</strong>
+              <input [(ngModel)]="BuyData.TransHash" [ngModelOptions]="{standalone: true}" type="text" class="w-1/2 p-3 bg-[#291038] text-white rounded">
+          </div>
+        </div>
+      </div>

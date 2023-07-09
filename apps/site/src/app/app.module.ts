@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NotifierModule } from 'angular-notifier';
 import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,12 +12,19 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database/';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminGuard } from './admin/auth/guards/admin.guard';
+import { GuestGuard } from './admin/auth/guards/guest.guard';
+import { DangnhapComponent } from './admin/dangnhap/dangnhap.component';
+import { AuthService } from './admin/auth/auth.service';
+import { UsersInterceptor } from './shared/users.interceptor';
+import { AuthModule } from './admin/auth/auth.module';
+import { AuthGuard } from './admin/auth/guards/auth.guard';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -34,7 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NotifierModule,
     MaterialModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+    AuthModule,
     AngularFireModule.initializeApp(environment.FirebaseInit),
     AngularFireDatabaseModule,
     RouterModule.forRoot([
@@ -42,7 +50,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         path: '', component: AppComponent,
         children: [
           { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
-          { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
+          { 
+            path: 'admin', 
+            canActivate:[AuthGuard],
+           loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+           {
+            path: 'dangnhap',
+            canActivate: [GuestGuard],
+            canActivateChild: [GuestGuard],
+            component: DangnhapComponent,
+          },
         ]
       },
     ], {
@@ -91,7 +108,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     },),
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: UsersInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

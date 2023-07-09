@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { ExchangeService } from '../shared/trans.service';
 import { ConfigService } from '../shared/config.service';
+import { LangService } from '../shared/lang.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -20,20 +21,22 @@ export class MainComponent implements OnInit {
   Lists: any[] = []
   FilterLists: any[] = []
   Sitemap: any = { loc: '', priority: '' }
-  langselect:any = 'en';
-  ListLang:any={
-    en:'English',
-    zh:'China',
-    ko:'South Korea',
-    ru:'Russia',
-    fr:'France',
-  }
-  ListImg:any={
-    en:'assets/flag/en.png',
-    zh:'assets/flag/zh.png',
-    ko:'assets/flag/ko.png',
-    ru:'assets/flag/ru.png',
-    fr:'assets/flag/fr.png',
+  langselect: any =  { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" };
+  ListLang: any[] = [
+    { id: 0, code: "vi",img: 'assets/flag/en.png', name: "Vietnamese" },
+    { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" },
+    { id: 2, code: "zh",img: 'assets/flag/zh.png', name: "China" },
+    { id: 3, code: "ko",img: 'assets/flag/ko.png', name: "South Korea" },
+    { id: 4, code: "ru",img: 'assets/flag/ru.png', name: "Russia" },
+    { id: 5, code: "fr",img: 'assets/flag/fr.png', name: "France" }
+  ]
+  langInit:any={}
+  ListImg: any = {
+    en: 'assets/flag/en.png',
+    zh: 'assets/flag/zh.png',
+    ko: 'assets/flag/ko.png',
+    ru: 'assets/flag/ru.png',
+    fr: 'assets/flag/fr.png',
   }
   @ViewChild('drawer', { static: true }) drawer!: MatDrawer;
   displayedColumns: string[] = ['Email', 'CreateAt'];
@@ -46,27 +49,35 @@ export class MainComponent implements OnInit {
     public translate: TranslateService,
     public _ConfigService: ConfigService,
     private _ExchangeService: ExchangeService,
+    private _LangService: LangService,
   ) {
-    translate.addLangs(['en','zh','ko','ru','fr']);
+    translate.addLangs(['en', 'zh', 'ko', 'ru', 'fr']);
     translate.setDefaultLang('en');
-    const browserLang = translate.getBrowserLang();  
+    const browserLang = translate.getBrowserLang();
   }
-  ChangeLang(event:any)
-  {
+  ChangeLang(event: any) {
     this.translate.use(event)
   }
   ngOnInit(): void {
-    this._ConfigService.getAll().subscribe(data=>this.Config = data[0])
-    this._ExchangeService.getAll().subscribe(data=>
+    this._LangService.getAll().subscribe(data=>
       {
-        this.ListsExchange = data
-        this.ListsExchange.forEach(v => {
-          v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
-        });
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+        this._LangService.langs$.subscribe(data=>
+          {
+            this.langInit = data[0]
+            this.langselect = this.ListLang.find(v=>v.id==data[0].Type)
+          })
+      }
+      )
+    this._ConfigService.getAll().subscribe(data => this.Config = data[0])
+    this._ExchangeService.getAll().subscribe(data => {
+      this.ListsExchange = data
+      this.ListsExchange.forEach(v => {
+        v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
+      });
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
     // this._RedirectService.getAll().subscribe((data)=>{
     //   console.log(data);
     //   this.FilterLists = this.Lists = data
@@ -76,8 +87,8 @@ export class MainComponent implements OnInit {
     const value = (event.target as HTMLInputElement).value;
     if (value.length > 2) {
       this.Lists = this.Lists.filter((v) => {
-     return  v.Hoten.toLowerCase().includes(value)||v.SDT.toLowerCase().includes(value)
-       }
+        return v.Hoten.toLowerCase().includes(value) || v.SDT.toLowerCase().includes(value)
+      }
       )
     }
   }
@@ -89,5 +100,10 @@ export class MainComponent implements OnInit {
       //   this._RedirectService.createRedirect(this.Detail).subscribe((data)=>this._Notification.notify('success','Thêm mới thành công'))
       // }
     });
+  }
+  UpdateLang(data:any)
+  {
+    this.langInit.Type = data.id
+    this._LangService.updateLang(this.langInit).subscribe(()=>window.location.reload())
   }
 }

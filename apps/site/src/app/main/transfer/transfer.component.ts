@@ -43,7 +43,6 @@ export class TransferComponent implements OnInit {
           {
             this.Data = data
             console.log(data);
-            
           }
           else
           {
@@ -53,22 +52,7 @@ export class TransferComponent implements OnInit {
         })
 
     });
-    this._LivechatService.getChatMessages().subscribe((messages) => {
-      this.chatMessages = messages;
-    });
   }
-  sendMessage(): void {
-    console.log(this.newMessage);
-    if (this.selectedImage) {
-      this._LivechatService.addChatMessageWithImage(this.newMessage, 'User', this.selectedImage,0);
-    } else if (this.newMessage.trim() !== '') {
-      this._LivechatService.addChatMessage(this.newMessage, 'User',0);
-    }
-
-    this.newMessage = '';
-    this.selectedImage = null;
-  }
-
   onFileSelected(event: any): void {
     this.selectedImage = event.target.files[0];
   }

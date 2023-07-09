@@ -1,0 +1,66 @@
+<div class="max-w-3xl flex flex-col space-y-3 py-12 px-6 h-full m-auto">
+  <div class="flex flex-row space-x-4 justify-center">
+    <div class="p-4 rounded text-white bg-red-400" [routerLink]="['/buyer']">Mua Ngay</div>
+    <div class="p-4 rounded text-white bg-green-500" [routerLink]="['/seller']">Bán Ngay</div>
+  </div>
+  <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
+    <div class="flex flex-row space-x-4 justify-between">
+      <div class="flex flex-col">
+          <label for="first_name" class="block mb-2 text-white">*Số Lượng</label>
+          <input type="text" id="first_name" class="w-full bg-[#291038] text-3xl text-white rounded">
+          <span class="text-white font-bold">Phí:12USDT</span>
+      </div>
+      <div>
+        <div class="flex flex-row justify-between">
+          <label for="first_name" class="block mb-2 font-medium text-white">*Địa Chỉ Ví USDT :</label>       
+          <span [matMenuTriggerFor]="menu" class="!text-white">ETH</span>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>ETH</button>
+            <button mat-menu-item>BSC</button>
+          </mat-menu>
+        </div>
+        <input type="text" id="first_name" class="w-full bg-[#291038] text-3xl text-white rounded">
+        
+    </div>
+    </div>
+    <div class="flex flex-row space-x-4 justify-between">
+      <div>
+          <label for="first_name" class="block mb-2 font-medium text-white">*Email</label>
+          <input type="text" id="first_name" class="w-full bg-[#291038] text-3xl text-white rounded">
+      </div>
+      <div>
+        <label for="first_name" class="block mb-2 font-medium text-white">*Địa Chỉ Ví <strong>abc</strong></label>
+        <input type="text" id="first_name" class="w-full bg-[#291038] text-3xl text-white rounded">
+    </div>
+    </div>
+    <div class="flex flex-row justify-between rounded border border-[#eab308] mx-4 p-4">
+        <div class="text-white">Tổng Giá Trị Nhận Được : </div>
+        <div class="text-yellow-500">500000 USDT </div>
+    </div>
+    <div class="flex flex-col p-4">
+      <label for="message" class="block mb-2 text-sm font-medium text-white">Nội Dung Giao Dịch</label>
+      <textarea id="message" rows="4" class="bg-[#291038] text-3xl text-white rounded"></textarea>
+    </div>
+    <div class="flex flex-row justify-center px-4">
+      <button type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button>
+    </div>
+    <div class="flex flex-col p-4 text-white">
+      Hoàn Tất giao dịch trong vòng 15 phút hoặc được hoàn tiền
+    </div>
+  </div>
+  <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
+    <div class="text-white">
+        <span>Hướng Dẫn Thanh Toán</span>
+    </div>
+    <div class="text-white">
+        <span>- Quý KH chuyển số tiền 123usdt vào địa chỉ ví Công ty. </span><span class="text-yellow-500">Nội dung chuyển khoản vui lòng nhập Địa chỉ email và STK abc của quý khách</span>
+    </div>
+    <div class="text-white">
+        <span>- Địa chỉ ví USDT abc của Công Ty: xxxxx xxxáddfsgsdf </span>
+    </div>
+    <div class="text-white flex flex-row space-x-3">
+        <strong>*TRANSATION ID BANK</strong>
+          <input type="text" id="first_name" class="bg-[#291038] text-3xl text-white rounded">
+    </div>
+  </div>
+</div>
