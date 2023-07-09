@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-users',
+  selector: 'demo-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })

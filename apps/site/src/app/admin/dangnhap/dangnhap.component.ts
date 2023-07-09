@@ -5,7 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../../admin/auth/auth.service';
 
 @Component({
-  selector: 'tazagroup-dangnhap',
+  selector: 'demo-dangnhap',
   templateUrl: './dangnhap.component.html',
   styleUrls: ['./dangnhap.component.scss'],
 })

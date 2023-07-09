@@ -6,7 +6,7 @@ export const environment = {
   Teleram_bao_test_trans_group_id:'-986879518',
   Teleram_bao_test_chat_bot:'6344634365:AAF3OFOU3_JZrLTMZtqsYkad0HV3EESjn_4',
   Teleram_bao_test_chat_group_id:'-928895465',
-  APIURL:"https://apifull.tazagroup.vn",
+  APIURL:"https://apifull.click",
   FirebaseInit:{
     apiKey: "AIzaSyDNZCm026a2mziXxFgMNgGpVE6H4LGsDjo",
     authDomain: "fir-f4bb6.firebaseapp.com",

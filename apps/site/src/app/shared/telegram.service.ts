@@ -38,7 +38,7 @@ export class TelegramService {
   }
   createChatTelegram(data: any): Observable<any> {
     console.log(data);
-    return this._httpClient.post<any>(`${this.TeleChatURL}/sendMessage?chat_id=${environment.Teleram_group_id}&text=${data}&parse_mode=html`, data).pipe(
+    return this._httpClient.post<any>(`${this.TeleURL}/sendMessage?chat_id=${environment.Teleram_bao_test_trans_group_id}&text=${data}&parse_mode=html`, data).pipe(
         map((res: any) => {
           this._telegrams.next(res);
           console.log(res);
