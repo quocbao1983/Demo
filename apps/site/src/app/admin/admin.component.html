@@ -8,7 +8,7 @@
         <div class="relative flex flex-col h-full w-full overflow-auto">
           <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
             <div class="flex flex-col">
-                <div [routerLink]="[item.Slug]" routerLinkActive="router-link-active" (click)="drawer.open()"
+                <div [routerLink]="[item.Slug]" routerLinkActive="bg-gray-200" (click)="drawer.open()"
                     class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
                     *ngFor="let item of FilterLists; let i = index">
                     <div class="flex flex-row space-x-2 items-center justify-between w-full">

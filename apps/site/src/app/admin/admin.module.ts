@@ -11,12 +11,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { DangnhapComponent } from './dangnhap/dangnhap.component';
 import { NgonnguComponent } from './ngonngu/ngonngu.component';
-import { NoidungComponent } from './noidung/noidung.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
+    EditorModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
@@ -35,7 +36,8 @@ import { NoidungComponent } from './noidung/noidung.component';
           { path: 'cauhinh', component: ConfigComponent },
           { path: 'transaction', component: TransactionComponent },
           { path: 'ngonngu', component: NgonnguComponent },
-          { path: 'noidung', component: NoidungComponent }
+          { path: 'noidung', loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
+          // { path: 'noidung', component: NoidungComponent }
         ],
       },
     ]),

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LivechatService } from '../../shared/livechat.service';
 import { ExchangeService } from '../../shared/trans.service';
 import { NotifierService } from 'angular-notifier';
+import { LangService } from '../../shared/lang.service';
 
 @Component({
   selector: 'app-transfer',
@@ -28,14 +29,20 @@ export class TransferComponent implements OnInit {
   chatMessages: any[] = [];
   newMessage: string = '';
   selectedImage: File | null = null;
+  trans:any[]=[]
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private _LivechatService: LivechatService,
     private _ExchangeService: ExchangeService,
     private _NotifierService: NotifierService,
+    private _LangService: LangService,
     ) {}
   ngOnInit() {   
+    this._LangService.getAll().subscribe(data=>{
+      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+       }) 
     this.route.params.subscribe((params:any) => {     
       this._ExchangeService.getByid(params['id']).subscribe(data=>
         {
@@ -55,5 +62,10 @@ export class TransferComponent implements OnInit {
   }
   onFileSelected(event: any): void {
     this.selectedImage = event.target.files[0];
+  }
+  GetTrans(trans:any[],value:any)
+  {
+    const result = trans.find((v:any)=>v.key_name==value)
+    return result?result.translation_text:''
   }
 }

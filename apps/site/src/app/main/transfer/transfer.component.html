@@ -5,42 +5,42 @@
                 <thead class="text-xs text-white">
                     <tr>
                         <th colspan="2" scope="row" class="text-center text-2xl px-6 py-3">
-                            <span>Mã Đơn Hàng : </span>
+                            <span>{{GetTrans(trans,'transfer_text1')}}</span>
                             <span>#{{Data.Code}}</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Trạng thái giao dịch</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text2')}}</td>
                         <td>{{Data.Status==0?'Waiting':'Done'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Số Lượng Mua/Bán</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text3')}}</td>
                         <td>{{Data.QuantityIn| number:'1.0-0'||'0'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Phí</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text4')}}</td>
                         <td>{{Data.Fee| number:'1.0-0'||'0'}}%</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Tổng Thanh Toán</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text5')}}</td>
                         <td>{{Data.QuantityOut| number:'1.0-0'||'0'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Tài Khoản VND Khách Hàng</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text6')}}</td>
                         <td>{{Data.CustomAccount1}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Email</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text7')}}</td>
                         <td>{{Data.Email}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Tài Khoản VND Công Ty</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text8')}}</td>
                         <td>{{Data.CompanyAccount2}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">Nội dung</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_text9')}}</td>
                         <td>{{Data.Note}}</td>
                     </tr>
                 </tbody>

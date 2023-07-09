@@ -76,7 +76,9 @@ export class LivechatComponent implements OnInit {
   }
   Closedrawer()
   {
+    
     this._MainComponent.drawer.close();
+    //this._MainComponent.isshowLive = false;
   }
   CreateChat(email:any)
   {

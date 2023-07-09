@@ -13,7 +13,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database/';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminGuard } from './admin/auth/guards/admin.guard';
 import { GuestGuard } from './admin/auth/guards/guest.guard';
 import { DangnhapComponent } from './admin/dangnhap/dangnhap.component';
 import { AuthService } from './admin/auth/auth.service';

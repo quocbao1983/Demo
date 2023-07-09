@@ -31,6 +31,10 @@
     </section>
   </mat-drawer-content>
 </mat-drawer-container>
+<!-- <div class="fixed bottom-10 right-10 z-10" (click)="isshowLive=false">
+  <img [src]="'assets/livechat.png'" class="h-24">
+</div>
+<app-livechat *ngIf="isshowLive"></app-livechat> -->
 <div class="fixed bottom-10 right-10 z-10" (click)="drawer.open()" *ngIf="drawer.opened ? false : true">
   <img [src]="'assets/livechat.png'" class="h-24">
 </div>

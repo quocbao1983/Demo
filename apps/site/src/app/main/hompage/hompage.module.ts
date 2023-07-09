@@ -7,9 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../app.module';
+import { LinechartComponent } from './linechart/linechart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   imports: [
+    NgApexchartsModule,
     CommonModule,
     MatButtonModule,
     TranslateModule.forRoot({
@@ -24,6 +27,6 @@ import { HttpLoaderFactory } from '../../app.module';
       { path: '', component: HompageComponent }
     ])
   ],
-  declarations: [HompageComponent]
+  declarations: [HompageComponent,LinechartComponent]
 })
 export class HompageModule { }

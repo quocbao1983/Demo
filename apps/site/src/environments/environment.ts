@@ -6,6 +6,7 @@ export const environment = {
   Teleram_bao_test_trans_group_id:'-986879518',
   Teleram_bao_test_chat_bot:'6344634365:AAF3OFOU3_JZrLTMZtqsYkad0HV3EESjn_4',
   Teleram_bao_test_chat_group_id:'-928895465',
+  APITINYMCE: "1cdi3qs7qw7nogvpu6poxqc6z7bf4a4hurwyao0kdbd741dl",
   //APIURL:"http://localhost:3333",
   APIURL:"https://apifull.click",
   FirebaseInit:{

@@ -6,6 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { generateOrderId } from '../../shared/shared.utils';
 import { TelegramService } from '../../shared/telegram.service';
+import { LangService } from '../../shared/lang.service';
 
 @Component({
   selector: 'app-buyer',
@@ -28,6 +29,7 @@ export class BuyerComponent implements OnInit {
     Type: 1,
     Status: 0
   }
+  trans:any[]=[]
   ListNetwork:any[]=[
   {id:1,Title:"ETH",img:'assets/ETH.png'},
   {id:2,Title:"BSC",img:'assets/BSC.png'}
@@ -42,6 +44,7 @@ export class BuyerComponent implements OnInit {
     private _ConfigService: ConfigService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
+    private _LangService: LangService,
     private router: Router
   ) { }
   openSnackBar(message: string, action: string) {
@@ -50,7 +53,10 @@ export class BuyerComponent implements OnInit {
     });
   }
   ngOnInit() {
-    console.log(this.BuyData);   
+    this._LangService.getAll().subscribe(data=>{
+      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+       }) 
     this._ConfigService.getAll().subscribe(data => {
       this.Config = data[0]
       console.log(this.Config);
@@ -94,7 +100,12 @@ export class BuyerComponent implements OnInit {
     }
   }
   OnChange() {
-    this.BuyData.QuantityOut = (this.BuyData.QuantityIn * this.Config.Buyprice*(1 - (this.BuyData.Fee / 100))).toFixed();
+    this.BuyData.QuantityOut = (this.BuyData.QuantityIn * this.Config.Buyprice*(1 + (this.BuyData.Fee / 100))).toFixed();
+  }
+  GetTrans(trans:any[],value:any)
+  {
+    const result = trans.find((v:any)=>v.key_name==value)
+    return result?result.translation_text:''
   }
 
 }

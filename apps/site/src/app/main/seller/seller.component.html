@@ -6,14 +6,14 @@
   <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
     <div class="flex flex-row space-x-12 justify-between">
       <div class="w-full flex flex-col">
-          <label for="first_name" class="block mb-2 text-white">{{'So_luong'|translate}}</label>
+          <label for="first_name" class="block mb-2 text-white">{{GetTrans(trans,'sell_text1')}}</label>
           <input type="text" (change)="OnChange()" [(ngModel)]="SellData.QuantityIn" [ngModelOptions]="{standalone: true}"
            class="w-full p-3 bg-[#291038] text-white rounded">
-          <span class="text-white font-bold">{{ 'Fee' | translate }} {{SellData.Fee| number:'1.0-0'||'0'}}%</span>
+          <span class="text-white font-bold">{{GetTrans(trans,'sell_text2')}} {{SellData.Fee| number:'1.0-0'||'0'}}%</span>
       </div>
       <div class="w-full">
         <div class="mb-2 font-medium text-white flex flex-row space-x-2 justify-between">
-          <span>*Địa chỉ ví USDT: </span>
+          <span>{{GetTrans(trans,'sell_text3')}} </span>
           <div [matMenuTriggerFor]="menu" class="!text-white flex flex-row items-center space-x-2">
             <span>{{Network.Title}}</span>
             <img [src]="Network.img" class="h-5 bg-white">
@@ -30,22 +30,22 @@
     </div>
     <div class="flex flex-row space-x-12 justify-between">
       <div class="w-full">
-          <label class="block mb-2 font-medium text-white">*Email</label>
+          <label class="block mb-2 font-medium text-white">{{GetTrans(trans,'sell_text4')}}</label>
           <input [(ngModel)]="SellData.Email" [ngModelOptions]="{standalone: true}" type="text" class="w-full p-3 bg-[#291038] text-white rounded">
       </div>
       <div class="w-full">
         <div class="mb-2 font-medium text-white flex flex-row space-x-2 justify-between">
-          <span>*Địa chỉ ví <strong>abc</strong>:</span>
+          <span>{{GetTrans(trans,'sell_text5')}}</span>
         </div>       
         <input [(ngModel)]="SellData.CustomAccount1" [ngModelOptions]="{standalone: true}" type="text" class="w-full p-3 bg-[#291038] text-white rounded">    
     </div>
     </div>
     <div class="flex flex-row justify-between rounded border border-[#eab308] mx-4 px-8 p-4">
-        <div class="text-white italic font-bold">Tổng giá trị nhận được : </div>
-        <div class="text-yellow-500 font-bold text-xl">{{(SellData.QuantityOut| number:'1.0-0')||'0'}} <span class="text-white">usdt</span> </div>
+        <div class="text-white italic font-bold">{{GetTrans(trans,'sell_text6')}} </div>
+        <div class="text-yellow-500 font-bold text-xl">{{(SellData.QuantityOut| number:'1.0-0')||'0'}} <span class="text-white">{{GetTrans(trans,'sell_text7')}}</span> </div>
     </div>
     <div class="flex flex-col space-y-1">
-      <label for="message" class="block mb-2 text-sm font-medium text-white">*Nội Dung Giao Dịch :</label>
+      <label for="message" class="block mb-2 text-sm font-medium text-white">{{GetTrans(trans,'sell_text8')}}</label>
       <textarea [(ngModel)]="SellData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
     </div>
     <div class="flex flex-row justify-center px-4">
@@ -53,21 +53,21 @@
       <!-- <button (click)="CreateSell(SellData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
     </div>
     <div class="flex flex-col p-2 text-white italic">
-      *Hoàn tất giao dịch trong vòng 15 phút hoặc được hoàn tiền
+      {{GetTrans(trans,'sell_text9')}}
     </div>
   </div>
   <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
     <div class="text-white ml-4">
-        <span>Hướng Dẫn Thanh Toán</span>
+        <span>{{GetTrans(trans,'sell_text10')}}</span>
     </div>
     <div class="text-white">
-        <span>- Quý KH chuyển số tiền 123usdt vào địa chỉ ví Công ty. </span><span class="text-yellow-500">Nội dung chuyển khoản vui lòng nhập Địa chỉ email và STK abc của quý khách</span>
+        <span>{{GetTrans(trans,'sell_text11')}}</span><span class="text-yellow-500">{{GetTrans(trans,'sell_text12')}}</span>
     </div>
     <div class="text-white">
-        <span>- Địa chỉ ví USDT abc của Công Ty: xxxxx xxxáddfsgsdf </span>
+        <span>{{GetTrans(trans,'sell_text13')}}</span>
     </div>
     <div class="text-white flex flex-row space-x-3 items-center">
-        <strong>*TRANSATION ID BANK</strong>
+        <strong>{{GetTrans(trans,'sell_text14')}}</strong>
           <input [(ngModel)]="SellData.TransIdBank" [ngModelOptions]="{standalone: true}" type="text" class="w-1/2 p-3 bg-[#291038] text-white rounded">
     </div>
   </div>

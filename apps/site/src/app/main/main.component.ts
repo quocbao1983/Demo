@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
   Sitemap: any = { loc: '', priority: '' }
   langselect: any =  { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" };
   ListLang: any[] = [
-    { id: 0, code: "vi",img: 'assets/flag/en.png', name: "Vietnamese" },
+    { id: 0, code: "vi",img: 'assets/flag/vi.png', name: "Vietnamese" },
     { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" },
     { id: 2, code: "zh",img: 'assets/flag/zh.png', name: "China" },
     { id: 3, code: "ko",img: 'assets/flag/ko.png', name: "South Korea" },
@@ -31,13 +31,7 @@ export class MainComponent implements OnInit {
     { id: 5, code: "fr",img: 'assets/flag/fr.png', name: "France" }
   ]
   langInit:any={}
-  ListImg: any = {
-    en: 'assets/flag/en.png',
-    zh: 'assets/flag/zh.png',
-    ko: 'assets/flag/ko.png',
-    ru: 'assets/flag/ru.png',
-    fr: 'assets/flag/fr.png',
-  }
+  isshowLive:boolean=true;
   @ViewChild('drawer', { static: true }) drawer!: MatDrawer;
   displayedColumns: string[] = ['Email', 'CreateAt'];
   dataSource!: MatTableDataSource<any>;

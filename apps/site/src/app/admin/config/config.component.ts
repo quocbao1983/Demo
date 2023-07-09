@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../shared/config.service';
+import { LangService } from '../../shared/lang.service';
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
@@ -63,15 +64,19 @@ ConfigInit:any = {
 // }
   Config:any={}
   editableContent: string = '';
+  trans:any[]=[]
   constructor(
     private _NotifierService:NotifierService,
     private router: Router,
     private _ConfigService: ConfigService,
+    private _LangService: LangService,
     
-    ) { 
-     
-    }
+    ) {}
   ngOnInit() {
+    this._LangService.getAll().subscribe(data=>{
+      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+       }) 
     this._ConfigService.getAll().subscribe((data)=>
     {
       this.Config=data[0]
@@ -100,5 +105,10 @@ ConfigInit:any = {
   {
     this._NotifierService.notify("success","Xoá Thành Công")
     window.location.reload();
+  }
+  GetTrans(trans:any[],value:any)
+  {
+    const result = trans.find((v:any)=>v.key_name==value)
+    return result?result.translation_text:''
   }
 }
