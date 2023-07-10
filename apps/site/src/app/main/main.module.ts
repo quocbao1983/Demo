@@ -33,8 +33,10 @@ import { WhychooseusComponent } from './whychooseus/whychooseus.component';
           { path: 'buyer', loadChildren: () => import('./buyer/buyer.module').then(m => m.BuyerModule) },
           { path: 'seller', loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule) },
           { path: 'transfer/:id', loadChildren: () => import('./transfer/transfer.module').then(m => m.TransferModule) },
-        ]
+        ],
+        
       },
+      { path: 'admin', loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule) },
     ])
   ],
   declarations: [

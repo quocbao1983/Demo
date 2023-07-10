@@ -9,6 +9,7 @@ import { NotifierService } from 'angular-notifier';
 import { ExchangeService } from '../shared/trans.service';
 import { ConfigService } from '../shared/config.service';
 import { LangService } from '../shared/lang.service';
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -37,6 +38,7 @@ export class MainComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   constructor(
     private dialog: MatDialog,
     private _Notification: NotifierService,
@@ -53,6 +55,11 @@ export class MainComponent implements OnInit {
     this.translate.use(event)
   }
   ngOnInit(): void {
+    this._LangService.getAll().subscribe(data=>{
+      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)
+      localStorage.setItem('Translate', JSON.stringify(this.trans));  
+    }) 
     this._LangService.getAll().subscribe(data=>
       {
         this._LangService.langs$.subscribe(data=>
@@ -98,6 +105,10 @@ export class MainComponent implements OnInit {
   UpdateLang(data:any)
   {
     this.langInit.Type = data.id
-    this._LangService.updateLang(this.langInit).subscribe(()=>window.location.reload())
+    this._LangService.updateLang(this.langInit).subscribe((data)=>
+    {     
+    window.location.reload()
+    }
+    )
   }
 }

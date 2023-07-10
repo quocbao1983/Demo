@@ -9,6 +9,9 @@
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "allowedCommonJsDependencies": [
+          "apexcharts"
+       ],
         "outputPath": "dist/apps/site",
         "index": "apps/site/src/index.html",
         "main": "apps/site/src/main.ts",

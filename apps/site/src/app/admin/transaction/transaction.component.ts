@@ -27,7 +27,7 @@ export class TransactionComponent implements OnInit {
 //     Type: 0,
 //     Status: 0,
 // }
-
+   trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -58,4 +58,10 @@ export class TransactionComponent implements OnInit {
     data.Status=!data.Status;
     this._ExchangeService.updateExchange(data).subscribe(data=>this._NotifierService.notify("success", "Update Success"))
   }
+  GetTrans(trans:any[],value:any)
+  {
+    const result = trans.find((v:any)=>v.key_name==value)
+    return result?result.translation_text:''
+  }
+  
 }

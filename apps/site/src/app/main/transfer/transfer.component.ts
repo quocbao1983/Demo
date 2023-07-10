@@ -29,7 +29,7 @@ export class TransferComponent implements OnInit {
   chatMessages: any[] = [];
   newMessage: string = '';
   selectedImage: File | null = null;
-  trans:any[]=[]
+  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,10 +39,10 @@ export class TransferComponent implements OnInit {
     private _LangService: LangService,
     ) {}
   ngOnInit() {   
-    this._LangService.getAll().subscribe(data=>{
-      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-       }) 
+    // this._LangService.getAll().subscribe(data=>{
+    //   const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+    //    this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+    // }) 
     this.route.params.subscribe((params:any) => {     
       this._ExchangeService.getByid(params['id']).subscribe(data=>
         {

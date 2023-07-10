@@ -16,7 +16,7 @@ export class HompageComponent implements OnInit {
   ListsExchange: any[] = []
   displayedColumns: string[] = ['Email', 'CreateAt'];
   lang:any={}
-  trans:any[]=[]
+  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,10 +27,10 @@ export class HompageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._LangService.getAll().subscribe(data=>{
-    const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-     this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-     })
+    // this._LangService.getAll().subscribe(data=>{
+    // const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+    //  this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+    //  })
     this._ConfigService.getAll().subscribe(data=>this.Config = data[0])
     this._ExchangeService.getAll().subscribe(data=>
       {

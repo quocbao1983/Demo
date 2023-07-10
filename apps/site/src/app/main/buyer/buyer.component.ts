@@ -29,7 +29,7 @@ export class BuyerComponent implements OnInit {
     Type: 1,
     Status: 0
   }
-  trans:any[]=[]
+  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   ListNetwork:any[]=[
   {id:1,Title:"ETH",img:'assets/ETH.png'},
   {id:2,Title:"BSC",img:'assets/BSC.png'}
@@ -53,10 +53,10 @@ export class BuyerComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this._LangService.getAll().subscribe(data=>{
-      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-       }) 
+    // this._LangService.getAll().subscribe(data=>{
+    //   const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
+    //    this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
+    //    }) 
     this._ConfigService.getAll().subscribe(data => {
       this.Config = data[0]
       console.log(this.Config);

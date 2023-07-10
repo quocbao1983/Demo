@@ -1,6 +1,58 @@
 <div class="max-w-5xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
     <div class="flex flex-col justify-between space-y-4 bg-[#441E5B] rounded py-4 px-20">
         <div class="relative overflow-x-auto">
+            <ng-container *ngIf="Data.Type==1; else elseTemplate">
+                <table class="w-full text-sm text-left text-white">
+                    <thead class="text-xs text-white">
+                        <tr>
+                            <th colspan="2" scope="row" class="text-center text-2xl px-6 py-3">
+                                <span>{{GetTrans(trans,'transfer_text1')}}</span>
+                                <span>#{{Data.Code}}</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_text2')}}</td>
+                            <td>{{Data.Status==0?'Waiting':'Done'}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text1')}}</td>
+                            <td>{{Data.QuantityIn| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text2')}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_text4')}}</td>
+                            <td>{{Data.Fee| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text3')}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_text5')}}</td>
+                            <td>{{Data.QuantityOut| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text4')}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text5')}}</td>
+                            <td>{{Data.CustomAccount1}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_text7')}}</td>
+                            <td>{{Data.Email}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text6')}}</td>
+                            <td>{{Data.CompanyAccount2}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text7')}}</td>
+                            <td>{{Data.TransHash}}</td>
+                        </tr>
+                        <tr class="text-white border-t-2">
+                            <td class="py-4">{{GetTrans(trans,'transfer_text9')}}</td>
+                            <td>{{Data.Note}}</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </ng-container>
+            <ng-template #elseTemplate>
+              
             <table class="w-full text-sm text-left text-white">
                 <thead class="text-xs text-white">
                     <tr>
@@ -16,19 +68,19 @@
                         <td>{{Data.Status==0?'Waiting':'Done'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text3')}}</td>
-                        <td>{{Data.QuantityIn| number:'1.0-0'||'0'}}</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text1')}}</td>
+                        <td>{{Data.QuantityIn| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text2')}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{GetTrans(trans,'transfer_text4')}}</td>
-                        <td>{{Data.Fee| number:'1.0-0'||'0'}}%</td>
+                        <td>{{Data.Fee| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text3')}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text5')}}</td>
-                        <td>{{Data.QuantityOut| number:'1.0-0'||'0'}}</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text4')}}</td>
+                        <td>{{Data.QuantityOut| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text5')}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text6')}}</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text6')}}</td>
                         <td>{{Data.CustomAccount1}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
@@ -36,15 +88,22 @@
                         <td>{{Data.Email}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text8')}}</td>
+                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text7')}}</td>
                         <td>{{Data.CompanyAccount2}}</td>
+                    </tr>
+                    <tr class="text-white border-t-2">
+                        <td class="py-4">{{GetTrans(trans,'transfer_buy_text8')}}</td>
+                        <td>{{Data.TransIdBank}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{GetTrans(trans,'transfer_text9')}}</td>
                         <td>{{Data.Note}}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table>  
+            </ng-template>
+
+
         </div>
 
     </div>

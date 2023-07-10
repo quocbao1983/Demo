@@ -64,19 +64,13 @@ ConfigInit:any = {
 // }
   Config:any={}
   editableContent: string = '';
-  trans:any[]=[]
+  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
   constructor(
     private _NotifierService:NotifierService,
     private router: Router,
     private _ConfigService: ConfigService,
-    private _LangService: LangService,
-    
     ) {}
   ngOnInit() {
-    this._LangService.getAll().subscribe(data=>{
-      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-       }) 
     this._ConfigService.getAll().subscribe((data)=>
     {
       this.Config=data[0]
