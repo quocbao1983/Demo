@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotifierService } from 'angular-notifier';
 import { ExchangeService } from '../../shared/trans.service';
+import { AdminComponent } from '../admin.component';
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
@@ -11,7 +12,7 @@ import { ExchangeService } from '../../shared/trans.service';
 })
 export class TransactionComponent implements OnInit {
   data:any[]=[]
-  displayedColumns: string[] = ['Type','QuantityIn','Fee','QuantityOut','CompanyAccount1', 'CompanyAccount2', 'CustomAccount1', 'CustomAccount2', 'Email', 'Content','Note','Status'];
+  displayedColumns: string[] = ['Code','Type','QuantityIn','Fee','QuantityOut','CompanyAccount1', 'CompanyAccount2', 'CustomAccount1', 'CustomAccount2', 'Email', 'Content','Note','Status'];
 
 //   Data:any = {
 //     QuantityIn: "0",
@@ -34,9 +35,12 @@ export class TransactionComponent implements OnInit {
   constructor(
     private _ExchangeService: ExchangeService,
     private _NotifierService: NotifierService,
+    private _AdminComponent: AdminComponent,
   ) {
     this._ExchangeService.getAll().subscribe(data=>
       {
+        console.log(data);
+        
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -57,11 +61,9 @@ export class TransactionComponent implements OnInit {
   {
     data.Status=!data.Status;
     this._ExchangeService.updateExchange(data).subscribe(data=>this._NotifierService.notify("success", "Update Success"))
-  }
-  GetTrans(trans:any[],value:any)
+  }  
+  CloseDrawer()
   {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
+    this._AdminComponent.drawer.toggle();
   }
-  
 }

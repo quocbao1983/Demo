@@ -41,7 +41,8 @@ import { WhychooseusComponent } from './whychooseus/whychooseus.component';
   ],
   declarations: [
     MainComponent, 
-    LivechatComponent
+    LivechatComponent,
+    WhychooseusComponent
   ]
 })
 export class MainModule { }

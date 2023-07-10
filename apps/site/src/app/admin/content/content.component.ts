@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { NotifierService } from 'angular-notifier';
 import { ContentService } from '../../shared/content.service';
+import { AdminComponent } from '../admin.component';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -18,6 +19,7 @@ export class ContentComponent implements OnInit {
     private dialog: MatDialog,
     private _Notification: NotifierService,
     private _ContentService: ContentService,
+    private _AdminComponent: AdminComponent,
   ) {
   }
   ngOnInit(): void {
@@ -42,5 +44,9 @@ export class ContentComponent implements OnInit {
         this._ContentService.createContent(this.Detail).subscribe((data)=>this._Notification.notify('success','Thêm mới thành công'))
       }
     });
+  }
+  CloseDrawer()
+  {
+    this._AdminComponent.drawer.toggle();
   }
 }

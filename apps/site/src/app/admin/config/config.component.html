@@ -2,21 +2,21 @@
   <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
     <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
       menu
-      </span>
-      <div class="text-xl">abc</div>
-      <div>
-        <button mat-raised-button color="primary">Cập Nhật</button>
-      </div>
+    </span>
+    <div class="text-xl">Cấu Hình</div>
+    <div>
+    </div>
   </div>
   <div class="relative h-full w-full overflow-auto flex flex-col space-y-2 justify-between p-4">
     <div class="flex flex-col justify-center space-y-4 mx-auto p-4 rounded-md bg-white">
       <div class="flex lg:flex-row flex-col lg:space-x-4 w-full">
         <div class="flex flex-col space-y-3">
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Buyprice']||'Text_Buyprice'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Buyprice" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Buyprice| number:'1.0-2')||'0'}} {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Buyprice| number:'1.0-2')||'0'}}
+                  {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_BuyFee']||'Text_BuyFee'}}</mat-label>
@@ -25,15 +25,18 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxbuy']||'Text_Maxbuy'}}</mat-label>
-              <input matInput placeholder="{{trans['Text_Maxbuy']||'Text_Maxbuy'}}" [(ngModel)]="Config.Maxbuy" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Maxbuy| number:'1.0-2')||'0'}} {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
+              <input matInput placeholder="{{trans['Text_Maxbuy']||'Text_Maxbuy'}}" [(ngModel)]="Config.Maxbuy"
+                [ngModelOptions]="{standalone: true}">
+              <mat-hint><span class="text-blue-500">{{(Config.Maxbuy| number:'1.0-2')||'0'}}
+                  {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
             </mat-form-field>
           </div>
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Sellprice']||'Text_Sellprice'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Sellprice" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Sellprice| number:'1.0-2')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Sellprice| number:'1.0-2')||'0'}}
+                  {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -45,47 +48,43 @@
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxsell']||'Text_Maxsell'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Maxsell" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Maxsell| number:'1.0-2')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Maxsell| number:'1.0-2')||'0'}}
+                  {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
             </mat-form-field>
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Mintrade']||'Text_Mintrade'}}</mat-label>
-              <input matInput placeholder="{{trans['Text_Mintrade']||'Text_Mintrade'}}" [(ngModel)]="Config.Mintrade" [ngModelOptions]="{standalone: true}">
+              <input matInput placeholder="{{trans['Text_Mintrade']||'Text_Mintrade'}}" [(ngModel)]="Config.Mintrade"
+                [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Mintrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxtrade']||'Text_Maxtrade'}}</mat-label>
-              <input matInput placeholder="{{trans['Text_Maxtrade']||'Text_Maxtrade'}}" [(ngModel)]="Config.Maxtrade" [ngModelOptions]="{standalone: true}">
+              <input matInput placeholder="{{trans['Text_Maxtrade']||'Text_Maxtrade'}}" [(ngModel)]="Config.Maxtrade"
+                [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Maxtrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Totaltrade']||'Text_Totaltrade'}}</mat-label>
-              <input matInput placeholder="Tổng Giao Dịch" [(ngModel)]="Config.Totaltrade" [ngModelOptions]="{standalone: true}">
+              <input matInput placeholder="Tổng Giao Dịch" [(ngModel)]="Config.Totaltrade"
+                [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
           </div>
         </div>
-    </div>
-    <div class="text-center space-x-2">
-      <a mat-raised-button color="primary" (click)="Update(Config)">Cập Nhật</a>
-      <a mat-raised-button color="primary" (click)="LoadInit()">                 
-        <span class="material-icons">
-          file_upload
+      </div>
+      <div class="text-center space-x-2">
+        <a mat-raised-button color="primary" (click)="Update(Config)">Cập Nhật</a>
+        <!-- <a mat-raised-button color="primary" (click)="LoadInit()">
+          <span class="material-icons">
+            file_upload
           </span>
           <span>
             Dữ Liệu Demo
           </span>
-      </a>
-      <!-- <a mat-raised-button color="primary" (click)="ClearAll()">                 
-        <span class="material-icons">
-          restart_alt
-          </span>
-          <span>
-            Xoá Dữ Liệu
-          </span>
-      </a> -->
+        </a> -->
+      </div>
     </div>
   </div>
-</div>

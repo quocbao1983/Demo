@@ -13,11 +13,8 @@ export class NgonnguComponent implements OnInit {
   Data: any = {}
   NewKey: any;
   lang: any[] = []
-  // {"lang":[{"id":1,"code":"en","name":"English"},{"id":2,"code":"zh","name":"China"},{"id":3,"code":"ko","name":"South Korea"},{"id":4,"code":"ru","name":"Russia"},{"id":5,"code":"fr","name":"France"}],"keys":[{"key_id":1,"key_name":"greeting"},{"key_id":2,"key_name":"goodbye"},{"key_id":3,"key_name":"welcome"}]}
   keys: any[] = []
-  //"keys":[{"key_id": 1,"key_name":"greeting"},{"key_id":2,"key_name":"goodbye"},{"key_id":3,"key_name":"welcome"}]}
   translate: any[] = []
-  // {"translation_id": 1, "language_id": 1, "key_id": 1,"translation_text": "Hello"}
   constructor(
     private _LangService: LangService,
     private _NotifierService: NotifierService,
