@@ -16,7 +16,7 @@
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Buyprice']||'Text_Buyprice'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Buyprice" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Buyprice| number:'1.0-0')||'0'}} {{trans['Text_Buyprice']||'Text_Buyprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Buyprice| number:'1.0-2')||'0'}} {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_BuyFee']||'Text_BuyFee'}}</mat-label>
@@ -26,14 +26,14 @@
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxbuy']||'Text_Maxbuy'}}</mat-label>
               <input matInput placeholder="{{trans['Text_Maxbuy']||'Text_Maxbuy'}}" [(ngModel)]="Config.Maxbuy" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Maxbuy| number:'1.0-0')||'0'}} {{trans['Text_Buyprice']||'Text_Buyprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Maxbuy| number:'1.0-2')||'0'}} {{trans['Text_Buyprice_Currency']||'Text_Buyprice_Currency'}}</span></mat-hint>
             </mat-form-field>
           </div>
           <div class="grid grid-cols-3 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Sellprice']||'Text_Sellprice'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Sellprice" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Sellprice| number:'1.0-0')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Sellprice| number:'1.0-2')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -45,7 +45,7 @@
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxsell']||'Text_Maxsell'}}</mat-label>
               <input matInput placeholder="Mô Tả" [(ngModel)]="Config.Maxsell" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Maxsell| number:'1.0-0')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Maxsell| number:'1.0-2')||'0'}} {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
             </mat-form-field>
           </div>
 
@@ -53,17 +53,17 @@
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Mintrade']||'Text_Mintrade'}}</mat-label>
               <input matInput placeholder="{{trans['Text_Mintrade']||'Text_Mintrade'}}" [(ngModel)]="Config.Mintrade" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Mintrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Mintrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxtrade']||'Text_Maxtrade'}}</mat-label>
               <input matInput placeholder="{{trans['Text_Maxtrade']||'Text_Maxtrade'}}" [(ngModel)]="Config.Maxtrade" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Maxtrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Maxtrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Totaltrade']||'Text_Totaltrade'}}</mat-label>
               <input matInput placeholder="Tổng Giao Dịch" [(ngModel)]="Config.Totaltrade" [ngModelOptions]="{standalone: true}">
-              <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-0')||'0'}}đ</span></mat-hint>
+              <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-2')||'0'}}đ</span></mat-hint>
             </mat-form-field>
           </div>
         </div>

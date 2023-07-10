@@ -6,29 +6,29 @@
         <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
           <div class="flex flex-row space-x-12 justify-between">
             <div class="w-full flex flex-col">
-                <label for="first_name" class="block mb-2 text-white">{{GetTrans(trans,'buy_text1')}}</label>
+                <label for="first_name" class="block mb-2 text-white">{{trans['buy_soluong']}}</label>
                 <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
                  class="w-full p-3 bg-[#291038] text-white rounded">
-                <span class="text-white font-bold">{{GetTrans(trans,'buy_text2')}} {{BuyData.Fee| number:'1.0-0'||'0'}} %</span>
+                <span class="text-white font-bold">{{trans['buy_phi']}} {{BuyData.Fee| number:'1.0-2'||'0'}} {{trans['buy_donvitinh']}}</span>
             </div>
             <div class="w-full">
-              <label class="block mb-2 font-medium text-white">{{GetTrans(trans,'buy_text3')}}</label>       
+              <label class="block mb-2 font-medium text-white">{{trans['buy_so_tai_khoan']}}</label>       
               <input type="text" [(ngModel)]="BuyData.CustomAccount1" [ngModelOptions]="{standalone: true}" class="w-full p-3 bg-[#291038] text-white rounded">    
           </div>
           </div>
           <div class="flex flex-row space-x-12 justify-between">
             <div class="w-full">
-                <label class="block mb-2 font-medium text-white">{{GetTrans(trans,'buy_text4')}}</label>
+                <label class="block mb-2 font-medium text-white">{{trans['buy_email']}}</label>
                 <input type="text" [(ngModel)]="BuyData.Email" [ngModelOptions]="{standalone: true}" class="w-full p-3 bg-[#291038] text-white rounded">
             </div>
             <div class="w-full"></div>
           </div>
           <div class="flex flex-row justify-between rounded border border-[#eab308] mx-4 px-8 p-4">
-              <div class="text-white italic font-bold">{{GetTrans(trans,'buy_text5')}} </div>
-              <div class="text-yellow-500 font-bold text-xl">{{(BuyData.QuantityOut| number:'1.0-0')||'0'}} <span class="text-white">{{GetTrans(trans,'buy_text6')}}</span> </div>
+              <div class="text-white italic font-bold">{{trans['buy_tong_thanh_toan']}} </div>
+              <div class="text-yellow-500 font-bold text-xl">{{(BuyData.QuantityOut| number:'1.0-2')||'0'}} <span class="text-white">{{trans['buy_donvitinh2']}}</span> </div>
           </div>
           <div class="flex flex-col space-y-1">
-            <label for="message" class="block mb-2 text-sm font-medium text-white">{{GetTrans(trans,'buy_text7')}}</label>
+            <label for="message" class="block mb-2 text-sm font-medium text-white">{{trans['buy_noi_dung_giao_dich']}}</label>
             <textarea [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
           </div>
           <div class="flex flex-row justify-center px-4">
@@ -36,18 +36,24 @@
             <!-- <button (click)="CreateBuy(BuyData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
           </div>
           <div class="flex flex-col p-2 text-white italic">
-            {{GetTrans(trans,'buy_text8')}}
+            {{trans['buy_hoan_tat_giao_dich']}}
           </div>
         </div>
         <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
           <div class="text-white ml-4">
-              <span>{{GetTrans(trans,'buy_text9')}}</span>
+              <span>{{trans['buy_huong_dan_thanh_toan']}}</span>
           </div>
           <div class="text-white">
-              <span>{{GetTrans(trans,'buy_text10')}}</span>
+              <span>{{trans['buy_quy_khach_chuyen_tien']}}
+                <strong>                
+                  {{(BuyData.QuantityOut| number:'1.0-2')||'0'}}
+                  {{trans['buy_donvitinh2']}}
+                </strong>
+                {{trans['buy_quy_khach_chuyen_tien2']}}
+              </span>
           </div>
           <div class="text-white flex flex-row space-x-2 items-center">
-            <span>{{GetTrans(trans,'buy_text11')}}</span>           
+            <span>{{trans['buy_dia_chi_vi_cong_ty']}}</span>           
              <div [matMenuTriggerFor]="menu" class="!text-white flex flex-row items-center space-x-2">
               <span>{{Network.Title}}</span>
               <img [src]="Network.img" class="h-5 bg-white">
@@ -58,10 +64,10 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item *ngFor="let item of ListNetwork" (click)="Network=item">{{item.Title}}</button>
               </mat-menu>  
-              <span>{{GetTrans(trans,'buy_text12')}} </span>
+              <span>{{trans['buy_trans_hash']}} </span>
           </div>
           <div class="text-white flex flex-row space-x-3 items-center">
-              <strong>{{GetTrans(trans,'buy_text13')}}</strong>
+              <strong>{{trans['buy_trans_hash']}}</strong>
               <input [(ngModel)]="BuyData.TransHash" [ngModelOptions]="{standalone: true}" type="text" class="w-1/2 p-3 bg-[#291038] text-white rounded">
           </div>
         </div>

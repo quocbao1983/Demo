@@ -4,7 +4,7 @@
       <mat-label>{{'Sell_Quantity_In'| translate }}</mat-label>
       <input type="number" (change)="OnChange()" [(ngModel)]="SellData.QuantityIn" [ngModelOptions]="{standalone: true}"
        matInput placeholder="Số Lượng 1 Bán">
-       <mat-hint><span class="text-blue-500">Phí : {{(SellData.Fee| number:'1.0-0')||'0'}}%</span></mat-hint>
+       <mat-hint><span class="text-blue-500">Phí : {{(SellData.Fee| number:'1.0-2')||'0'}}%</span></mat-hint>
     </mat-form-field>
     <div class="mb-6">
       <label for="password" class="block mb-2 text-sm font-medium text-white">Số lượng</label>
@@ -13,15 +13,15 @@
     <!-- <mat-form-field appearance="outline">
       <mat-label>{{'Sell_Fee'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="SellData.Fee" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Sell_Fee'| translate }}">
-      <mat-hint><span class="text-blue-500">{{(SellData.Fee| number:'1.0-0')||'0'}}đ</span></mat-hint>
+      <mat-hint><span class="text-blue-500">{{(SellData.Fee| number:'1.0-2')||'0'}}đ</span></mat-hint>
     </mat-form-field> -->
     <div>Tổng giá trị nhận được :</div>
-    <div>    {{(SellData.QuantityOut| number:'1.0-0')||'0'}}</div>
+    <div>    {{(SellData.QuantityOut| number:'1.0-2')||'0'}}</div>
 
     <!-- <mat-form-field appearance="outline">
       <mat-label>{{'Tổng giá trị nhận được'| translate }}</mat-label>
       <input type="number" disabled [(ngModel)]="SellData.QuantityOut" [ngModelOptions]="{standalone: true}" matInput placeholder="{{'Sell_Quantity_Out'| translate }}">
-      <mat-hint><span class="text-blue-500">{{(SellData.QuantityOut| number:'1.0-0')||'0'}}</span></mat-hint>
+      <mat-hint><span class="text-blue-500">{{(SellData.QuantityOut| number:'1.0-2')||'0'}}</span></mat-hint>
     </mat-form-field> -->
   </div>
   <div class="flex flex-col">

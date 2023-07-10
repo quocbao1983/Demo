@@ -14,61 +14,58 @@
               </div>
             </div>
           </div>
-
-
-
           <div class="flex flex-row space-x-4 justify-between">
             <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
-              <div>{{trans['home_giamua']}}</div>
+              <div>{{trans['Text_Buyprice']}}</div>
               <div class="space-x-2">
-                <span class="text-green-600 font-bold">{{(Config.Buyprice| number:'1.0-0')||'0'}} </span>
-                <span>USD</span>
+                <span class="text-green-600 font-bold">{{(Config.Buyprice| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Buyprice_Currency']}}</span>
               </div>
               <div>
                 <img [src]="'assets/muangay1.png'" class="h-10" [routerLink]="['/buyer']">
                 <!-- <button mat-raised-button class="bg-green-500" [routerLink]="['/buyer']">{{'Mua_ngay'|translate}}</button> -->
               </div>
               <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 px-6 rounded">
-                <div>{{trans['home_text1']}}</div>
+                <div>{{trans['Text_Maxbuy']}}</div>
                 <div>
-                  <span class="text-orange-300 font-bold">{{(Config.Mintrade| number:'1.0-0')||'0'}} </span>
-                  <span>{{trans['home_text_coin']}}</span>
+                  <span class="text-orange-300 font-bold">{{(Config.Maxbuy| number:'1.0-2')||'0'}} </span>
+                  <span>{{trans['Text_Buyprice_Currency']}}</span>
                 </div>
               </div>
             </div>
             <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
-              <div>{{trans['home_giaban']}}</div>
+              <div>{{trans['Text_Sellprice']}}</div>
               <div class="space-x-2">
-                <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-0')||'0'}} </span>
-                <span>USD</span>
+                <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Sellprice_Currency']}}</span>
               </div>
               <div>
                 <img [src]="'assets/banngay1.png'" class="h-10" [routerLink]="['/seller']">
                 <!-- <button mat-raised-button class="bg-green-500" [routerLink]="['/seller']">{{'Ban_ngay'|translate}}</button> -->
               </div>
               <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 px-6 rounded">
-                <div>{{trans['home_text2']}}</div>
+                <div>{{trans['Text_Maxsell']}}</div>
                 <div>
-                  <span class="text-orange-300 font-bold">{{(Config.Maxtrade| number:'1.0-0')||'0'}} </span>
-                  <span>{{trans['home_text_coin']}}</span>
+                  <span class="text-orange-300 font-bold">{{(Config.Maxsell| number:'1.0-2')||'0'}} </span>
+                  <span>{{trans['Text_Sellprice_Currency']}}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="text-white italic">{{trans['home_text6']}}</div>
+          <div class="text-white italic">{{trans['home_hoan_tat_giao_dich']}}</div>
           <div class="flex flex-col space-y-3 mt-3 text-center">
             <app-linechart></app-linechart>
-            <div class="text-xl text-white">{{trans['home_text7']}}</div>
+            <div class="text-xl text-white">{{trans['home_cac_giao_dich_thanh_cong']}}</div>
             <div class="flex flex-row">
               <div class="max-h-48 overflow-auto relative w-full bg-[#441E5B] p-4">
                 <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-[#441E5B]">
                   <thead class="text-center bg-[#441E5B] text-xs text-white uppercase">
                     <tr>
                       <th scope="col" class="px-6 py-3">
-                        {{trans['home_text8']}}
+                        {{trans['home_email']}}
                       </th>
                       <th scope="col" class="px-6 py-3">
-                        {{trans['home_text9']}}
+                        {{trans['home_ngaytao']}}
                       </th>
                     </tr>
                   </thead>

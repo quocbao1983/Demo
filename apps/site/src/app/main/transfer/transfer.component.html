@@ -6,46 +6,46 @@
                     <thead class="text-xs text-white">
                         <tr>
                             <th colspan="2" scope="row" class="text-center text-2xl px-6 py-3">
-                                <span>{{GetTrans(trans,'transfer_text1')}}</span>
+                                <span>{{trans['transfer_buy_madonhang']}}</span>
                                 <span>#{{Data.Code}}</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_text2')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_trangthai']}}</td>
                             <td>{{Data.Status==0?'Waiting':'Done'}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text1')}}</td>
-                            <td>{{Data.QuantityIn| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text2')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_soluong']}}</td>
+                            <td>{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_text4')}}</td>
-                            <td>{{Data.Fee| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text3')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_phi']}}</td>
+                            <td>{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh2']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_text5')}}</td>
-                            <td>{{Data.QuantityOut| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_buy_text4')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_tongthanhtoan']}}</td>
+                            <td>{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh3']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text5')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_taikhoan_khach']}}</td>
                             <td>{{Data.CustomAccount1}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_text7')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_email']}}</td>
                             <td>{{Data.Email}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text6')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_taikhoan_congty']}}</td>
                             <td>{{Data.CompanyAccount2}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_buy_text7')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_trans_hash']}}</td>
                             <td>{{Data.TransHash}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
-                            <td class="py-4">{{GetTrans(trans,'transfer_text9')}}</td>
+                            <td class="py-4">{{trans['transfer_buy_noi_dung']}}</td>
                             <td>{{Data.Note}}</td>
                         </tr>
                     </tbody>
@@ -57,54 +57,51 @@
                 <thead class="text-xs text-white">
                     <tr>
                         <th colspan="2" scope="row" class="text-center text-2xl px-6 py-3">
-                            <span>{{GetTrans(trans,'transfer_text1')}}</span>
+                            <span>{{trans['transfer_sell_madonhang']}}</span>
                             <span>#{{Data.Code}}</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text2')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_trangthai']}}</td>
                         <td>{{Data.Status==0?'Waiting':'Done'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text1')}}</td>
-                        <td>{{Data.QuantityIn| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text2')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_soluong']}}</td>
+                        <td>{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text4')}}</td>
-                        <td>{{Data.Fee| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text3')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_phi']}}</td>
+                        <td>{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh2']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text4')}}</td>
-                        <td>{{Data.QuantityOut| number:'1.0-0'||'0'}} {{GetTrans(trans,'transfer_sell_text5')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_tong_nhan']}}</td>
+                        <td>{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh3']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text6')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_taikhoan_kh']}}</td>
                         <td>{{Data.CustomAccount1}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text7')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_email']}}</td>
                         <td>{{Data.Email}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_sell_text7')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_taikhoan_cong_ty_2']}}</td>
                         <td>{{Data.CompanyAccount2}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_buy_text8')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_trans_id']}}</td>
                         <td>{{Data.TransIdBank}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
-                        <td class="py-4">{{GetTrans(trans,'transfer_text9')}}</td>
+                        <td class="py-4">{{trans['transfer_sell_noi_dung']}}</td>
                         <td>{{Data.Note}}</td>
                     </tr>
                 </tbody>
             </table>  
             </ng-template>
-
-
         </div>
-
     </div>
 </div>
