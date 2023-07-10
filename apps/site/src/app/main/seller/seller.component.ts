@@ -30,7 +30,7 @@ export class SellerComponent implements OnInit {
     Status: 0
   }
   Config:any={}
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   ListNetwork:any[]=[
     {id:1,Title:"ETH",img:'assets/ETH.png'},
     {id:2,Title:"BSC",img:'assets/BSC.png'}

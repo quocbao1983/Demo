@@ -1,23 +1,27 @@
-<mat-drawer-container class="example-container w-full h-full" autosize>
-    <mat-drawer #drawer mode="side" opened class="!flex flex-col w-3/4 flex-auto relative h-full" position="end">
+<mat-drawer-container class="example-container flex h-[100vh]" autosize>
+    <mat-drawer #drawer mode="side" opened class="h-full">
+        <div class="relative flex flex-col h-full w-full overflow-auto">
+            <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
+              <div class="flex flex-col {{isMini?'min-w-[80px]':'min-w-[270px]'}}">
+                  <div class="flex flex-row justify-between items-center p-2">
+                      <img [src]="'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'" class="h-10"/>
+                  </div>
+                  <div [routerLink]="[item.Slug]" routerLinkActive="bg-gray-200" (click)="drawer.open()"
+                      class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
+                      *ngFor="let item of FilterLists; let i = index">
+                      <div class="flex flex-col space-y-2 w-full">
+                          <div class="flex {{isMini?'flex-col space-y-2 text-xs':'flex-row space-x-2'}} items-center">
+                              <span class="material-icons">settings</span>
+                               <span>{{item.Title}} </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </mat-drawer>
+    <mat-drawer-content class="!flex flex-col flex-auto relative bg-white !h-[100vh]">
         <div class="relative flex flex-col h-full w-full overflow-auto">
             <router-outlet></router-outlet>
-        </div>
-    </mat-drawer>
-    <mat-drawer-content class="!flex flex-col w-1/4 flex-auto relative bg-white !h-[100vh]">
-        <div class="relative flex flex-col h-full w-full overflow-auto">
-          <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
-            <div class="flex flex-col">
-                <div [routerLink]="[item.Slug]" routerLinkActive="bg-gray-200" (click)="drawer.open()"
-                    class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
-                    *ngFor="let item of FilterLists; let i = index">
-                    <div class="flex flex-row space-x-2 items-center justify-between w-full">
-                        <div class="flex flex-col space-y-2">
-                            <span>{{item.Title}} </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </mat-drawer-content>
   </mat-drawer-container>

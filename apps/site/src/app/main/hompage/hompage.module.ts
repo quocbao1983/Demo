@@ -15,6 +15,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     NgApexchartsModule,
     CommonModule,
     MatButtonModule,
+    MaterialModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

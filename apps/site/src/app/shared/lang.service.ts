@@ -51,10 +51,15 @@ export class LangService {
   updateLang(dulieu: any): Observable<any> {
     return this._httpClient.patch(`${this.APIURL}/demo_lang/${dulieu.id}`, dulieu).pipe(
           map((lang: any) => {
-            this._lang.next(lang);            
-            const merged = lang.keys.map((obj1:any) => ({ ...obj1, ...lang.translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-            const trans = merged.filter((v:any)=>v.language_id==lang.Type)
-            localStorage.setItem('Translate', JSON.stringify(trans)); 
+            console.log(lang);    
+            this._lang.next(lang);
+            const result = lang.translate.reduce((acc:any, obj:any) => {
+              if (obj.vi) {
+                acc[obj.key_name] = obj.vi;
+              }
+              return acc;
+            }, {});           
+            localStorage.setItem('Translate', JSON.stringify(result)); 
             return lang;
           })
         )

@@ -4,6 +4,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { CauhinhService } from '../shared/cauhinh.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -11,14 +12,15 @@ import { CauhinhService } from '../shared/cauhinh.service';
 })
 export class AdminComponent implements OnInit {
   Detail: any = {};
+  isMini:boolean=false;
   Lists: any[] = [
-    {id:1,Title:'Cấu Hình Chung',Slug:'cauhinh'},
+    {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
     {id:1,Title:'Nội Dung',Slug:'noidung'},
     {id:1,Title:'Ngôn Ngữ',Slug:'ngonngu'},
     {id:1,Title:'Giao Dịch',Slug:'transaction'}
   ]
   FilterLists: any[] = [    
-  {id:1,Title:'Cấu Hình Chung',Slug:'cauhinh'},
+  {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
   {id:1,Title:'Nội Dung',Slug:'noidung'},
   {id:1,Title:'Ngôn Ngữ',Slug:'ngonngu'},
   {id:1,Title:'Giao Dịch',Slug:'transaction'}
@@ -29,8 +31,14 @@ export class AdminComponent implements OnInit {
     private dialog: MatDialog,
     private _Notification: NotifierService,
     private router: Router,
-    private _CauhinhService: CauhinhService
+    private _CauhinhService: CauhinhService,
+    private breakpointObserver: BreakpointObserver
   ) {
+    breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      if (result.matches) {
+       
+      }
+  })
   }
   ngOnInit(): void {
     // this._CauhinhService.getAll().subscribe((data)=>{

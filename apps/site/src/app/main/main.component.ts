@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   constructor(
     private dialog: MatDialog,
     private _Notification: NotifierService,
@@ -47,28 +47,24 @@ export class MainComponent implements OnInit {
     private _ExchangeService: ExchangeService,
     private _LangService: LangService,
   ) {
-    translate.addLangs(['en', 'zh', 'ko', 'ru', 'fr']);
-    translate.setDefaultLang('en');
-    const browserLang = translate.getBrowserLang();
-  }
-  ChangeLang(event: any) {
-    this.translate.use(event)
   }
   ngOnInit(): void {
-    this._LangService.getAll().subscribe(data=>{
-      const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-       this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)
-      localStorage.setItem('Translate', JSON.stringify(this.trans));  
-    }) 
-    this._LangService.getAll().subscribe(data=>
+    this._LangService.getAll().subscribe(()=>
       {
         this._LangService.langs$.subscribe(data=>
           {
             this.langInit = data[0]
             this.langselect = this.ListLang.find(v=>v.id==data[0].Type)
+            const result = data[0].translate.reduce((acc:any, obj:any) => {
+              if (obj[this.langselect.code]) {
+                acc[obj.key_name] = obj[this.langselect.code];
+              }
+              return acc;
+            }, {});    
+            localStorage.setItem('Translate', JSON.stringify(result)); 
           })
       }
-      )
+    )
     this._ConfigService.getAll().subscribe(data => this.Config = data[0])
     this._ExchangeService.getAll().subscribe(data => {
       this.ListsExchange = data
@@ -79,10 +75,6 @@ export class MainComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
-    // this._RedirectService.getAll().subscribe((data)=>{
-    //   console.log(data);
-    //   this.FilterLists = this.Lists = data
-    // })
   }
   applyFilter(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -104,9 +96,10 @@ export class MainComponent implements OnInit {
   }
   UpdateLang(data:any)
   {
-    this.langInit.Type = data.id
+    this.langInit.Type = data.id   
     this._LangService.updateLang(this.langInit).subscribe((data)=>
-    {     
+    {    
+    console.log(data); 
     window.location.reload()
     }
     )

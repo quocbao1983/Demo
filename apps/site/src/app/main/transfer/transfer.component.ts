@@ -29,7 +29,7 @@ export class TransferComponent implements OnInit {
   chatMessages: any[] = [];
   newMessage: string = '';
   selectedImage: File | null = null;
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   constructor(
     private route: ActivatedRoute,
     private router: Router,

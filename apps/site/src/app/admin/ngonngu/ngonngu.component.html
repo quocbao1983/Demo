@@ -1,22 +1,50 @@
-<div class="flex flex-row space-x-4 p-3">
-    <mat-form-field appearance="outline">
-        <mat-label>Tiêu Đề</mat-label>
-        <input (keydown.enter)="createKey(NewKey)" type="text" [(ngModel)]="NewKey" [ngModelOptions]="{standalone: true}"
-         matInput class="px-3 py-2 border border-gray-200 rounded"
-          [placeholder]="'Tìm kiếm bài viết'"/>
-      </mat-form-field>  
-      <div><button mat-raised-button (click)="createKey(NewKey)">Thêm Key</button></div>
-</div>
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-    <mat-tab label="{{item.name}}" *ngFor="let item of lang">
-        <div class="grid grid-cols-4">
-            <div class="p-4" *ngFor="let item1 of keys">
-                <mat-form-field appearance="outline" class="w-full items-center">
-                  <mat-label>{{item1.key_name}}</mat-label>
-                  <input type="text" (change)="Change($event,translate,item,item1)" [value]="GetTranslate(translate,item,item1)" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-                    [placeholder]="GetTranslate(translate,item,item1)"/>
-                </mat-form-field>  
+  <div class="!flex flex-col flex-auto min-w-0 relative bg-white">
+    <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
+      <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
+        arrow_back
+        </span>
+        <div class="text-xl">Ngôn Ngữ</div>
+        <div>
+          <button mat-raised-button color="primary">Cập Nhật</button>
+        </div>
+    </div>
+    <div class="relative h-full w-full overflow-auto flex flex-col space-y-2 justify-between p-4">
+        <div class="flex flex-row space-x-4 p-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Thêm Key</mat-label>
+                <input (keydown.enter)="createKey(NewKey)" type="text" [(ngModel)]="NewKey" [ngModelOptions]="{standalone: true}"
+                 matInput class="px-3 py-2 border border-gray-200 rounded"
+                  [placeholder]="'Thêm Key'"/>
+                  <span matSuffix class="material-icons mr-2" (click)="createKey(NewKey)">add</span>
+              </mat-form-field>
+        </div>
+        <div class="flex flex-col w-full">
+            <div class="flex flex-col space-x-2" *ngFor="let item of translate; let i =index">   
+                <div>{{item.key_name}}</div>
+                <div class="flex flex-row space-x-2">
+                <div *ngFor="let item1 of lang">
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>{{item1.code}}</mat-label>
+                        <input (change)="Change(translate)" type="text" [(ngModel)]="translate[i][item1.code]" [ngModelOptions]="{standalone: true}"
+                         matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+                          [placeholder]="item1.code"/>
+                      </mat-form-field> 
+                </div>  
+                </div>
             </div>
         </div>
-    </mat-tab>
-  </mat-tab-group>
+        <!-- <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+            <mat-tab label="{{item.name}}" *ngFor="let item of lang">
+                <div class="grid grid-cols-4">
+                    <div class="p-4" *ngFor="let item1 of keys">
+                        <mat-form-field appearance="outline" class="w-full items-center">
+                          <mat-label>{{item1.key_name}}</mat-label>
+                          <input type="text" (change)="Change($event,translate,item,item1)" [value]="GetTranslate(translate,item,item1)" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+                            [placeholder]="GetTranslate(translate,item,item1)"/>
+                        </mat-form-field>  
+                    </div>
+                </div>
+            </mat-tab>
+          </mat-tab-group> -->
+      </div> 
+  </div>

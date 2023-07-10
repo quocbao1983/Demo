@@ -29,7 +29,7 @@ export class BuyerComponent implements OnInit {
     Type: 1,
     Status: 0
   }
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   ListNetwork:any[]=[
   {id:1,Title:"ETH",img:'assets/ETH.png'},
   {id:2,Title:"BSC",img:'assets/BSC.png'}

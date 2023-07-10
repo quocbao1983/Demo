@@ -27,7 +27,7 @@ export class TransactionComponent implements OnInit {
 //     Type: 0,
 //     Status: 0,
 // }
-   trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+   trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

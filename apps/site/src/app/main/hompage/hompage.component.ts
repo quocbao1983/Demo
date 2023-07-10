@@ -16,7 +16,7 @@ export class HompageComponent implements OnInit {
   ListsExchange: any[] = []
   displayedColumns: string[] = ['Email', 'CreateAt'];
   lang:any={}
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,10 +43,10 @@ export class HompageComponent implements OnInit {
         this.dataSource.sort = this.sort;
       })
   }
-  GetTrans(trans:any[],value:any)
-  {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
-  }
+  // GetTrans(trans:any,value:any)
+  // {
+  //   const result = trans.find((v:any)=>v.key_name==value)
+  //   return result?result.translation_text:''
+  // }
 
 }

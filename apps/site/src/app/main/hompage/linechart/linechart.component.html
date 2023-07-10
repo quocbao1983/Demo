@@ -1,4 +1,4 @@
-<div id="chart" class="bg-white">
+<div id="chart" class="bg-white relative">
   <apx-chart
     [series]="chartOptions['series']"
     [chart]="chartOptions['chart']"
@@ -12,4 +12,10 @@
     [yaxis]="chartOptions['yaxis']"
     [title]="chartOptions['title']"
   ></apx-chart>
+  <div class="absolute top-1 right-1/2">  
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">{{SelechDate.Title}}</button>
+    <mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="GetChart(item.value);SelechDate=item" *ngFor="let item of ChooseDate">{{item.Title}}</button>
+</mat-menu></div>
+
 </div>

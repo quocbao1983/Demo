@@ -3,6 +3,7 @@ import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../shared/config.service';
 import { LangService } from '../../shared/lang.service';
+import { AdminComponent } from '../admin.component';
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
@@ -64,11 +65,12 @@ ConfigInit:any = {
 // }
   Config:any={}
   editableContent: string = '';
-  trans:any[]=JSON.parse(localStorage.getItem('Translate') || '[]');
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   constructor(
     private _NotifierService:NotifierService,
     private router: Router,
     private _ConfigService: ConfigService,
+    private _AdminComponent: AdminComponent,
     ) {}
   ngOnInit() {
     this._ConfigService.getAll().subscribe((data)=>
@@ -105,4 +107,9 @@ ConfigInit:any = {
     const result = trans.find((v:any)=>v.key_name==value)
     return result?result.translation_text:''
   }
+  CloseDrawer()
+  {
+    this._AdminComponent.drawer.toggle();
+  }
+
 }
