@@ -21,14 +21,12 @@ export class UsersInterceptor implements HttpInterceptor {
     .pipe(catchError((error: HttpErrorResponse) => {
             let errorMsg = '';
             if (error.error instanceof ErrorEvent) {
-                console.log('This is client side error');
                 errorMsg = `Error: ${error.message}`;
             } else {
                 // this._notifierService.show({
                 //   message: "Có Lỗi. Kiểm Tra Lại",
                 //   type: 'error',
                 // });
-                console.log(error.error);
             }
             return throwError(errorMsg);
         })

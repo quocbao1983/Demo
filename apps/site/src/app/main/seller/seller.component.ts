@@ -17,15 +17,13 @@ export class SellerComponent implements OnInit {
   SellData: any = {
     QuantityIn: '',
     QuantityOut: '',
-    // CompanyAccount1: string,
-    // CompanyAccount2: string,
-     CustomAccount1: '',
-     CustomAccount2: '',
-    // Content: string,
+    CustomAccount1: '',
+    CustomAccount2: '',
+    CompanyAccount1:'',
+    CompanyAccount2:'',
     Email:'',
     Fee: '',
     TransIdBank:'',
-    // Note: string,
     Type: 2,
     Status: 0
   }
@@ -42,7 +40,6 @@ export class SellerComponent implements OnInit {
     private _ConfigService: ConfigService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
-    private _LangService: LangService,
     private router: Router
   ) { 
  
@@ -53,13 +50,11 @@ export class SellerComponent implements OnInit {
     });
   }
   ngOnInit() {
-    // this._LangService.getAll().subscribe(data=>{
-    //   const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-    //    this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-    //    }) 
     this._ConfigService.getAll().subscribe(data => {
       this.Config = data[0]
       this.SellData.Fee = this.Config.SellFee
+      this.SellData.CompanyAccount2 = this.Config.CompanyAccount2
+      this.SellData.CompanyAccount1 = this.Config.CompanyAccount1
     })
   }
   CreateSell(dulieu:any)
@@ -104,12 +99,17 @@ export class SellerComponent implements OnInit {
   }
   OnChange()
   {   
-    this.SellData.QuantityOut = (this.SellData.QuantityIn*this.Config.Sellprice*(1 - (this.SellData.Fee / 100))).toFixed();
+    if(this.SellData.QuantityIn<this.Config.Mintrade||this.SellData.QuantityIn>this.Config.Maxtrade)
+    {
+      this._NotifierService.notify("error",(this.trans['sell_min_max_error']||'sell_min_max_error '+this.Config.Mintrade+' - '+this.Config.Maxtrade))
+      this.SellData.QuantityIn = 0
+    }
+    else
+    {
+      this.SellData.QuantityOut = (this.SellData.QuantityIn*this.Config.Sellprice*(1 - (this.SellData.Fee / 100))).toFixed(2);
+    }
+    
   }
-  GetTrans(trans:any[],value:any)
-  {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
-  }
+
 
 }

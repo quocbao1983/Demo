@@ -35,7 +35,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
         children: [
           { path: 'cauhinh', component: ConfigComponent },
           { path: 'transaction', component: TransactionComponent },
-          { path: 'ngonngu', component: NgonnguComponent },
+          { path: 'ngonngu', loadChildren: () => import('./ngonngu/ngonngu.module').then(m => m.NgonnguModule) },
           { path: 'noidung', loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
           { path: 'chart', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
           { path: 'femail', loadChildren: () => import('./femail/femail.module').then(m => m.FemailModule) }
@@ -44,6 +44,6 @@ import { EditorModule } from '@tinymce/tinymce-angular';
       },
     ]),
   ],
-  declarations: [AdminComponent, ConfigComponent, TransactionComponent,DangnhapComponent,NgonnguComponent],
+  declarations: [AdminComponent, ConfigComponent, TransactionComponent,DangnhapComponent],
 })
 export class AdminModule {}

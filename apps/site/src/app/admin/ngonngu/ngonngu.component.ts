@@ -34,7 +34,6 @@ export class NgonnguComponent implements OnInit {
     )
   }
   Change(translate: any[]) {
-    console.log(translate);
     this.Data[0].translate = translate
     this._LangService.updateLang(this.Data[0]).subscribe(()=>this._NotifierService.notify("success","Cập Nhật Thành Công"));
   }

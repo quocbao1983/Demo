@@ -41,7 +41,7 @@ export class LinechartComponent implements OnInit {
     {id:1,Title:"7",value:7},
     {id:2,Title:"30",value:30},
   ]
-  SelechDate:any={id:1,Title:"7",value:7}
+  SelechDate:any=this.ChooseDate[0]
   charts:any[]=[]
   listDay:any[]=[]
   listMua:any[]=[]
@@ -58,13 +58,27 @@ export class LinechartComponent implements OnInit {
     });
   }
   ngOnInit(): void {}
+  averageDistance(arr1:any, arr2:any) {
+    var totalDistance = 0;
+    var count = 0;
+  
+    for (var i = 0; i < arr1.length; i++) {
+      for (var j = 0; j < arr2.length; j++) {
+        var distance = Math.abs(arr1[i] - arr2[j]);
+        totalDistance += distance;
+        count++;
+      }
+    }
+  
+    return totalDistance / count;
+  }
   GetChart(data:any)
   { 
     this.listDay = []  
     const now = new Date()
     for (let index = 0; index < data; index++) {
           now.setDate(now.getDate() - 1);
-         const day = this.datePipe.transform(new Date(now), 'dd/MM/yyyy');
+          const day = this.datePipe.transform(new Date(now), 'dd/MM/yyyy');
           this.listDay.push(day);
     } 
     this.listMua = this.charts
@@ -73,6 +87,11 @@ export class LinechartComponent implements OnInit {
     this.listBan = this.charts
     .filter(v => this.listDay
     .includes(v.Ngay)).map(v => v.Sell);
+    console.log(this.listDay);
+    const listDay = this.listDay.map(date => date.split('/').slice(0, 2).join('/'));
+    let average = this.averageDistance(this.listMua,this.listBan)
+    let min = Math.min(...this.listMua, ...this.listBan)-average;
+    let max = Math.max(...this.listMua, ...this.listBan)+average;
 
     this.chartOptions = {
       series: [
@@ -88,6 +107,7 @@ export class LinechartComponent implements OnInit {
       chart: {
         height: 350,
         type: "line",
+        stacked: false,
         dropShadow: {
           enabled: true,
           color: "#000",
@@ -123,25 +143,27 @@ export class LinechartComponent implements OnInit {
         size: 1
       },
       xaxis: {
-        categories: this.listDay,
+        categories: listDay,
         title: {
-          text: this.trans['chart_donvitinh']
-        }
+          //text: this.trans['chart_donvitinh']
+        },
+
       },
       yaxis: {
         title: {
           text: ""
           // text: "Temperature"
         },
-        min: 5,
-        max: 40
+        min: min,
+        max: max
       },
       legend: {
-        position: "top",
-        horizontalAlign: "right",
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
+        position: "bottom",
+        horizontalAlign: "center",
+        floating: false,
+        offsetY: 0,
+        offsetX: 20,
+        
       }
     };
   }

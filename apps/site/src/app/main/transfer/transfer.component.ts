@@ -63,9 +63,5 @@ export class TransferComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedImage = event.target.files[0];
   }
-  GetTrans(trans:any[],value:any)
-  {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
-  }
+
 }

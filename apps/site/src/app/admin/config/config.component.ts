@@ -38,6 +38,9 @@ export class ConfigComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+  Change() {
+    this._ConfigService.updateConfig(this.Config).subscribe(data=>this._NotifierService.notify("success","Update Success"))
+  }
   AddCoin()
   {
     const check = this.Config.ListtypeCoin.find((v:any)=>v.Title== this.Typecoin.Title)
@@ -70,11 +73,6 @@ export class ConfigComponent implements OnInit {
   {
     this._NotifierService.notify("success","Xoá Thành Công")
     window.location.reload();
-  }
-  GetTrans(trans:any[],value:any)
-  {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
   }
   CloseDrawer()
   {

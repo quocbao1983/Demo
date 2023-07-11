@@ -1,7 +1,7 @@
-      
-      <div class="max-w-4xl py-12 px-6 h-full m-auto">
-        <div class="flex flex-col space-y-6">
-          <div class="flex flex-col space-y-2 text-center bg-[#441E5B] text-white py-3 px-8 rounded">
+<!-- desktop -->
+<div class="lg:block hidden max-w-4xl py-12 px-6 h-full m-auto">
+     <div class="flex flex-col space-y-6">
+          <div class="flex flex-col space-y-2 text-center bg-[#441E5B] text-white py-3 rounded px-8">
             <div class="flex flex-row justify-between items-center">
               <div><img [src]="'assets/bitcoin.png'" class="h-10"></div>
               <div>
@@ -13,19 +13,20 @@
               </div>
             </div>
           </div>
+
           <div class="flex flex-row space-x-4 justify-between">
+           
             <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
               <div>{{trans['Text_Buyprice']}}</div>
               <div class="space-x-2">
                 <span class="text-green-600 font-bold">{{(Config.Buyprice| number:'1.0-2')||'0'}} </span>
                 <span>{{trans['Text_Buyprice_Currency']}}</span>
               </div>
-              <div class="w-1/2 flex flex-row items-center justify-center px-4">
-                <img [src]="'assets/muangay1.png'" class="h-10" [routerLink]="['/buyer']">
+              <div class="w-1/2 flex flex-row items-center justify-center px-4" [routerLink]="['/buyer']">
+                <img [src]="'assets/muangay1.png'" class="h-10">
                 <div class="absolute text-white">{{trans['home_button_buy']||'home_button_buy'}}</div>
-                <!-- <button (click)="CreateSell(SellData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
               </div>
-              <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 px-6 rounded">
+              <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 rounded">
                 <div>{{trans['Text_Maxbuy']}}</div>
                 <div>
                   <span class="text-orange-300 font-bold">{{(Config.Maxbuy| number:'1.0-2')||'0'}} </span>
@@ -33,18 +34,18 @@
                 </div>
               </div>
             </div>
+           
             <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
               <div>{{trans['Text_Sellprice']}}</div>
               <div class="space-x-2">
                 <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-2')||'0'}} </span>
                 <span>{{trans['Text_Sellprice_Currency']}}</span>
               </div>
-              <div class="w-1/2 flex flex-row items-center justify-center px-4">
-                <img [src]="'assets/banngay1.png'" class="h-10" [routerLink]="['/seller']">
+              <div class="w-1/2 flex flex-row items-center justify-center px-4" [routerLink]="['/seller']">
+                <img [src]="'assets/banngay1.png'" class="h-10">
                 <div class="absolute text-white">{{trans['home_button_sell']||'home_button_sell'}}</div>
-                <!-- <button (click)="CreateSell(SellData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
               </div>
-              <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 px-6 rounded">
+              <div class="flex flex-col space-y-4 bg-[#441E5B] text-white py-3 rounded">
                 <div>{{trans['Text_Maxsell']}}</div>
                 <div>
                   <span class="text-orange-300 font-bold">{{(Config.Maxsell| number:'1.0-2')||'0'}} </span>
@@ -53,6 +54,109 @@
               </div>
             </div>
           </div>
+
+
+
+          <div class="text-white italic">{{trans['home_hoan_tat_giao_dich']}}</div>
+          <div class="flex flex-col space-y-3 mt-3 text-center">
+            <app-linechart></app-linechart>
+            <div class="text-xl text-white">{{trans['home_cac_giao_dich_thanh_cong']}}</div>
+            <div class="flex flex-row">
+              <div class="max-h-48 overflow-auto relative w-full bg-[#441E5B] p-4">
+                <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-[#441E5B]">
+                  <thead class="text-center bg-[#441E5B] text-xs text-white uppercase">
+                    <tr>
+                      <th scope="col" class="px-6 py-3">
+                        {{trans['home_email']}}
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        {{trans['home_ngaytao']}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center  even:bg-[#291038] odd:bg-[#441E5B] text-white p-2" *ngFor="let item of ListsExchange">
+                      <td>{{item.Email}}</td>
+                      <td class="py-2">{{item.CreateAt|date:'hh:ss:mm dd/MM/yyyy'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex flex-row"></div>
+          </div>
+        </div>
+ </div>
+
+
+
+
+<!-- mobile -->
+ <div class="lg:hidden w-full py-12 px-6 h-full m-auto">
+        <div class="flex flex-col space-y-6">
+          <div class="flex flex-col space-y-2 text-center bg-[#441E5B] text-white py-3 rounded">
+            <div class="flex flex-row justify-between items-center px-2">
+              <div><img [src]="'assets/bitcoin.png'" class="h-10"></div>
+              <div>
+                <select id="default"
+                  class="bg-[#291038] border border-[#291038] text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>{{trans['Home_Choose_Coin']||'Home_Choose_Coin'}}</option>
+                  <option [value]="item" *ngFor="let item of this.Config.ListtypeCoin">{{item.Title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="flex flex-col space-y-4 justify-between">
+           
+            <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
+             <div class="flex flex-row justify-between">
+              <div>{{trans['Text_Buyprice']}}</div>
+              <div class="space-x-2">
+                <span class="text-green-600 font-bold">{{(Config.Buyprice| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Buyprice_Currency']}}</span>
+              </div>
+             </div>
+             <hr/>
+             <div class="flex flex-row justify-between">
+              <div>{{trans['Text_Maxbuy']}}</div>
+              <div class="flex flex-row space-x-2">
+                <span class="text-orange-300 font-bold">{{(Config.Maxbuy| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Buyprice_Currency']}}</span>
+              </div>
+             </div>
+              <div class="w-full flex flex-row items-center justify-center px-4" [routerLink]="['/buyer']">
+                <img [src]="'assets/muangay1.png'" class="h-10">
+                <div class="absolute text-white">{{trans['home_button_buy']||'home_button_buy'}}</div>
+              </div>
+            </div>
+
+            <div class="flex flex-col w-full space-y-4 bg-[#441E5B] text-white p-5 rounded">
+             <div class="flex flex-row justify-between">
+              <div>{{trans['Text_Sellprice']}}</div>
+              <div class="space-x-2">
+                <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Sellprice_Currency']}}</span>
+              </div>
+             </div>
+             <hr/>
+             <div class="flex flex-row justify-between">
+              <div>{{trans['Text_Maxsell']}}</div>
+              <div class="flex flex-row space-x-2">
+                <span class="text-orange-300 font-bold">{{(Config.Maxsell| number:'1.0-2')||'0'}} </span>
+                <span>{{trans['Text_Sellprice_Currency']}}</span>
+              </div>
+             </div>
+             <div class="w-full flex flex-row items-center justify-center px-4" [routerLink]="['/seller']">
+              <img [src]="'assets/banngay1.png'" class="h-10">
+              <div class="absolute text-white">{{trans['home_button_sell']||'home_button_sell'}}</div>
+            </div>
+            </div>
+          </div>
+
+
+
           <div class="text-white italic">{{trans['home_hoan_tat_giao_dich']}}</div>
           <div class="flex flex-col space-y-3 mt-3 text-center">
             <app-linechart></app-linechart>

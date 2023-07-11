@@ -17,15 +17,11 @@ export class BuyerComponent implements OnInit {
   BuyData: any = {
      QuantityIn: '',
      QuantityOut: '',
-    // CompanyAccount1: string,
-    // CompanyAccount2: string,
+    CompanyAccount2: '',
      CustomAccount1: '',
-    // CustomAccount2: string,
-    // Content: string,
      Email:'',
      Fee: '',
      TransHash:'',
-    // Note: string,
     Type: 1,
     Status: 0
   }
@@ -44,22 +40,26 @@ export class BuyerComponent implements OnInit {
     private _ConfigService: ConfigService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
-    private _LangService: LangService,
     private router: Router
   ) { }
   openSnackBar(message: string, action: string) {
+    if(message)
+    {
     this._snackBar.open(message, action, {
       duration: 1000,
     });
+    }
+    else    {
+      this._snackBar.open('empty!!!', '', {
+        duration: 1000,
+      });
+      }
   }
   ngOnInit() {
-    // this._LangService.getAll().subscribe(data=>{
-    //   const merged = data[0].keys.map((obj1:any) => ({ ...obj1, ...data[0].translate.find((obj2:any) => obj2.key_id === obj1.key_id) }));
-    //    this.trans = merged.filter((v:any)=>v.language_id==data[0].Type)  
-    //    }) 
     this._ConfigService.getAll().subscribe(data => {
       this.Config = data[0]
-      console.log(this.Config);
+      this.BuyData.CompanyAccount2 = this.Config.CompanyAccount2
+      this.BuyData.CompanyAccount1 = this.Config.CompanyAccount1
       this.BuyData.Fee = this.Config.BuyFee
       }
     )
@@ -100,12 +100,14 @@ export class BuyerComponent implements OnInit {
     }
   }
   OnChange() {
-    this.BuyData.QuantityOut = (this.BuyData.QuantityIn * this.Config.Buyprice*(1 + (this.BuyData.Fee / 100))).toFixed();
+    if(this.BuyData.QuantityIn<this.Config.Mintrade||this.BuyData.QuantityIn>this.Config.Maxtrade)
+    {
+      this.BuyData.QuantityIn = 0
+      this._NotifierService.notify("error",(this.trans['buy_min_max_error']||'buy_min_max_error '+this.Config.Mintrade+' - '+this.Config.Maxtrade))
+    }
+    else
+    {
+    this.BuyData.QuantityOut = (this.BuyData.QuantityIn * this.Config.Buyprice*(1 + (this.BuyData.Fee / 100))).toFixed(2);
+    }
   }
-  GetTrans(trans:any[],value:any)
-  {
-    const result = trans.find((v:any)=>v.key_name==value)
-    return result?result.translation_text:''
-  }
-
 }

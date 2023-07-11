@@ -9,11 +9,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../app.module';
 import { LinechartComponent } from './linechart/linechart.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     NgApexchartsModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MaterialModule,
     TranslateModule.forRoot({
