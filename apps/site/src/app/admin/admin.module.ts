@@ -37,6 +37,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
           { path: 'transaction', component: TransactionComponent },
           { path: 'ngonngu', component: NgonnguComponent },
           { path: 'noidung', loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
+          { path: 'chart', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
+          { path: 'femail', loadChildren: () => import('./femail/femail.module').then(m => m.FemailModule) }
           // { path: 'noidung', component: NoidungComponent }
         ],
       },

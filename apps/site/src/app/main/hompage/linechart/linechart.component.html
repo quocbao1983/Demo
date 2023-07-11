@@ -13,9 +13,9 @@
     [title]="chartOptions['title']"
   ></apx-chart>
   <div class="absolute top-1 right-1/2">  
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">{{SelechDate.Title}}</button>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">{{SelechDate.Title}} {{trans['chart_donvitinh']||'chart_donvitinh'}}</button>
     <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="GetChart(item.value);SelechDate=item" *ngFor="let item of ChooseDate">{{item.Title}}</button>
+  <button mat-menu-item (click)="GetChart(item.value);SelechDate=item" *ngFor="let item of ChooseDate">{{item.Title}} {{trans['chart_donvitinh']||'chart_donvitinh'}}</button>
 </mat-menu></div>
 
 </div>

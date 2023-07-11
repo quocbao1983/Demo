@@ -1,0 +1,68 @@
+<div class="!flex flex-col flex-auto min-w-0 relative bg-white">
+  <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
+    <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
+      menu
+      </span>
+      <div class="text-xl">Chart</div>
+      <div></div>
+  </div>
+  <div class="relative h-full w-full overflow-auto flex flex-col space-y-2 justify-between p-4">
+    <div class="grid grid-cols-4 gap-2">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Chọn Ngày</mat-label>
+        <input [(ngModel)]="chart.Ngayformat" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Giá Bán</mat-label>
+          <input [(ngModel)]="chart.Buy" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+            [placeholder]="'Tổng Bán'"/>
+        </mat-form-field>  
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Giá Mua</mat-label>
+          <input [(ngModel)]="chart.Sell" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+            [placeholder]="'Tổng Mua'"/>
+        </mat-form-field> 
+        <div>
+          <ng-container *ngIf="isEdit; else elseTemplate">
+            <button mat-raised-button color="primary" (click)="Updatechart()">Cập Nhật</button>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <button mat-raised-button color="primary" (click)="AddChart(chart)">Thêm</button>
+          </ng-template>
+        </div>
+    </div>
+    <div class="flex flex-col rounded bg-white">
+      <mat-form-field appearance="outline" class="w-full text-xs">
+        <mat-label>Tìm Kiếm</mat-label>
+        <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Tìm Kiếm" #input>
+        <span matPrefix class="material-icons mr-2">search</span>
+     </mat-form-field>
+  <div class="w-full">
+      <div class="mat-elevation-z8 w-full">
+        <table class="w-full" mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="Ngay">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày </th>
+            <td mat-cell *matCellDef="let row"> {{row.Ngay}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Buy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mua </th>
+            <td mat-cell *matCellDef="let row"> {{row.Buy| number:'1.0-2'||'0'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Sell">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bán </th>
+            <td mat-cell *matCellDef="let row"> {{row.Sell| number:'1.0-2'||'0'}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="Selectchart(row)"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

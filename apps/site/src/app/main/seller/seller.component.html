@@ -1,7 +1,13 @@
 <div class="max-w-4xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
   <div class="flex flex-row space-x-20 justify-center">
-    <img [src]="'assets/muangay2.png'" class="h-10" [routerLink]="['/buyer']">
-    <img [src]="'assets/banngay1.png'" class="h-10" [routerLink]="['/seller']">
+    <div class="flex flex-row items-center justify-center">
+      <img [src]="'assets/muangay2.png'" class="h-10" [routerLink]="['/buyer']">
+      <div class="absolute text-white">{{trans['sell_button_mua']||'sell_button_mua'}}</div>
+    </div>
+    <div class="flex flex-row items-center justify-center">
+      <img [src]="'assets/banngay1.png'" class="h-10" [routerLink]="['/seller']">
+      <div class="absolute text-white">{{trans['sell_button_ban']||'sell_button_ban'}}</div>
+    </div>
   </div>
   <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
     <div class="flex flex-row space-x-12 justify-between">
@@ -9,7 +15,7 @@
           <label for="first_name" class="block mb-2 text-white">{{trans['sell_soluong']}}</label>
           <input type="text" (change)="OnChange()" [(ngModel)]="SellData.QuantityIn" [ngModelOptions]="{standalone: true}"
            class="w-full p-3 bg-[#291038] text-white rounded">
-          <span class="text-white font-bold">{{trans['sell_phi']}} {{SellData.Fee| number:'1.0-2'||'0'}} {{trans['sell_donvitinh']}}</span>
+          <span class="text-white font-bold">{{trans['sell_phi']}} {{(SellData.Fee*SellData.QuantityIn)/100| number:'1.0-2'||'0'}} {{trans['sell_donvitinh']}}</span>
       </div>
       <div class="w-full">
         <div class="mb-2 font-medium text-white flex flex-row space-x-2 justify-between">
@@ -48,8 +54,9 @@
       <label for="message" class="block mb-2 text-sm font-medium text-white">{{trans['sell_noi_dung_giao_dich']}}</label>
       <textarea [(ngModel)]="SellData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
     </div>
-    <div class="flex flex-row justify-center px-4">
+    <div class="flex flex-row items-center justify-center px-4">
       <img [src]="'assets/xacnhan.png'" class="h-10" (click)="CreateSell(SellData)">
+      <div class="absolute text-white">{{trans['sell_button_xacnhan']||'sell_button_xacnhan'}}</div>
       <!-- <button (click)="CreateSell(SellData)" type="button" class="text-white bg-green-500 p-2 rounded">Xác Nhận Giao Dịch</button> -->
     </div>
     <div class="flex flex-col p-2 text-white italic">

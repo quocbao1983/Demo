@@ -14,7 +14,7 @@
         <span matPrefix class="material-icons mr-2">search</span>
         </mat-form-field>
       <div class="mat-elevation-z8 w-full overflow-auto">
-        <table class="w-full" mat-table [dataSource]="dataSource" matSort>
+        <table class="w-full min-w-[1920px]" mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="Code">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{trans['transaction_code']}}</th>
             <td mat-cell *matCellDef="let row"> 
@@ -34,20 +34,32 @@
           </ng-container>                    
           <ng-container matColumnDef="QuantityIn">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>  {{trans['transaction_soluong']}} </th>
-            <td mat-cell *matCellDef="let row"> 
+            <td mat-cell *matCellDef="let row" class="text-right"> 
                 {{row.QuantityIn| number:'1.0-2'||'0'}}
               </td>
           </ng-container>
           <ng-container matColumnDef="Fee">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_phi']}} </th>
-            <td mat-cell *matCellDef="let row"> 
+            <td mat-cell *matCellDef="let row" class="text-right"> 
                 {{row.Fee| number:'1.0-2'||'0'}}
               </td>
           </ng-container>
           <ng-container matColumnDef="QuantityOut">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_tongnhan_tongthanhtoan']}} </th>
-            <td mat-cell *matCellDef="let row"> 
+            <td mat-cell *matCellDef="let row" class="text-right"> 
                 {{row.QuantityOut| number:'1.0-2'||'0'}}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="TransHash">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_transhash']}} </th>
+            <td mat-cell *matCellDef="let row" class="text-right"> 
+                {{row.TransHash}}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="TransIdBank">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_transidbank']}} </th>
+            <td mat-cell *matCellDef="let row" class="text-right"> 
+                {{row.TransIdBank}}
               </td>
           </ng-container>
           <ng-container matColumnDef="CompanyAccount1">
@@ -92,9 +104,9 @@
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="{{row.Type==1?'!bg-red-200 ':'!bg-green-200'}}"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="text-white {{row.Type==1?'!bg-green-300 ':'!bg-red-300'}}"></tr>
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">{{trans['transaction_no_match']}} "{{input.value}}"</td>
+            <td class="mat-cell" colspan="15">{{trans['transaction_no_match']}} "{{input.value}}"</td>
           </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>

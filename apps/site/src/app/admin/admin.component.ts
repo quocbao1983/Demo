@@ -15,15 +15,19 @@ export class AdminComponent implements OnInit {
   isMini:boolean=false;
   Lists: any[] = [
     {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
-    {id:1,Title:'Nội Dung',Slug:'noidung'},
-    {id:1,Title:'Ngôn Ngữ',Slug:'ngonngu'},
-    {id:1,Title:'Giao Dịch',Slug:'transaction'}
+    {id:2,Title:'Nội Dung',Slug:'noidung'},
+    {id:3,Title:'Ngôn Ngữ',Slug:'ngonngu'},
+    {id:4,Title:'Giao Dịch',Slug:'transaction'},
+    {id:5,Title:'Chart',Slug:'chart'},
+    {id:6,Title:'Femail',Slug:'femail'},
   ]
   FilterLists: any[] = [    
-  {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
-  {id:1,Title:'Nội Dung',Slug:'noidung'},
-  {id:1,Title:'Ngôn Ngữ',Slug:'ngonngu'},
-  {id:1,Title:'Giao Dịch',Slug:'transaction'}
+    {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
+    {id:2,Title:'Nội Dung',Slug:'noidung'},
+    {id:3,Title:'Ngôn Ngữ',Slug:'ngonngu'},
+    {id:4,Title:'Giao Dịch',Slug:'transaction'},
+    {id:5,Title:'Chart',Slug:'chart'},
+    {id:6,Title:'Femail',Slug:'femail'},
 ]
   Sitemap: any = { loc: '', priority: '' }
   @ViewChild('drawer', { static: true }) drawer!: MatDrawer;

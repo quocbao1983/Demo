@@ -48,14 +48,14 @@ export class LangService {
         })
     );
   }
-  updateLang(dulieu: any): Observable<any> {
+  updateLang(dulieu: any,code:any='vi'): Observable<any> {
     return this._httpClient.patch(`${this.APIURL}/demo_lang/${dulieu.id}`, dulieu).pipe(
           map((lang: any) => {
             console.log(lang);    
             this._lang.next(lang);
             const result = lang.translate.reduce((acc:any, obj:any) => {
-              if (obj.vi) {
-                acc[obj.key_name] = obj.vi;
+              if (obj[code]) {
+                acc[obj.key_name] = obj[code];
               }
               return acc;
             }, {});           

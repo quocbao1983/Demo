@@ -97,10 +97,10 @@ export class MainComponent implements OnInit {
   UpdateLang(data:any)
   {
     this.langInit.Type = data.id   
-    this._LangService.updateLang(this.langInit).subscribe((data)=>
-    {    
-    console.log(data); 
-    window.location.reload()
+    this._LangService.updateLang(this.langInit,data.code).subscribe((data)=>
+    { 
+      console.log(data);
+      window.location.reload()
     }
     )
   }

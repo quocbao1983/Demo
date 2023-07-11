@@ -104,7 +104,7 @@ export class SellerComponent implements OnInit {
   }
   OnChange()
   {   
-    this.SellData.QuantityOut = (this.SellData.QuantityIn *this.Config.Sellprice*(1 - (this.SellData.Fee / 100))).toFixed();
+    this.SellData.QuantityOut = (this.SellData.QuantityIn*this.Config.Sellprice*(1 - (this.SellData.Fee / 100))).toFixed();
   }
   GetTrans(trans:any[],value:any)
   {

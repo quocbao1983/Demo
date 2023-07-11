@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HompageComponent } from './hompage.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
@@ -28,6 +28,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
       { path: '', component: HompageComponent }
     ])
   ],
-  declarations: [HompageComponent,LinechartComponent]
+  declarations: [HompageComponent,LinechartComponent],
+  providers:[DatePipe]
 })
 export class HompageModule { }

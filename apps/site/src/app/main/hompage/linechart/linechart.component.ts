@@ -13,6 +13,8 @@ import {
   ApexTitleSubtitle,
   ApexLegend
 } from "ng-apexcharts";
+import { ConfigService } from "../../../shared/config.service";
+import { DatePipe } from "@angular/common";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -33,24 +35,56 @@ export type ChartOptions = {
 })
 export class LinechartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   public chartOptions: Partial<any>;
   ChooseDate:any[]=[
-    {id:1,Title:"7 Ngày",value:7},
-    {id:2,Title:"30 Ngày",value:30},
+    {id:1,Title:"7",value:7},
+    {id:2,Title:"30",value:30},
   ]
-  SelechDate:any={id:1,Title:"7 Ngày",value:7}
-  constructor() {
+  SelechDate:any={id:1,Title:"7",value:7}
+  charts:any[]=[]
+  listDay:any[]=[]
+  listMua:any[]=[]
+  listBan:any[]=[]
+  constructor(
+    private _ConfigService: ConfigService,
+    private datePipe: DatePipe,
+  ) {
+    this.chartOptions={}
+    this._ConfigService.getAll().subscribe((data)=>
+    {
+      this.charts=data[0].Chart
+      this.GetChart(7)
+    });
+  }
+  ngOnInit(): void {}
+  GetChart(data:any)
+  { 
+    this.listDay = []  
+    const now = new Date()
+    for (let index = 0; index < data; index++) {
+          now.setDate(now.getDate() - 1);
+         const day = this.datePipe.transform(new Date(now), 'dd/MM/yyyy');
+          this.listDay.push(day);
+    } 
+    this.listMua = this.charts
+    .filter(v => this.listDay
+    .includes(v.Ngay)).map(v => v.Buy);
+    this.listBan = this.charts
+    .filter(v => this.listDay
+    .includes(v.Ngay)).map(v => v.Sell);
+
     this.chartOptions = {
-      // series: [
-      //   {
-      //     name: "Mua Vào",
-      //     data: [28, 29, 33, 36, 32, 32, 33]
-      //   },
-      //   {
-      //     name: "Bán Ra",
-      //     data: [12, 11, 14, 18, 17, 13, 13]
-      //   }
-      // ],
+      series: [
+        {
+          name: this.trans['chart_mua'],
+          data: this.listBan
+        },
+        {
+          name: this.trans['chart_ban'],
+          data: this.listMua
+        }
+      ],
       chart: {
         height: 350,
         type: "line",
@@ -75,7 +109,7 @@ export class LinechartComponent implements OnInit {
       },
       title: {
         // text: "Average High & Low Temperature",
-        text: "Biểu Đồ Giá 7 ngày gần nhất",
+        text: this.trans['chart_tieude_1']+data+this.trans['chart_tieude_2'],
         align: "left"
       },
       grid: {
@@ -88,12 +122,12 @@ export class LinechartComponent implements OnInit {
       markers: {
         size: 1
       },
-      // xaxis: {
-      //   categories: ["03/07", "04/07", "05/07", "06/07", "07/07", "08/07", "09/07"],
-      //   title: {
-      //     text: "Ngày"
-      //   }
-      // },
+      xaxis: {
+        categories: this.listDay,
+        title: {
+          text: this.trans['chart_donvitinh']
+        }
+      },
       yaxis: {
         title: {
           text: ""
@@ -110,69 +144,5 @@ export class LinechartComponent implements OnInit {
         offsetX: -5
       }
     };
-  }
-  ngOnInit(): void {
-    this.chartOptions['series']= [
-      {
-        name: "Mua Vào",
-        data: [28, 29, 33, 36, 32, 32, 33]
-      },
-      {
-        name: "Bán Ra",
-        data: [12, 11, 14, 18, 17, 13, 13]
-      }
-    ]
-    this.chartOptions['xaxis']= {
-      categories: ["03/07", "04/07", "05/07", "06/07", "07/07", "08/07", "09/07"],
-      title: {
-        text: "Ngày"
-      }
-    }
-  }
-
-  GetChart(data:any)
-  {   
-    if(data==7)
-    {
-      this.chartOptions['series']= [
-        {
-          name: "Mua Vào",
-          data: [28, 29, 33, 36, 32, 32, 33]
-        },
-        {
-          name: "Bán Ra",
-          data: [12, 11, 14, 18, 17, 13, 13]
-        }
-      ]
-      this.chartOptions['xaxis']= {
-        categories: ["03/07", "04/07", "05/07", "06/07", "07/07", "08/07", "09/07"],
-        title: {
-          text: "7 Ngày"
-        }
-      }
-    }
-    else
-    {
-      this.chartOptions['series']= [
-        {
-          name: "Mua Vào",
-          data: [28, 29, 33, 36, 32, 32, 33,28, 29, 33, 36, 32, 32, 33,28, 29, 33, 36, 32, 32, 33,28, 29, 33, 36, 32, 32, 33,65,75]
-        },
-        {
-          name: "Bán Ra",
-          data: [12, 11, 14, 18, 17, 13, 13,28, 29, 33, 36, 32, 32, 33,28, 29, 33, 36, 32, 32, 33,28, 29, 33, 36, 32, 32, 33,28, 29]
-        }
-      ]
-      this.chartOptions['xaxis']= {
-        categories: [
-          "01/07", "02/07", "03/07", "04/07", "05/07", "06/07", "07/07", "08/07", "09/07","10/07",
-          "11/07", "12/07", "13/07", "14/07", "15/07", "16/07", "17/07", "18/07", "19/07","20/07",
-          "21/07", "22/07", "23/07", "24/07", "25/07", "26/07", "27/07", "28/07", "29/07","30/07",
-        ],
-        title: {
-          text: "30 Ngày"
-        }
-      }
-    }
   }
 }
