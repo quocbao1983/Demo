@@ -78,13 +78,13 @@
           <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Mintradesell']||'Text_Mintradesell'}}</mat-label>
-              <input matInput placeholder="{{trans['Text_Mintradesell']||'Text_Mintradesell'}}" [(ngModel)]="Config.Mintrade"
+              <input matInput placeholder="{{trans['Text_Mintradesell']||'Text_Mintradesell'}}" [(ngModel)]="Config.Mintradesell"
                 [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Mintradesell| number:'1.0-2')||'0'}} {{trans['Text_Mintradesell_Donvitinh']||'Text_Mintradesell_Donvitinh'}} </span></mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Maxtradesell']||'Text_Maxtradesell'}}</mat-label>
-              <input matInput placeholder="{{trans['Text_Maxtradesell']||'Text_Maxtradesell'}}" [(ngModel)]="Config.Maxtrade"
+              <input matInput placeholder="{{trans['Text_Maxtradesell']||'Text_Maxtradesell'}}" [(ngModel)]="Config.Maxtradesell"
                 [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Maxtradesell| number:'1.0-2')||'0'}} {{trans['Text_Maxtradesell_Donvitinh']||'Text_Maxtradesell_Donvitinh'}}</span></mat-hint>
             </mat-form-field>
@@ -95,17 +95,14 @@
           </div>
         </div>
         <div class="flex flex-col space-y-2 w-full">
-          <div class="flex flex-col space-y-2 p-4 shadow w-full">
-            
+          <div class="flex flex-col space-y-2 p-4 shadow w-full">  
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Brandname</mat-label>
               <input type="text" (change)="Change()" [(ngModel)]="this.Config.Brand.Title" [ngModelOptions]="{standalone: true}"
                matInput class="w-full px-3 py-2 border border-gray-200 rounded"
                 [placeholder]="'Brandname'"/>
             </mat-form-field>  
-
-
-            <ng-container *ngIf="Config.Brand.Img.spath!=''; else elseTemplate">
+            <ng-container *ngIf="CheckValue(Config.Brand,'Img'); else elseTemplate">
               <div class="p-4 group relative">
                 <img [src]="ImgUrl+Config.Brand.Img.spath" class="w-40 mx-auto rounded-md" />
                 <div

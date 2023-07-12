@@ -116,7 +116,7 @@
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="text-white {{row.Type==1?'!bg-green-300 ':'!bg-red-300'}}"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="{{row.Type==1?'!text-green-500 ':'!text-red-300'}}"></tr>
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="15">{{trans['transaction_no_match']}} "{{input.value}}"</td>
           </tr>

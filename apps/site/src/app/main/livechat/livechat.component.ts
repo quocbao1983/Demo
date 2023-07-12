@@ -46,12 +46,17 @@ export class LivechatComponent implements OnInit {
     // });
     this._LivechatService.getChatMessages().subscribe((messages) => {
       this.chatMessages = messages 
-        this.ListEmail = messages.filter((obj, index) => {
-        return index === messages.findIndex((t) => {
-            return t.email === obj.email
-        });
-        });
-    console.log(this.ListEmail);
+        console.log(this.ListEmail);
+       this.ListEmail = Object.values(messages.reduce((acc, obj) => {
+        const { email } = obj;
+        if (!acc[email]) {
+          acc[email] = {email,chat: []};
+        } 
+        acc[email].chat.push(obj);
+        return acc;
+      }, {}));
+
+      console.log(this.ListEmail);
       this.isEmail  = messages[messages.length-1].email
       this.FilterchatMessages = messages.filter(v=>v.email==this.isEmail)      
     });
@@ -111,8 +116,10 @@ export class LivechatComponent implements OnInit {
   }
   LoadChat(data:any)
   {
-    this.FilterchatMessages = this.chatMessages.filter(v=>v.email==data) 
-    this._LivechatService.updateisEmail(data);
+    console.log(data);
+    
+    this.FilterchatMessages = data.chat
+    this._LivechatService.updateisEmail(data.email);
   }
   NotiTele(data:any)
   {

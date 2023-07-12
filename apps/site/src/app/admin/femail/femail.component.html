@@ -22,13 +22,13 @@
             <span class="material-icons" (click)="AddFemail(femail)"> add </span>
           </ng-template>
         </div>
+        <mat-form-field appearance="outline" class="w-full text-xs">
+          <mat-label>Tìm Kiếm</mat-label>
+          <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Tìm Kiếm" #input>
+          <span matPrefix class="material-icons mr-2">search</span>
+       </mat-form-field>
     </div>
     <div class="flex flex-col rounded bg-white">
-      <mat-form-field appearance="outline" class="w-full text-xs">
-        <mat-label>Tìm Kiếm</mat-label>
-        <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Tìm Kiếm" #input>
-        <span matPrefix class="material-icons mr-2">search</span>
-     </mat-form-field>
   <div class="w-full">
       <div class="mat-elevation-z8 w-full">
         <table class="w-full" mat-table [dataSource]="dataSource" matSort>

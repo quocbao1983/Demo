@@ -54,7 +54,6 @@ export class SellerComponent implements OnInit {
   ngOnInit() {
     this._ConfigService.getAll().subscribe(data => {
       this.Config = data[0]
-      this.SellData.Fee = this.Config.SellFee
       this.SellData.CompanyAccount2 = this.Config.CompanyAccount2
       this.SellData.CompanyAccount1 = this.Config.CompanyAccount1
     })
@@ -103,7 +102,7 @@ export class SellerComponent implements OnInit {
   }
   OnChange()
   {   
-    if(this.SellData.QuantityIn<this.Config.Mintradesell||this.SellData.QuantityIn>this.Config.Maxtradesell)
+    if(this.SellData.QuantityIn>this.Config.Maxtradesell||this.SellData.QuantityIn<this.Config.Mintradesell)
     {
       this._NotifierService.notify("error",(this.trans['sell_min_max_error']||'sell_min_max_error '+this.Config.Mintradesell+' - '+this.Config.Maxtradesell))
       this.SellData.QuantityIn = 0
@@ -111,7 +110,7 @@ export class SellerComponent implements OnInit {
     else
     {
       this.SellData.Fee = (this.SellData.QuantityIn*this.Config.Sellprice*this.Config.SellFee/100).toFixed(2)
-      this.SellData.QuantityOut = this.SellData.QuantityIn*this.Config.Sellprice - this.SellData.Fee;
+      this.SellData.QuantityOut = this.SellData.QuantityIn*this.Config.Sellprice - Number(this.SellData.Fee);
     }
     
   }

@@ -57,6 +57,6 @@
   </div>
 </div>
 <div class="h-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded" *ngIf="Role!='user'">
-  <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2 {{item.email==SelectEmail?'bg-slate-500 text-white':''}}" (click)="LoadChat(item.email);SelectEmail=item.email">{{item.email}}</div>
+  <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2 {{item.email==SelectEmail?'bg-slate-500 text-white':''}}" (click)="LoadChat(item);SelectEmail=item.email">{{item.email}}</div>
 </div>
 </div>

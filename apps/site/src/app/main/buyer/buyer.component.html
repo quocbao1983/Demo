@@ -16,7 +16,7 @@
                 <label for="first_name" class="block mb-2 text-white">{{trans['buy_soluong']}}</label>
                 <input type="number" (change)="OnChange()" [(ngModel)]="BuyData.QuantityIn" [ngModelOptions]="{standalone: true}"
                  class="w-full p-3 bg-[#291038] text-white rounded">
-                <span class="text-white font-bold">{{trans['buy_phi']}} {{(BuyData.Fee*BuyData.QuantityIn)/100| number:'1.0-2'||'0'}} {{trans['buy_donvitinh']}}</span>
+                <span class="text-white font-bold">{{trans['buy_phi']}} {{BuyData.Fee| number:'1.0-2'||'0'}} {{trans['buy_donvitinh']}}</span>
             </div>
             <div class="w-full">
               <label class="block mb-2 font-medium text-white">{{trans['buy_so_tai_khoan']}}</label>       

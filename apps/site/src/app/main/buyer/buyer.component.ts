@@ -16,13 +16,13 @@ import { LivechatService } from '../../shared/livechat.service';
 })
 export class BuyerComponent implements OnInit {
   BuyData: any = {
-     QuantityIn: '',
-     QuantityOut: '',
+    QuantityIn: '',
+    QuantityOut: '',
     CompanyAccount2: '',
-     CustomAccount1: '',
-     Email:'',
-     Fee: '',
-     TransHash:'',
+    CustomAccount1: '',
+    Email:'',
+    Fee: '',
+    TransHash:'',
     Type: 1,
     Status: 0
   }
@@ -90,6 +90,7 @@ export class BuyerComponent implements OnInit {
     {
     dulieu.Code = generateOrderId(11);
     dulieu.Network = this.Network;
+    dulieu.CreateAt = new Date().getTime();
     this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
@@ -109,8 +110,12 @@ export class BuyerComponent implements OnInit {
     }
     else
     {
-    this.BuyData.Fee = (this.BuyData.QuantityIn*this.Config.Buyprice*this.Config.BuyFee/100).toFixed(2)
-    this.BuyData.QuantityOut = this.BuyData.QuantityIn * this.Config.Buyprice + this.BuyData.Fee;
+    this.BuyData.Fee = (this.BuyData.QuantityIn*this.Config.Buyprice* this.Config.BuyFee/100).toFixed(2)
+    console.log(this.BuyData.QuantityIn);
+    console.log(this.Config.Buyprice);
+    console.log(this.Config.BuyFee);
+    
+    this.BuyData.QuantityOut = this.BuyData.QuantityIn * this.Config.Buyprice + Number(this.BuyData.Fee);
     }
   }
 }

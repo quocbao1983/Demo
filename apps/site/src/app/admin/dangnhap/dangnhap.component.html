@@ -1,14 +1,14 @@
-<section class="h-full gradient-form bg-gray-200 md:h-screen">
+<section class="gradient-form bg-gray-200 h-screen">
   <div class="container py-12 px-6 h-full m-auto">
     <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
       <div class="xl:w-6/12 w-full">
-        <div class="block bg-white shadow-lg rounded-lg">
+        <div class="block bg-white shadow-lg rounded-lg py-4">
           <div class="lg:flex lg:flex-wrap g-0">
             <div class="lg:w-full px-4 md:px-0">
               <div class="md:p-12 md:mx-6">
-                <div class="m-auto p-4" routerLink="/">
+                <div class="m-auto p-4 bg-[#441E5B] rounded-lg max-w-[400px] mb-2" routerLink="/">
                   <img class="mx-auto w-48"
-                  src="/assets/image/logo.svg"
+                  [src]="ImgUrl+Config.Brand.Img.spath"
                     alt="logo" />
                 </div>
                 <form class="flex flex-col space-y-2 max-w-[400px] m-auto">

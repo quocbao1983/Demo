@@ -36,12 +36,19 @@ export class ConfigComponent implements OnInit {
     {
       if(data)
       {
+        console.log(data);
+        
       this.Config=data[0]
       this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       }
     });
+  }
+  CheckValue(data:any,field:any)
+  {
+    const result = data[field] !== null && typeof data[field] === 'object'&&Object.keys(data[field]).length!==0;   
+    return result
   }
   Change() {
     this._ConfigService.updateConfig(this.Config).subscribe(data=>this._NotifierService.notify("success","Update Success"))

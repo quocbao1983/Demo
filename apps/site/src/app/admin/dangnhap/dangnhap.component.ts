@@ -3,7 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../../admin/auth/auth.service';
-
+import { ConfigService } from '../../shared/config.service';
+import { environment } from 'apps/site/src/environments/environment';
 @Component({
   selector: 'demo-dangnhap',
   templateUrl: './dangnhap.component.html',
@@ -11,6 +12,8 @@ import { AuthService } from '../../admin/auth/auth.service';
 })
 export class DangnhapComponent implements OnInit {
   User: any = {};
+  Config: any = {};
+  ImgUrl=environment.ImgUrl
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   phoneRegex = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
   signInForm!: any;
@@ -22,9 +25,12 @@ export class DangnhapComponent implements OnInit {
     private _notifierService: NotifierService,
     private _activatedRoute: ActivatedRoute,
     private _authService: AuthService,
+    private _ConfigService: ConfigService,
+    
   ) {}
 
   ngOnInit(): void {
+    this._ConfigService.getAll().subscribe(data => this.Config = data[0])
     this.signInForm = this._formBuilder.group({
       SDT: ['', [Validators.required, Validators.pattern(this.phoneRegex)]],
       password: ['', Validators.required],

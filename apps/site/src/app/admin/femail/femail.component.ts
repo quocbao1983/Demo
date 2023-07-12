@@ -18,7 +18,6 @@ import { LivechatService } from '../../shared/livechat.service';
 export class FemailComponent implements OnInit {
   Config:any={}
   femail:any=  {}
-
   femails:any[]=[]
   displayedColumns: string[] = ['Email', 'CreateAt'];
   dataSource!: MatTableDataSource<any>;
@@ -34,7 +33,7 @@ export class FemailComponent implements OnInit {
   ngOnInit() {
     this._LivechatService.getlistExchange().subscribe((data) => {
       console.log(data);
-      this.femails = data
+      this.femails = data.sort((a, b) => b.CreateAt-a.CreateAt);
       this.dataSource = new MatTableDataSource(this.femails);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;    

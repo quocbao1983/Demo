@@ -10,6 +10,7 @@ import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
 import { WhychooseusComponent } from './whychooseus/whychooseus.component';
 import { AuthGuard } from '../admin/auth/guards/auth.guard';
+import { DangnhapComponent } from '../admin/dangnhap/dangnhap.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +29,7 @@ import { AuthGuard } from '../admin/auth/guards/auth.guard';
       {
         path: '', component: MainComponent,
         children: [
-          {path:'whychooseus',component: WhychooseusComponent},
+          {path:'termofuse',component: WhychooseusComponent},
           {path:'contact',component: WhychooseusComponent},
           { path: '', loadChildren: () => import('./hompage/hompage.module').then(m => m.HompageModule) },
           { path: 'buyer', loadChildren: () => import('./buyer/buyer.module').then(m => m.BuyerModule) },
