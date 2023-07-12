@@ -89,7 +89,7 @@
               <div>
                 <select id="default"
                   class="bg-[#291038] border border-[#291038] text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected>{{trans['Home_Choose_Coin']||'Home_Choose_Coin'}}</option>
+                  <!-- <option selected>{{trans['Home_Choose_Coin']||'Home_Choose_Coin'}}</option> -->
                   <option [value]="item" *ngFor="let item of this.Config.ListtypeCoin">{{item.Title}}</option>
                 </select>
               </div>
@@ -150,26 +150,16 @@
           <div class="flex flex-col space-y-3 mt-3 text-center">
             <app-linechart></app-linechart>
             <div class="text-xl text-white">{{trans['home_cac_giao_dich_thanh_cong']}}</div>
-            <div class="flex flex-row">
-              <div class="max-h-48 overflow-auto relative w-full bg-[#441E5B] p-4">
-                <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-[#441E5B]">
-                  <thead class="text-center bg-[#441E5B] text-xs text-white uppercase">
-                    <tr>
-                      <th scope="col" class="px-6 py-3">
-                        {{trans['home_email']}}
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        {{trans['home_ngaytao']}}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="text-center  even:bg-[#291038] odd:bg-[#441E5B] text-white p-2" *ngFor="let item of ListsExchange">
-                      <td>{{item.Email}}</td>
-                      <td class="py-2">{{item.CreateAt|date:'hh:ss:mm dd/MM/yyyy'}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="flex flex-row pb-8">
+              <div class="flex flex-col w-full">
+                <div class="flex flex-row w-full justify-center text-white font-bold bg-[#441E5B] p-4 border-b">
+                    <div class="w-full">{{trans['home_email']||'home_email'}}</div>
+                    <div class="w-full">{{trans['home_ngaytao']||'home_ngaytao'}}</div>
+                </div>
+                <div [@slideInOut]="first ? 'enter' : ''" class="flex flex-row w-full justify-center text-white odd:bg-[#291038] even:bg-[#441E5B] p-4" *ngFor="let item of ListsExchange;let first = first; let last = last">
+                  <div class="w-full">{{item.Email}}</div>
+                  <div class="w-full">{{item.CreateAt|date:'hh:ss:mm dd/MM/yyyy'}}</div>
+               </div>
               </div>
             </div>
             <div class="flex flex-row"></div>
