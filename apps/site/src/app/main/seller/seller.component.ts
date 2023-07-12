@@ -7,6 +7,7 @@ import { ExchangeService } from '../../shared/trans.service';
 import { generateOrderId } from '../../shared/shared.utils';
 import { TelegramService } from '../../shared/telegram.service';
 import { LangService } from '../../shared/lang.service';
+import { LivechatService } from '../../shared/livechat.service';
 
 @Component({
   selector: 'app-seller',
@@ -40,6 +41,7 @@ export class SellerComponent implements OnInit {
     private _ConfigService: ConfigService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
+    private _LivechatService: LivechatService,
     private router: Router
   ) { 
  
@@ -87,6 +89,8 @@ export class SellerComponent implements OnInit {
     {
     dulieu.Code = generateOrderId(11);
     dulieu.Network = this.Network;
+    dulieu.CreateAt = new Date().getTime();
+    this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
         const result = `Có 1 giao dịch BÁN mới Mã đơn hàng ${data.Code}`
@@ -99,14 +103,15 @@ export class SellerComponent implements OnInit {
   }
   OnChange()
   {   
-    if(this.SellData.QuantityIn<this.Config.Mintrade||this.SellData.QuantityIn>this.Config.Maxtrade)
+    if(this.SellData.QuantityIn<this.Config.Mintradesell||this.SellData.QuantityIn>this.Config.Maxtradesell)
     {
-      this._NotifierService.notify("error",(this.trans['sell_min_max_error']||'sell_min_max_error '+this.Config.Mintrade+' - '+this.Config.Maxtrade))
+      this._NotifierService.notify("error",(this.trans['sell_min_max_error']||'sell_min_max_error '+this.Config.Mintradesell+' - '+this.Config.Maxtradesell))
       this.SellData.QuantityIn = 0
     }
     else
     {
-      this.SellData.QuantityOut = (this.SellData.QuantityIn*this.Config.Sellprice*(1 - (this.SellData.Fee / 100))).toFixed(2);
+      this.SellData.Fee = (this.SellData.QuantityIn*this.Config.Sellprice*this.Config.SellFee/100).toFixed(2)
+      this.SellData.QuantityOut = this.SellData.QuantityIn*this.Config.Sellprice - this.SellData.Fee;
     }
     
   }

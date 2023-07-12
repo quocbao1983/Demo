@@ -1,14 +1,13 @@
-<div class="!flex flex-col flex-auto relative bg-white !h-screen">
+<div class="flex flex-row !h-screen">
+<div class="!flex flex-col flex-auto relative bg-white">
   <div class="relative flex flex-row py-2 px-4 items-center justify-between">
     <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
     <div class="text-center">Live Chat</div>
     <div></div>
   </div>
+  
   <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
     <div class="flex flex-row space-x-2">
-        <div class="flex flex-col space-y-2 bg-white rounded" *ngIf="Role!='user'">
-          <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2" (click)="LoadChat(item.data)">{{item.data}}</div>
-        </div>
         <div class="flex flex-col space-y-2 w-full">
           <ng-container *ngIf="!isEmail; else elseTemplate">
               <ng-container *ngIf="this.CUser.email; else elseTemplate1">
@@ -56,4 +55,8 @@
       <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
     </div>
   </div>
+</div>
+<div class="h-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded" *ngIf="Role!='user'">
+  <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2 {{item.email==SelectEmail?'bg-slate-500 text-white':''}}" (click)="LoadChat(item.email);SelectEmail=item.email">{{item.email}}</div>
+</div>
 </div>

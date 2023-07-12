@@ -1,5 +1,5 @@
 <div class="max-w-4xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
-    <div class="flex flex-col justify-between space-y-4 bg-[#441E5B] rounded py-4 px-20">
+    <div class="flex flex-col justify-between space-y-4 bg-[#441E5B] rounded py-4 px-4 lg:px-20">
         <div class="relative overflow-x-auto">
             <ng-container *ngIf="Data.Type==1; else elseTemplate">
                 <table class="w-full text-sm text-left text-white">
@@ -14,39 +14,39 @@
                     <tbody>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_trangthai']}}</td>
-                            <td>{{Data.Status==0?'Waiting':'Done'}}</td>
+                            <td class="text-right">{{Data.Status==0?'Waiting':'Done'}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_soluong']}}</td>
-                            <td>{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh']}}</td>
+                            <td class="text-right">{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_phi']}}</td>
-                            <td>{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh2']}}</td>
+                            <td class="text-right">{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh2']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_tongthanhtoan']}}</td>
-                            <td>{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh3']}}</td>
+                            <td class="text-right">{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_buy_donvitinh3']}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_taikhoan_khach']}}</td>
-                            <td>{{Data.CustomAccount1}}</td>
+                            <td class="text-right">{{Data.CustomAccount1}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_email']}}</td>
-                            <td>{{Data.Email}}</td>
+                            <td class="text-right">{{Data.Email}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_taikhoan_congty']}}</td>
-                            <td>{{Data.CompanyAccount2}}</td>
+                            <td class="text-right">{{Data.CompanyAccount2}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_trans_hash']}}</td>
-                            <td>{{Data.TransHash}}</td>
+                            <td class="text-right">{{Data.TransHash}}</td>
                         </tr>
                         <tr class="text-white border-t-2">
                             <td class="py-4">{{trans['transfer_buy_noi_dung']}}</td>
-                            <td>{{Data.Note}}</td>
+                            <td class="text-right">{{Data.Note}}</td>
                         </tr>
                     </tbody>
                 </table>   
@@ -65,39 +65,39 @@
                 <tbody>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_trangthai']}}</td>
-                        <td>{{Data.Status==0?'Waiting':'Done'}}</td>
+                        <td class="text-right">{{Data.Status==0?'Waiting':'Done'}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_soluong']}}</td>
-                        <td>{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh']}}</td>
+                        <td class="text-right">{{Data.QuantityIn| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_phi']}}</td>
-                        <td>{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh2']}}</td>
+                        <td class="text-right">{{Data.Fee| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh2']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_tong_nhan']}}</td>
-                        <td>{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh3']}}</td>
+                        <td class="text-right">{{Data.QuantityOut| number:'1.0-2'||'0'}} {{trans['transfer_sell_donvitinh3']}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_taikhoan_kh']}}</td>
-                        <td>{{Data.CustomAccount1}}</td>
+                        <td class="text-right">{{Data.CustomAccount1}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_email']}}</td>
-                        <td>{{Data.Email}}</td>
+                        <td class="text-right">{{Data.Email}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_taikhoan_cong_ty_2']}}</td>
-                        <td>{{Data.CompanyAccount2}}</td>
+                        <td class="text-right">{{Data.CompanyAccount1}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_trans_id']}}</td>
-                        <td>{{Data.TransIdBank}}</td>
+                        <td class="text-right">{{Data.TransIdBank}}</td>
                     </tr>
                     <tr class="text-white border-t-2">
                         <td class="py-4">{{trans['transfer_sell_noi_dung']}}</td>
-                        <td>{{Data.Note}}</td>
+                        <td class="text-right">{{Data.Note}}</td>
                     </tr>
                 </tbody>
             </table>  

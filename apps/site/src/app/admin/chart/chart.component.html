@@ -24,12 +24,14 @@
           <input [(ngModel)]="chart.Sell" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
             [placeholder]="'Tổng Mua'"/>
         </mat-form-field> 
-        <div>
-          <ng-container *ngIf="isEdit; else elseTemplate">
-            <button mat-raised-button color="primary" (click)="Updatechart()">Cập Nhật</button>
+        <div class="flex flex-row space-x-2 items-center">
+          <ng-container *ngIf="chart.id; else elseTemplate">
+            <span class="material-icons" (click)="Updatechart()"> update </span>
+            <span class="material-icons" (click)="chart={}"> close </span>
+            <span class="material-icons" (click)="Deletechart()"> delete </span>
           </ng-container>
           <ng-template #elseTemplate>
-            <button mat-raised-button color="primary" (click)="AddChart(chart)">Thêm</button>
+            <span class="material-icons" (click)="AddChart(chart)"> add </span>
           </ng-template>
         </div>
     </div>
@@ -55,7 +57,7 @@
             <td mat-cell *matCellDef="let row"> {{row.Sell| number:'1.0-2'||'0'}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="Selectchart(row)"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="chart = row"></tr>
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
           </tr>

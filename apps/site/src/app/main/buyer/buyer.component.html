@@ -38,9 +38,9 @@
             <label for="message" class="block mb-2 text-sm font-medium text-white">{{trans['buy_noi_dung_giao_dich']}}</label>
             <textarea [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
           </div>
-          <div class="flex flex-row items-center justify-center px-4" (click)="CreateBuy(BuyData)">
-            <img [src]="'assets/xacnhan.png'" class="h-10">
-            <div class="absolute text-white">{{trans['buy_button_xacnhan']||'buy_button_xacnhan'}}</div>
+          <div class="flex flex-row items-center justify-center px-4">
+            <img [src]="'assets/xacnhan.png'" class="h-10" (click)="CreateBuy(BuyData)">
+            <div class="absolute text-white"  (click)="CreateBuy(BuyData)">{{trans['buy_button_xacnhan']||'buy_button_xacnhan'}}</div>
           </div>
           <div class="flex flex-col p-2 text-white italic">
             {{trans['buy_hoan_tat_giao_dich']}}
@@ -89,12 +89,16 @@
 <!-- mobile -->
 <div class="lg:hidden max-w-4xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
   <div class="flex flex-row space-x-20 justify-center">
+    <div class="flex flex-row items-center justify-center" [routerLink]="['/buyer']">
+      <img [src]="'assets/muangay1.png'" class="h-10">
+      <div class="absolute text-white">{{trans['buy_button_mua']||'buy_button_mua'}}</div>
+    </div>
     <div class="flex flex-row items-center justify-center" [routerLink]="['/seller']">
-      <img [src]="'assets/banngay1.png'" class="h-10">
+      <img [src]="'assets/banngay2.png'" class="h-10">
       <div class="absolute text-white">{{trans['buy_button_ban']||'buy_button_ban'}}</div>
     </div>
   </div>
-  <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
+  <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 py-8 px-2">
     <div class="flex flex-col space-y-8 justify-between">
       <div class="w-full flex flex-col space-y-2">
           <label for="first_name" class="block mb-2 text-white">{{trans['buy_soluong']}}</label>
@@ -119,9 +123,9 @@
       <label for="message" class="block mb-2 text-sm font-medium text-white">{{trans['buy_noi_dung_giao_dich']}}</label>
       <textarea [(ngModel)]="BuyData.Note" [ngModelOptions]="{standalone: true}" rows="3" class="bg-[#291038] text-white rounded"></textarea>
     </div>
-    <div class="flex flex-row items-center justify-center px-4" (click)="CreateBuy(BuyData)">
-      <img [src]="'assets/xacnhan.png'" class="h-10">
-      <div class="absolute text-white">{{trans['buy_button_xacnhan']||'buy_button_xacnhan'}}</div>
+    <div class="flex flex-row items-center justify-center px-4">
+      <img [src]="'assets/xacnhan.png'" class="h-10" (click)="CreateBuy(BuyData)">
+      <div class="absolute text-white"  (click)="CreateBuy(BuyData)">{{trans['buy_button_xacnhan']||'buy_button_xacnhan'}}</div>
     </div>
     <div class="flex flex-col p-2 text-white italic">
       {{trans['buy_hoan_tat_giao_dich']}}
@@ -140,8 +144,8 @@
           {{trans['buy_quy_khach_chuyen_tien2']}}
         </span>
     </div>
-    <div class="text-white">{{trans['buy_dia_chi_vi_cong_ty']}}</div> 
-    <div class="justify-between text-white flex flex-row space-x-2 items-center">
+    <div class="text-white flex flex-row justify-between items-center">
+      <div>{{trans['buy_dia_chi_vi_cong_ty']}}</div>
       <div [matMenuTriggerFor]="menu" class="!text-white flex flex-row items-center space-x-2">
         <span>{{Network.Title}}</span>
         <img [src]="Network.img" class="h-5 bg-white">
@@ -152,7 +156,9 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item *ngFor="let item of ListNetwork" (click)="Network=item">{{item.Title}}</button>
         </mat-menu>  
-        <span>{{trans['buy_so_dia_chi_vi']}} </span>  
+        <span>{{trans['buy_so_dia_chi_vi']}} </span>
+    </div> 
+    <div class="justify-between text-white flex flex-row space-x-2 items-center">  
       <div class="flex">
         <input disabled type="text" [(ngModel)]="BuyData.CompanyAccount2" [ngModelOptions]="{standalone: true}" class="p-3 bg-[#291038] text-white rounded"> 
         <span [cdkCopyToClipboard]="BuyData.CompanyAccount2" (click)="openSnackBar(BuyData.CompanyAccount2,trans['buy_coppy_text'])" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-l-0 border-gray-300 rounded-r-md ">
@@ -160,9 +166,9 @@
         </span>
       </div>
     </div>
-    <div class="text-white flex flex-row space-x-3 items-center justify-between">
+    <div class="text-white flex flex-col space-y-3 items-center justify-between">
         <strong>{{trans['buy_trans_hash']}}</strong>
-        <input [(ngModel)]="BuyData.TransHash" [ngModelOptions]="{standalone: true}" type="text" class="w-1/2 p-3 bg-[#291038] text-white rounded">
+        <input [(ngModel)]="BuyData.TransHash" [ngModelOptions]="{standalone: true}" type="text" class="w-full p-3 bg-[#291038] text-white rounded">
     </div>
   </div>
 </div>

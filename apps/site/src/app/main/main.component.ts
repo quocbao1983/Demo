@@ -10,6 +10,8 @@ import { ExchangeService } from '../shared/trans.service';
 import { ConfigService } from '../shared/config.service';
 import { LangService } from '../shared/lang.service';
 import { stringify } from 'querystring';
+import { environment } from '../../environments/environment';
+import { UsersService } from '../shared/users.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -17,14 +19,16 @@ import { stringify } from 'querystring';
 })
 export class MainComponent implements OnInit {
   Detail: any = {};
-  Config: any = {};
+  CUser: any = {};
+  Config:any={Brand:{Title:'',Img:{spath:''}}}
   ListsExchange: any[] = []
   Lists: any[] = []
   FilterLists: any[] = []
+  ImgUrl = environment.ImgUrl
   Sitemap: any = { loc: '', priority: '' }
   langselect: any =  { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" };
   ListLang: any[] = [
-    { id: 0, code: "vi",img: 'assets/flag/vi.png', name: "Vietnamese" },
+    // { id: 0, code: "vi",img: 'assets/flag/vi.png', name: "Vietnamese" },
     { id: 1, code: "en",img: 'assets/flag/en.png', name: "English" },
     { id: 2, code: "zh",img: 'assets/flag/zh.png', name: "China" },
     { id: 3, code: "ko",img: 'assets/flag/ko.png', name: "South Korea" },
@@ -46,9 +50,15 @@ export class MainComponent implements OnInit {
     public _ConfigService: ConfigService,
     private _ExchangeService: ExchangeService,
     private _LangService: LangService,
+    private _UsersService: UsersService,
   ) {
   }
   ngOnInit(): void {
+    this._UsersService.getProfile().subscribe(data=>
+      {
+        if(data){
+        this.CUser = data
+      }})
     this._LangService.getAll().subscribe(()=>
       {
         this._LangService.langs$.subscribe(data=>
@@ -99,7 +109,6 @@ export class MainComponent implements OnInit {
     this.langInit.Type = data.id   
     this._LangService.updateLang(this.langInit,data.code).subscribe((data)=>
     { 
-      console.log(data);
       window.location.reload()
     }
     )

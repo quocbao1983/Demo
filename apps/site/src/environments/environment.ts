@@ -9,6 +9,7 @@ export const environment = {
   APITINYMCE: "1cdi3qs7qw7nogvpu6poxqc6z7bf4a4hurwyao0kdbd741dl",
   //APIURL:"http://localhost:3333",
   APIURL:"https://apifull.click",
+  ImgUrl:"https://images.apifull.click/",
   FirebaseInit:{
     apiKey: "AIzaSyDNZCm026a2mziXxFgMNgGpVE6H4LGsDjo",
     authDomain: "fir-f4bb6.firebaseapp.com",

@@ -5,6 +5,9 @@ import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { CauhinhService } from '../shared/cauhinh.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AuthService } from './auth/auth.service';
+import { ConfigService } from '../shared/config.service';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -13,6 +16,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class AdminComponent implements OnInit {
   Detail: any = {};
   isMini:boolean=false;
+  Config:any={Brand:{Title:'',Img:{spath:''}}}
+  ImgUrl=environment.ImgUrl
   Lists: any[] = [
     {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
     {id:2,Title:'Nội Dung',Slug:'noidung'},
@@ -36,7 +41,10 @@ export class AdminComponent implements OnInit {
     private _Notification: NotifierService,
     private router: Router,
     private _CauhinhService: CauhinhService,
-    private breakpointObserver: BreakpointObserver
+    private _AuthService: AuthService,
+    private breakpointObserver: BreakpointObserver,
+    private _router: Router,
+    private _ConfigService: ConfigService,
   ) {
     breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
       if (result.matches) {
@@ -45,9 +53,20 @@ export class AdminComponent implements OnInit {
   })
   }
   ngOnInit(): void {
-    // this._CauhinhService.getAll().subscribe((data)=>{
-    //   this.FilterLists = this.Lists = data
-    // })
+    this._ConfigService.getAll().subscribe((data)=>
+    {
+      this.Config=data[0]
+    });
+  }
+ 
+  Logout() {
+      this._AuthService.Dangxuat().subscribe((res) => {
+          if (res == true) {
+            this._router.navigate(['/admin']);
+            location.reload();
+           }
+          }
+      );
   }
   isActive(route: string): boolean {
     return this.router.url === route;

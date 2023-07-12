@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { genID } from '../../shared/shared.utils';
 
 @Component({
   selector: 'app-chart',
@@ -49,10 +50,17 @@ export class ChartComponent implements OnInit {
   }
   AddChart(data:any)
   {
+    console.log(data.Ngayformat);
+    
     const check = this.charts.find(v=>v.Ngay== this.datePipe.transform(data.Ngayformat, 'dd/MM/yyyy'))
-     if(!check)
+    if(data.Ngayformat==undefined)
     {
-      data.id = this.charts.length+1
+      this._NotifierService.notify("error","Vui lòng Chọn Ngày")
+    }
+    else if(!check)
+    {
+
+      data.id = genID(8)
       data.Ngay = this.datePipe.transform(data.Ngayformat, 'dd/MM/yyyy');
       this.charts.push(data)
       this.Config.Chart = this.charts      
@@ -67,11 +75,6 @@ export class ChartComponent implements OnInit {
     }
     else {this._NotifierService.notify("error","Đã tồn tại ngày")}
   }
-  Selectchart(data:any)
-  {    
-    this.isEdit = true
-    this.chart = data
-  }
   Updatechart()
   {
     this.chart.Ngay = this.datePipe.transform(this.chart.Ngayformat, 'dd/MM/yyyy');
@@ -84,7 +87,18 @@ export class ChartComponent implements OnInit {
       this._NotifierService.notify("success","Cập nhật thành công")
       this.chart={}
     })
-    this.isEdit = false
+  }
+  Deletechart()
+  {
+    this.Config.Chart = this.Config.Chart.filter((v:any)=>v.id!=this.chart.id)   
+    this._ConfigService.updateConfig(this.Config).subscribe(()=>
+    {
+      this.dataSource = new MatTableDataSource(this.Config.Chart);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this._NotifierService.notify("success","Xóa thành công")
+      this.chart={}
+    })
   }
   applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;

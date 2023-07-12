@@ -85,8 +85,12 @@
 <div class="lg:hidden max-w-4xl flex flex-col space-y-4 py-12 px-6 h-full m-auto">
   <div class="flex flex-row space-x-20 justify-center">
     <div class="flex flex-row items-center justify-center" [routerLink]="['/buyer']">
-      <img [src]="'assets/muangay1.png'" class="h-10">
+      <img [src]="'assets/muangay2.png'" class="h-10">
       <div class="absolute text-white">{{trans['sell_button_mua']||'sell_button_mua'}}</div>
+    </div>
+    <div class="flex flex-row items-center justify-center" [routerLink]="['/seller']">
+      <img [src]="'assets/banngay1.png'" class="h-10">
+      <div class="absolute text-white">{{trans['sell_button_ban']||'sell_button_ban'}}</div>
     </div>
   </div>
   <div class="flex flex-col space-y-4 bg-[#441E5B] rounded pb-2 p-8">
@@ -140,7 +144,7 @@
       {{trans['sell_hoan_tat_giao_dich']}}
     </div>
   </div>
-  <div class="flex flex-col space-y-3 bg-[#441E5B] rounded p-8">
+  <div class="flex flex-col space-y-4 bg-[#441E5B] rounded p-8">
     <div class="text-white ml-4">
         <span>{{trans['sell_huong_dan_thanh_toan']}}</span>
     </div>
@@ -150,9 +154,9 @@
     <div class="text-white">
         <span>{{trans['sell_dia_chi_vi_cong_ty']}}</span><span class="text-yellow-500">{{trans['sell_dia_chi_vi_cong_ty2']}}</span>
     </div>
-    <div class="text-white flex flex-row space-x-3 items-center">
+    <div class="text-white flex flex-col space-y-3 items-center">
         <strong>{{trans['sell_trans_id']}}</strong>
-          <input [(ngModel)]="SellData.TransIdBank" [ngModelOptions]="{standalone: true}" type="text" class="w-1/2 p-3 bg-[#291038] text-white rounded">
+          <input [(ngModel)]="SellData.TransIdBank" [ngModelOptions]="{standalone: true}" type="text" class="w-full p-3 bg-[#291038] text-white rounded">
     </div>
   </div>
 </div>

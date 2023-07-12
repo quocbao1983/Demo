@@ -5,6 +5,7 @@ import { ExchangeService } from '../../shared/trans.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { LangService } from '../../shared/lang.service';
+import { LivechatService } from '../../shared/livechat.service';
 
 @Component({
   selector: 'app-hompage',
@@ -23,7 +24,7 @@ export class HompageComponent implements OnInit {
   constructor(
     public _ConfigService: ConfigService,
     private _ExchangeService: ExchangeService,
-    private _LangService: LangService,
+    private _LivechatService: LivechatService,
     
   ) { }
 
@@ -35,16 +36,26 @@ export class HompageComponent implements OnInit {
     
       }
       )
-    this._ExchangeService.getAll().subscribe(data=>
-      {
+    // this._ExchangeService.getAll().subscribe(data=>
+    //   {
+    //     this.ListsExchange = data
+    //     this.ListsExchange.forEach(v => {
+    //       v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
+    //     });
+    //     this.dataSource = new MatTableDataSource(data);
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //   })
+
+      this._LivechatService.getlistExchange().subscribe((data) => {
         this.ListsExchange = data
         this.ListsExchange.forEach(v => {
           v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
         });
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
+        this.dataSource.sort = this.sort;    
+      });
   }
   // GetTrans(trans:any,value:any)
   // {

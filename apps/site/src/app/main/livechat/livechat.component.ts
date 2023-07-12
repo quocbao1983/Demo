@@ -21,6 +21,7 @@ export class LivechatComponent implements OnInit {
   Email:any;
   isEmail:any;
   ListEmail:any[]=[]
+  SelectEmail:any='';
   Role:any='user';
   CUser:any={}
   constructor(
@@ -38,17 +39,25 @@ export class LivechatComponent implements OnInit {
         if(data){
         this.Role='admin'
         this.CUser = data
+
       }})
-    this._LivechatService.isEmail$.subscribe(data => {
-      this.isEmail = data;
-      this._LivechatService.getChatMessages().subscribe((messages) => {
-        this.chatMessages = messages
-        this.FilterchatMessages = messages.filter(v=>v.email==this.isEmail) 
-      });
+    // this._LivechatService.isEmail$.subscribe(data => {
+    //   this.isEmail = data;
+    // });
+    this._LivechatService.getChatMessages().subscribe((messages) => {
+      this.chatMessages = messages 
+        this.ListEmail = messages.filter((obj, index) => {
+        return index === messages.findIndex((t) => {
+            return t.email === obj.email
+        });
+        });
+    console.log(this.ListEmail);
+      this.isEmail  = messages[messages.length-1].email
+      this.FilterchatMessages = messages.filter(v=>v.email==this.isEmail)      
     });
-    this._LivechatService.getlistEmail().subscribe(data=>{
-      this.ListEmail=data
-    })
+    // this._LivechatService.getlistEmail().subscribe(data=>{
+    //   this.ListEmail=data
+    // })
 
   }
   onEnterPressed(email: any) {
@@ -93,8 +102,6 @@ export class LivechatComponent implements OnInit {
   else
     {
    const result = this.ListEmail.find(v=>v.data==email)
-   console.log(result);
-   
    if(result==undefined)
    {
     this._LivechatService.addEmail(email);

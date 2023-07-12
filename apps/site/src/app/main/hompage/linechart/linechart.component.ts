@@ -79,8 +79,9 @@ export class LinechartComponent implements OnInit {
     for (let index = 0; index < data; index++) {
           now.setDate(now.getDate() - 1);
           const day = this.datePipe.transform(new Date(now), 'dd/MM/yyyy');
-          this.listDay.push(day);
+          this.listDay.unshift(day);
     } 
+
     this.listMua = this.charts
     .filter(v => this.listDay
     .includes(v.Ngay)).map(v => v.Buy);

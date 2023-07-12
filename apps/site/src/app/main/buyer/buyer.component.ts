@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { generateOrderId } from '../../shared/shared.utils';
 import { TelegramService } from '../../shared/telegram.service';
 import { LangService } from '../../shared/lang.service';
+import { LivechatService } from '../../shared/livechat.service';
 
 @Component({
   selector: 'app-buyer',
@@ -40,6 +41,7 @@ export class BuyerComponent implements OnInit {
     private _ConfigService: ConfigService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
+    private _LivechatService: LivechatService,
     private router: Router
   ) { }
   openSnackBar(message: string, action: string) {
@@ -60,7 +62,6 @@ export class BuyerComponent implements OnInit {
       this.Config = data[0]
       this.BuyData.CompanyAccount2 = this.Config.CompanyAccount2
       this.BuyData.CompanyAccount1 = this.Config.CompanyAccount1
-      this.BuyData.Fee = this.Config.BuyFee
       }
     )
   }
@@ -89,6 +90,7 @@ export class BuyerComponent implements OnInit {
     {
     dulieu.Code = generateOrderId(11);
     dulieu.Network = this.Network;
+    this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
         const result = `Có 1 giao dịch MUA mới Mã đơn  ${data.Code}`
@@ -107,7 +109,8 @@ export class BuyerComponent implements OnInit {
     }
     else
     {
-    this.BuyData.QuantityOut = (this.BuyData.QuantityIn * this.Config.Buyprice*(1 + (this.BuyData.Fee / 100))).toFixed(2);
+    this.BuyData.Fee = (this.BuyData.QuantityIn*this.Config.Buyprice*this.Config.BuyFee/100).toFixed(2)
+    this.BuyData.QuantityOut = this.BuyData.QuantityIn * this.Config.Buyprice + this.BuyData.Fee;
     }
   }
 }

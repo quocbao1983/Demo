@@ -9,6 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
 import { WhychooseusComponent } from './whychooseus/whychooseus.component';
+import { AuthGuard } from '../admin/auth/guards/auth.guard';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +37,10 @@ import { WhychooseusComponent } from './whychooseus/whychooseus.component';
         ],
         
       },
-      { path: 'admin', loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule) },
+      { 
+      path: 'admin', 
+      canActivate:[AuthGuard],
+      loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule) },
     ])
   ],
   declarations: [

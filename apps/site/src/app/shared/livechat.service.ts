@@ -11,11 +11,14 @@ export class LivechatService {
   private chatMessagesRef: AngularFireList<any>;
   private listEmail: AngularFireList<any>;
   private chatbyid!: AngularFireList<any>;
+  private listExchange!: AngularFireList<any>;
   private _isEmail = new BehaviorSubject<string>(sessionStorage.getItem('EmailToken') || '');
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
     this.chatMessagesRef = this.db.list('chatMessages');   
-    this.listEmail = this.db.list('listEmail');   
+    this.listEmail = this.db.list('listEmail');       
+    this.listExchange = this.db.list('listExchange');       
   }
+  
   isEmail$ = this._isEmail.asObservable();
   updateisEmail(data: string) {
     sessionStorage.setItem('EmailToken', data); 
@@ -31,16 +34,26 @@ export class LivechatService {
   getlistEmail(): Observable<any[]> {
     return this.listEmail.valueChanges();
   }
+
+
+  getlistExchange(): Observable<any[]> {
+    return this.listExchange.valueChanges();
+  }
+  addExchange(data:string)
+  {   
+    this.listExchange.push(data);
+  }
+
+
   addChatMessagebyID(email: string,message: string, sender: string, type: number): void {
-    console.log(email);
     this.chatbyid = this.db.list(email);   
     console.log(this.chatbyid);
     this.chatMessagesRef.push({email, message, sender,type });
   }
   addChatMessage(email: string,message: string, sender: string, type: number): void {
-    this.chatMessagesRef.push({email,message, sender,type });
+    const time = new Date().getTime()
+    this.chatMessagesRef.push({email,message, sender,type,time});
   }
-
   addChatMessageWithImage(email: string,message: string, sender: string, imageFile: File, type: number): void {
     const filePath = `chat_images/${new Date().getTime()}_${imageFile.name}`;
     const storageRef = this.storage.ref(filePath);

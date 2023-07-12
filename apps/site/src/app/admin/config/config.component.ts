@@ -7,13 +7,16 @@ import { AdminComponent } from '../admin.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { genID } from '../../shared/shared.utils';
+import { environment } from 'apps/site/src/environments/environment';
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent implements OnInit {
-  Config:any={}
+  Config:any={Brand:{Title:'',Img:{spath:''}}}
+  ImgUrl = environment.ImgUrl
   Listtypecoin:any[]=[]
   Typecoin:any={}
   editableContent: string = '';
@@ -31,29 +34,78 @@ export class ConfigComponent implements OnInit {
   ngOnInit() {
     this._ConfigService.getAll().subscribe((data)=>
     {
+      if(data)
+      {
       this.Config=data[0]
-      console.log(data); 
       this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      }
     });
   }
   Change() {
     this._ConfigService.updateConfig(this.Config).subscribe(data=>this._NotifierService.notify("success","Update Success"))
   }
+  onSelect(event: any) {
+    this._ConfigService.uploadDriver(event.addedFiles[0]).subscribe((data)=>
+    {
+      this.Config.Brand.Img= data
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+    }
+    )
+  }
+  onRemove(data:any) {
+    this._ConfigService.DeleteuploadDriver(data).subscribe(()=>
+    {
+      this.Config.Brand.Img = {}
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+    })  
+  }
   AddCoin()
   {
+
     const check = this.Config.ListtypeCoin.find((v:any)=>v.Title== this.Typecoin.Title)
     if(!check)
     {
-    this.Typecoin.id = this.Config.ListtypeCoin.length +1
+    this.Typecoin.id = genID(8)
     this.Config.ListtypeCoin.push(this.Typecoin)
-    this._ConfigService.updateConfig(this.Config).subscribe(data=>this._NotifierService.notify("success","Update Success"))
+    this._ConfigService.updateConfig(this.Config).subscribe(()=>{
+        this.Typecoin={}
+        this._NotifierService.notify("success","Update Success")
+        this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
     }
     else
     {
       this._NotifierService.notify("error","Đã tồn tại")
     }
+  }
+  UpdateCoin()
+  {
+    const hashMap = new Map(this.Config.ListtypeCoin.map((obj:any) => [obj.id, obj]));
+    this.Config.ListtypeCoin = Array.from(hashMap.values());    
+    this._ConfigService.updateConfig(this.Config).subscribe(()=>
+    {
+      this._NotifierService.notify("success","Update Success")
+      this.Typecoin={}
+      this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
+  DeleteCoin()
+  {
+    this.Config.ListtypeCoin = this.Config.ListtypeCoin.filter((v:any)=>v.id!==this.Typecoin.id)
+    this._ConfigService.updateConfig(this.Config).subscribe(()=>
+    {
+      this._NotifierService.notify("success","Delete Success")
+      this.Typecoin={}
+      this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

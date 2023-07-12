@@ -12,6 +12,7 @@ import { HttpLoaderFactory } from '../app.module';
 import { DangnhapComponent } from './dangnhap/dangnhap.component';
 import { NgonnguComponent } from './ngonngu/ngonngu.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     FormsModule,
     EditorModule,
     ReactiveFormsModule,
+    NgxDropzoneModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

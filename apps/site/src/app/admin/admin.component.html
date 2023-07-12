@@ -1,10 +1,10 @@
 <mat-drawer-container class="example-container flex h-[100vh]" autosize>
     <mat-drawer #drawer mode="side" opened class="h-full">
-        <div class="relative flex flex-col h-full w-full overflow-auto">
+        <div class="flex flex-col h-full">
             <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
-              <div class="flex flex-col {{isMini?'min-w-[80px]':'min-w-[270px]'}}">
+              <div class="flex flex-col {{isMini?'min-w-[80px]':'min-w-[270px]'}} h-full overflow-auto pb-5">
                   <div class="flex flex-row justify-between items-center p-2">
-                      <img [src]="'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'" class="h-10"/>
+                      <img [src]="ImgUrl+Config.Brand.Img.spath" class="max-h-[80px] h-full"/>
                   </div>
                   <div [routerLink]="[item.Slug]" routerLinkActive="bg-gray-200" (click)="drawer.open()"
                       class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
@@ -17,6 +17,13 @@
                       </div>
                   </div>
               </div>
+              <div class="relative flex flex-0 items-center justify-between w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
+                <span class="font-medium text-secondary">Title</span>
+                <div class="flex flex-row space-x-3">
+                            <span class="material-icons">settings</span>
+                            <span class="material-icons" (click)="Logout()">logout</span>
+                    </div>
+              </div>             
           </div>
     </mat-drawer>
     <mat-drawer-content class="!flex flex-col flex-auto relative bg-white !h-[100vh]">

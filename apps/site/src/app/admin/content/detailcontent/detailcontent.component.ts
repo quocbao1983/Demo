@@ -5,6 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { ContentService } from '../../../shared/content.service';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { environment } from 'apps/site/src/environments/environment';
+import { ConfigService } from '../../../shared/config.service';
 @Component({
   selector: 'app-detailcontent',
   templateUrl: './detailcontent.component.html',
@@ -13,6 +14,7 @@ import { environment } from 'apps/site/src/environments/environment';
 export class DetailcontentComponent implements OnInit {
   Detail: any={Title:''}
   APITINYMCE=environment.APITINYMCE
+  ImgUrl = environment.ImgUrl
   configTiny: EditorComponent['init'] = {
     menubar: false,
     toolbar_mode: 'sliding',
@@ -34,11 +36,11 @@ export class DetailcontentComponent implements OnInit {
     images_upload_handler: (blobInfo: any) => {
       const file = blobInfo.blob();
       const promise = new Promise<string>((resolve, reject) => {
-        // this._BaivietService.uploadDriver(file).subscribe((res) => {
-        //   if (res) {
-        //     resolve(GetImage(res.spath));
-        //   }
-        // });
+        this._ConfigService.uploadDriver(file).subscribe((res) => {
+          if (res) {
+            resolve(this.ImgUrl+res.spath);
+          }
+        });
       });
       return promise;
     },
@@ -47,6 +49,7 @@ export class DetailcontentComponent implements OnInit {
     private route: ActivatedRoute,
     private _ContentService: ContentService,
     private _NotifierService: NotifierService,
+    private _ConfigService: ConfigService,
     // private _ContentComponent: ContentComponent
   ) {}
   ngOnInit(): void {

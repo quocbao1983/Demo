@@ -52,6 +52,7 @@
                   {{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span></mat-hint>
             </mat-form-field>
           </div>
+
           <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Mintrade']||'Text_Mintrade'}}</mat-label>
@@ -72,12 +73,59 @@
               <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-2')||'0'}} {{trans['Text_Totaltrade_Donvitinh']||'Text_Totaltrade_Donvitinh'}}</span></mat-hint>
             </mat-form-field>
           </div>
+
+
+          <div class="grid lg:grid-cols-3 grid-cols-1 gap-3">
+            <mat-form-field appearance="outline">
+              <mat-label>{{trans['Text_Mintradesell']||'Text_Mintradesell'}}</mat-label>
+              <input matInput placeholder="{{trans['Text_Mintradesell']||'Text_Mintradesell'}}" [(ngModel)]="Config.Mintrade"
+                [ngModelOptions]="{standalone: true}">
+              <mat-hint><span class="text-blue-500">{{(Config.Mintradesell| number:'1.0-2')||'0'}} {{trans['Text_Mintradesell_Donvitinh']||'Text_Mintradesell_Donvitinh'}} </span></mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{trans['Text_Maxtradesell']||'Text_Maxtradesell'}}</mat-label>
+              <input matInput placeholder="{{trans['Text_Maxtradesell']||'Text_Maxtradesell'}}" [(ngModel)]="Config.Maxtrade"
+                [ngModelOptions]="{standalone: true}">
+              <mat-hint><span class="text-blue-500">{{(Config.Maxtradesell| number:'1.0-2')||'0'}} {{trans['Text_Maxtradesell_Donvitinh']||'Text_Maxtradesell_Donvitinh'}}</span></mat-hint>
+            </mat-form-field>
+          </div>
+
           <div class="text-center space-x-2">
             <a mat-raised-button color="primary" (click)="Update(Config)">Cập Nhật</a>
           </div>
         </div>
         <div class="flex flex-col space-y-2 w-full">
-          
+          <div class="flex flex-col space-y-2 p-4 shadow w-full">
+            
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Brandname</mat-label>
+              <input type="text" (change)="Change()" [(ngModel)]="this.Config.Brand.Title" [ngModelOptions]="{standalone: true}"
+               matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+                [placeholder]="'Brandname'"/>
+            </mat-form-field>  
+
+
+            <ng-container *ngIf="Config.Brand.Img.spath!=''; else elseTemplate">
+              <div class="p-4 group relative">
+                <img [src]="ImgUrl+Config.Brand.Img.spath" class="w-40 mx-auto rounded-md" />
+                <div
+                  class="group-hover:block rounded-md hidden absolute inset-0 items-center justify-center bg-black opacity-10"
+                  (click)="onRemove(Config.Brand.Img)">
+                  <span class="material-icons text-white flex items-center justify-center h-full">
+                    cancel
+                  </span>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="flex flex-col spacey-3 !h-full">
+                <ngx-dropzone-label>Chọn File</ngx-dropzone-label>
+              </ngx-dropzone>
+            </ng-template>
+          </div>
+
+
+
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>{{trans['Text_Vicongty']||'Text_Vicongty'}}</mat-label>
             <input (change)="Change()" [(ngModel)]="Config.CompanyAccount2" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
@@ -89,14 +137,15 @@
             <input (change)="Change()" [(ngModel)]="Config.CompanyAccount1" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
               [placeholder]="trans['Text_Bank_congty']||'Text_Bank_congty'" />
           </mat-form-field>  
-          
             <div class="flex flex-col space-y-2">             
                 <mat-form-field appearance="outline" class="w-full">
                   <mat-label>Thêm Coin</mat-label>
                   <input [(ngModel)]="Typecoin.Title" [ngModelOptions]="{standalone: true}"
                    type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-                    [placeholder]="'Thêm Coin'"/>
-                  <span matSuffix class="material-icons ml-2" (click)="AddCoin()">add</span>
+                    [placeholder]="'Thêm Coin'"/>                   
+                  <span matSuffix class="material-icons ml-2" (click)="UpdateCoin()" *ngIf="Typecoin.id">update</span>
+                  <span matSuffix class="material-icons ml-2" (click)="DeleteCoin()" *ngIf="Typecoin.id">delete</span>
+                  <span matSuffix class="material-icons ml-2" (click)="AddCoin()" *ngIf="!Typecoin.id">add</span>
                 </mat-form-field>  
                 <div class="mat-elevation-z8 w-full">
                   <table class="w-full" mat-table [dataSource]="dataSource" matSort>
@@ -109,7 +158,7 @@
                       <td mat-cell *matCellDef="let row"> {{row.img}}</td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="Typecoin=row"></tr>
                   </table>
                 </div>
             </div>
