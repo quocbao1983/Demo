@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
+  Token:any=JSON.parse(localStorage.getItem('HdermaToken') || '{}');
   constructor(
     private dialog: MatDialog,
     private _Notification: NotifierService,

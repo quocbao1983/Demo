@@ -14,7 +14,7 @@
         <div class="hidden lg:flex max-w-4xl h-20 flex-row justify-between items-center m-auto px-3">
           <div class="w-full">
             <a class="m-auto text-center text-3xl w-48 p-3" routerLink="/">
-              <img [src]="ImgUrl+Config.Brand.Img.spath" class="max-h-[80px] h-full"/>
+              <img [src]="ImgUrl+Config.Brand.Img.spath" class="max-h-[40px] h-full"/>
             </a>
           </div>
           <div class="w-full flex flex-row justify-between items-center">
@@ -38,7 +38,7 @@
         </div>
         <div class="lg:hidden max-w-4xl flex flex-row justify-between items-center m-auto px-4">
            <span (click)="drawer2.open()" class="material-icons">menu</span>
-            <a class="m-auto text-center text-3xl w-48 p-3" routerLink="/"> <img [src]="ImgUrl+Config.Brand.Img.spath" class="m-auto max-h-[80px] h-full"/></a>
+            <a class="m-auto text-center text-3xl w-48 p-3" routerLink="/"> <img [src]="ImgUrl+Config.Brand.Img.spath" class="m-auto max-h-[40px] h-full"/></a>
           <div class="flex flex-row justify-between items-center">
             <div [matMenuTriggerFor]="menu" class="!text-white flex flex-row justify-center items-center space-x-2">
               <span class="uppercase">{{langselect.code}} </span>

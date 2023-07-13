@@ -36,7 +36,8 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this._ConfigService.getAll().subscribe((data) => {
       this.Config = data[0];
-      this.charts = data[0].Chart
+      this.charts = data[0].Chart.sort((a:any,b:any)=>b.Ngayformat - a.Ngayformat)
+
       this.dataSource = new MatTableDataSource(this.charts);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
