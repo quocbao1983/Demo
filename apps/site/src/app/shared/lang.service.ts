@@ -49,6 +49,8 @@ export class LangService {
     );
   }
   updateLang(dulieu: any,code:any='vi'): Observable<any> {
+    console.log(dulieu);
+    
     return this._httpClient.patch(`${this.APIURL}/demo_lang/${dulieu.id}`, dulieu).pipe(
           map((lang: any) => {
             console.log(lang);    

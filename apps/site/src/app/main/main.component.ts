@@ -4,12 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { ExchangeService } from '../shared/trans.service';
 import { ConfigService } from '../shared/config.service';
 import { LangService } from '../shared/lang.service';
-import { stringify } from 'querystring';
 import { environment } from '../../environments/environment';
 import { UsersService } from '../shared/users.service';
 @Component({
@@ -43,10 +41,10 @@ export class MainComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   Token:any=JSON.parse(localStorage.getItem('HdermaToken') || '{}');
+  Translate:any=localStorage.getItem('Translate') || null;
   constructor(
     private dialog: MatDialog,
     private _Notification: NotifierService,
-    public translate: TranslateService,
     public _ConfigService: ConfigService,
     private _ExchangeService: ExchangeService,
     private _LangService: LangService,
@@ -58,7 +56,8 @@ export class MainComponent implements OnInit {
       {
         if(data){
         this.CUser = data
-      }})
+      }})      
+
     this._LangService.getAll().subscribe(()=>
       {
         this._LangService.langs$.subscribe(data=>
@@ -71,7 +70,11 @@ export class MainComponent implements OnInit {
               }
               return acc;
             }, {});    
-            localStorage.setItem('Translate', JSON.stringify(result)); 
+            localStorage.setItem('Translate', JSON.stringify(result));
+            if(!this.Translate)
+            {
+              window.location.reload();  
+            }
           })
       }
     )
@@ -106,6 +109,8 @@ export class MainComponent implements OnInit {
   }
   UpdateLang(data:any)
   {
+    console.log(this.langInit);
+    
     this.langInit.Type = data.id   
     this._LangService.updateLang(this.langInit,data.code).subscribe((data)=>
     { 

@@ -53,7 +53,7 @@ export class LinechartComponent implements OnInit {
     this.chartOptions={}
     this._ConfigService.getAll().subscribe((data)=>
     {
-      this.charts=data[0].Chart
+      this.charts=data[0].Chart.sort((a:any,b:any)=> new Date(a.Ngayformat).getTime() - new Date(b.Ngayformat).getTime())            
       this.GetChart(7)
     });
   }
@@ -61,7 +61,6 @@ export class LinechartComponent implements OnInit {
   averageDistance(arr1:any, arr2:any) {
     var totalDistance = 0;
     var count = 0;
-  
     for (var i = 0; i < arr1.length; i++) {
       for (var j = 0; j < arr2.length; j++) {
         var distance = Math.abs(arr1[i] - arr2[j]);
@@ -69,31 +68,29 @@ export class LinechartComponent implements OnInit {
         count++;
       }
     }
-  
     return totalDistance / count;
   }
   GetChart(data:any)
   { 
     this.listDay = []  
     const now = new Date()
+    const begin = new Date(now.setDate(now.getDate()+1))
     for (let index = 0; index < data; index++) {
-          now.setDate(now.getDate() - 1);
-          const day = this.datePipe.transform(new Date(now), 'dd/MM/yyyy');
+          begin.setDate(begin.getDate()-1);
+          const day = this.datePipe.transform(new Date(begin), 'dd/MM/yyyy');
           this.listDay.unshift(day);
     } 
 
-    this.listMua = this.charts
-    .filter(v => this.listDay
-    .includes(v.Ngay)).map(v => v.Buy);
     this.listBan = this.charts
     .filter(v => this.listDay
+    .includes(v.Ngay)).map(v => v.Buy);   
+    this.listMua = this.charts
+    .filter(v => this.listDay
     .includes(v.Ngay)).map(v => v.Sell);
-    console.log(this.listDay);
     const listDay = this.listDay.map(date => date.split('/').slice(0, 2).join('/'));
     let average = this.averageDistance(this.listMua,this.listBan)
     let min = Math.min(...this.listMua, ...this.listBan)-average;
     let max = Math.max(...this.listMua, ...this.listBan)+average;
-
     this.chartOptions = {
       series: [
         {
@@ -163,8 +160,7 @@ export class LinechartComponent implements OnInit {
         horizontalAlign: "center",
         floating: false,
         offsetY: 0,
-        offsetX: 20,
-        
+        offsetX: 20, 
       }
     };
   }

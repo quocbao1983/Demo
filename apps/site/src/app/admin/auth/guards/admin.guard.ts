@@ -47,7 +47,7 @@ export class AdminGuard implements CanActivate {
     }
     else
     {
-      this._router.navigate(['/dangnhap'], { queryParams: { redirectUrl } });
+      this._router.navigate(['/login'], { queryParams: { redirectUrl } });
       return false;
     }
   }

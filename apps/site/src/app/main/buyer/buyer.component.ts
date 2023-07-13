@@ -69,34 +69,34 @@ export class BuyerComponent implements OnInit {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (dulieu.QuantityIn=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Số Lượng")
+      this._NotifierService.notify("error", this.trans['buy_fill_quantityin']||'buy_fill_quantityin')
     }
     else if (dulieu.CustomAccount1=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Tài Khoản")
+      this._NotifierService.notify("error", this.trans['buy_fill_custom_account1']||'buy_fill_custom_account1')
     }
     else if (dulieu.Email=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Email")
+      this._NotifierService.notify("error", this.trans['buy_fill_email']||'buy_fill_email')
     }
     else if (!emailPattern.test(dulieu.Email)) {
-      this._NotifierService.notify("error", "Sai Định Dạng Email")
+      this._NotifierService.notify("error", this.trans['buy_wrong_email_format']||'buy_wrong_email_format')
     }
     else if (dulieu.TransHash=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Mã HASH")
+      this._NotifierService.notify("error", this.trans['buy_fill_hash_code']||'buy_fill_hash_code')
     }
     else
     {
     dulieu.Code = generateOrderId(11);
     dulieu.Network = this.Network;
-    dulieu.CreateAt = new Date().getTime();
+    dulieu.Ngaytao = new Date().getTime();
     this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
         const result = `Có 1 giao dịch MUA mới Mã đơn  ${data.Code}`
         this._TelegramService.createTelegram(result).subscribe();
-        this._NotifierService.notify("success", "Create Success")
+        this._NotifierService.notify("success", this.trans['buy_create_success']||'buy_create_success')
           this.router.navigate(['transfer',data.id]);
         }
       )
@@ -110,11 +110,7 @@ export class BuyerComponent implements OnInit {
     }
     else
     {
-    this.BuyData.Fee = (this.BuyData.QuantityIn*this.Config.Buyprice* this.Config.BuyFee/100).toFixed(2)
-    console.log(this.BuyData.QuantityIn);
-    console.log(this.Config.Buyprice);
-    console.log(this.Config.BuyFee);
-    
+    this.BuyData.Fee = (this.BuyData.QuantityIn*this.Config.Buyprice* this.Config.BuyFee/100).toFixed(2)    
     this.BuyData.QuantityOut = this.BuyData.QuantityIn * this.Config.Buyprice + Number(this.BuyData.Fee);
     }
   }

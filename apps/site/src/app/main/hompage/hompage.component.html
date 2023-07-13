@@ -1,3 +1,7 @@
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+
 <!-- desktop -->
 <div class="lg:block hidden max-w-4xl py-12 px-6 h-full m-auto">
      <div class="flex flex-col space-y-6">
@@ -31,7 +35,7 @@
                 <div>{{trans['Text_Maxbuy']}}</div>
                 <div>
                   <span class="text-orange-300 font-bold">{{(Config.Maxbuy| number:'1.0-2')||'0'}} </span>
-                  <span>{{trans['Text_Buyprice_Currency']}}</span>
+                  <span>{{trans['Text_Buyprice_Currency2']}}</span>
                 </div>
               </div>
             </div>
@@ -40,7 +44,7 @@
               <div>{{trans['Text_Sellprice']}}</div>
               <div class="space-x-2">
                 <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-2')||'0'}} </span>
-                <span>{{trans['Text_Sellprice_Currency']}}</span>
+                <span>{{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span>
               </div>
               <div class="w-1/2 flex flex-row items-center justify-center px-4" [routerLink]="['/seller']">
                 <img [src]="'assets/banngay1.png'" class="h-10">
@@ -50,7 +54,7 @@
                 <div>{{trans['Text_Maxsell']}}</div>
                 <div>
                   <span class="text-orange-300 font-bold">{{(Config.Maxsell| number:'1.0-2')||'0'}} </span>
-                  <span>{{trans['Text_Sellprice_Currency']}}</span>
+                  <span>{{trans['Text_Sellprice_Currency2']||'Text_Sellprice_Currency2'}}</span>
                 </div>
               </div>
             </div>
@@ -69,7 +73,7 @@
                 </div>
                 <div [@slideInOut]="first ? 'enter' : ''" class="flex flex-row w-full justify-center text-white odd:bg-[#291038] even:bg-[#441E5B] p-4" *ngFor="let item of ListsExchange;let first = first; let last = last">
                   <div class="w-full">{{item.Email}}</div>
-                  <div class="w-full">{{item.CreateAt|date:'hh:ss:mm dd/MM/yyyy'}}</div>
+                  <div class="w-full">{{item.Ngaytao|date:'hh:ss:mm dd/MM/yyyy'}}</div>
                </div>
               </div>
             </div>
@@ -114,7 +118,7 @@
               <div>{{trans['Text_Maxbuy']}}</div>
               <div class="flex flex-row space-x-2">
                 <span class="text-orange-300 font-bold">{{(Config.Maxbuy| number:'1.0-2')||'0'}} </span>
-                <span>{{trans['Text_Buyprice_Currency']}}</span>
+                <span>{{trans['Text_Buyprice_Currency2']}}</span>
               </div>
              </div>
               <div class="w-full flex flex-row items-center justify-center px-4" [routerLink]="['/buyer']">
@@ -128,7 +132,7 @@
               <div>{{trans['Text_Sellprice']}}</div>
               <div class="space-x-2">
                 <span class="text-purple-500 font-bold">{{(Config.Sellprice| number:'1.0-2')||'0'}} </span>
-                <span>{{trans['Text_Sellprice_Currency']}}</span>
+                <span>{{trans['Text_Sellprice_Currency']||'Text_Sellprice_Currency'}}</span>
               </div>
              </div>
              <hr/>
@@ -136,7 +140,7 @@
               <div>{{trans['Text_Maxsell']}}</div>
               <div class="flex flex-row space-x-2">
                 <span class="text-orange-300 font-bold">{{(Config.Maxsell| number:'1.0-2')||'0'}} </span>
-                <span>{{trans['Text_Sellprice_Currency']}}</span>
+                <span>{{trans['Text_Sellprice_Currency2']||'Text_Sellprice_Currency2'}}</span>
               </div>
              </div>
              <div class="w-full flex flex-row items-center justify-center px-4" [routerLink]="['/seller']">
@@ -145,9 +149,6 @@
             </div>
             </div>
           </div>
-
-
-
           <div class="text-white italic">{{trans['home_hoan_tat_giao_dich']}}</div>
           <div class="flex flex-col space-y-3 mt-3 text-center">
             <app-linechart></app-linechart>
@@ -160,7 +161,7 @@
                 </div>
                 <div [@slideInOut]="first ? 'enter' : ''" class="flex flex-row w-full justify-center text-white odd:bg-[#291038] even:bg-[#441E5B] p-4" *ngFor="let item of ListsExchange;let first = first; let last = last">
                   <div class="w-full">{{item.Email}}</div>
-                  <div class="w-full">{{item.CreateAt|date:'hh:ss:mm dd/MM/yyyy'}}</div>
+                  <div class="w-full">{{item.Ngaytao|date:'hh:ss:mm dd/MM/yyyy'}}</div>
                </div>
               </div>
             </div>

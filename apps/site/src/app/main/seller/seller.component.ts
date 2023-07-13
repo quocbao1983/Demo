@@ -63,38 +63,38 @@ export class SellerComponent implements OnInit {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (dulieu.QuantityIn=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Số Lượng")
+      this._NotifierService.notify("error", this.trans['sell_fill_quantity_in']||'sell_fill_quantity_in')
     }
     else if (dulieu.CustomAccount2=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Địa Chỉ Ví")
+      this._NotifierService.notify("error",this.trans['sell_fill_custom_account2']||'sell_fill_custom_account2')
     }
     else if (dulieu.Email=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Email")
+      this._NotifierService.notify("error", this.trans['sell_fill_email']||'sell_fill_email')
     }
     else if (!emailPattern.test(dulieu.Email)) {
-      this._NotifierService.notify("error", "Sai Định Dạng Email")
+      this._NotifierService.notify("error", this.trans['buy_wrong_email_format']||'buy_wrong_email_format')
     }
     else if (dulieu.CustomAccount1=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Địa Chỉ Ví")
+      this._NotifierService.notify("error", this.trans['sell_fill_address_wallet']||'sell_fill_address_wallet')
     }
     else if (dulieu.TransIdBank=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Mã Trans ID")
+      this._NotifierService.notify("error", this.trans['sell_fill_trans_id_bank']||'sell_fill_trans_id_bank')
     }
     else
     {
     dulieu.Code = generateOrderId(11);
     dulieu.Network = this.Network;
-    dulieu.CreateAt = new Date().getTime();
+    dulieu.Ngaytao = new Date().getTime();
     this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
         const result = `Có 1 giao dịch BÁN mới Mã đơn hàng ${data.Code}`
         this._TelegramService.createTelegram(result).subscribe();
-        this._NotifierService.notify("success", "Create Success")
+        this._NotifierService.notify("success", this.trans['sell_create_success']||'sell_create_success')
           this.router.navigate(['transfer',data.id]);
         }
       )

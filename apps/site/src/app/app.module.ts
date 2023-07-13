@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,6 +19,7 @@ import { AuthService } from './admin/auth/auth.service';
 import { UsersInterceptor } from './shared/users.interceptor';
 import { AuthModule } from './admin/auth/auth.module';
 import { AuthGuard } from './admin/auth/guards/auth.guard';
+import { ServiceWorkerModule } from '@angular/service-worker';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -54,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             canActivate:[AuthGuard],
            loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
            {
-            path: 'dangnhap',
+            path: 'login',
             canActivate: [GuestGuard],
             canActivateChild: [GuestGuard],
             component: DangnhapComponent,
@@ -106,6 +107,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         overlap: 150,
       },
     },),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: false,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     AuthService,

@@ -19,11 +19,12 @@ export class LivechatComponent implements OnInit {
   newMessage: string = '';
   selectedImage: File | null = null;
   Email:any;
-  isEmail:any;
   ListEmail:any[]=[]
   SelectEmail:any='';
   Role:any='user';
   CUser:any={}
+  isEmail:any=sessionStorage.getItem('EmailToken') || null;
+  trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   constructor(
     private _LivechatService: LivechatService,
     private sanitizer: DomSanitizer,
@@ -32,7 +33,6 @@ export class LivechatComponent implements OnInit {
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
     ) {}
-
   ngOnInit(): void {
     this._UsersService.getProfile().subscribe(data=>
       {
@@ -41,12 +41,9 @@ export class LivechatComponent implements OnInit {
         this.CUser = data
 
       }})
-    // this._LivechatService.isEmail$.subscribe(data => {
-    //   this.isEmail = data;
-    // });
+
     this._LivechatService.getChatMessages().subscribe((messages) => {
-      this.chatMessages = messages 
-        console.log(this.ListEmail);
+      this.chatMessages = messages.sort((a,b)=>b.time-a.time)
        this.ListEmail = Object.values(messages.reduce((acc, obj) => {
         const { email } = obj;
         if (!acc[email]) {
@@ -55,15 +52,16 @@ export class LivechatComponent implements OnInit {
         acc[email].chat.push(obj);
         return acc;
       }, {}));
-
-      console.log(this.ListEmail);
-      this.isEmail  = messages[messages.length-1].email
+      // this.ListEmail1 =
+      if(this.CUser.id)
+      {
+        this.isEmail  = messages[messages.length-1].email
+      }
+      else {
+        this.isEmail 
+      }
       this.FilterchatMessages = messages.filter(v=>v.email==this.isEmail)      
     });
-    // this._LivechatService.getlistEmail().subscribe(data=>{
-    //   this.ListEmail=data
-    // })
-
   }
   onEnterPressed(email: any) {
     this.sendMessage(email)
@@ -92,7 +90,6 @@ export class LivechatComponent implements OnInit {
   {
     
     this._MainComponent.drawer.close();
-    //this._MainComponent.isshowLive = false;
   }
   CreateChat(email:any)
   {
@@ -109,14 +106,14 @@ export class LivechatComponent implements OnInit {
    const result = this.ListEmail.find(v=>v.data==email)
    if(result==undefined)
    {
+    this.isEmail = email
     this._LivechatService.addEmail(email);
    }
     this._LivechatService.updateisEmail(email);
     }
   }
   LoadChat(data:any)
-  {
-    console.log(data);
+  {    
     
     this.FilterchatMessages = data.chat
     this._LivechatService.updateisEmail(data.email);

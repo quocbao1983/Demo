@@ -9,7 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { genID } from '../../shared/shared.utils';
 import { LivechatService } from '../../shared/livechat.service';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-femail',
   templateUrl: './femail.component.html',
@@ -17,11 +17,12 @@ import { LivechatService } from '../../shared/livechat.service';
 })
 export class FemailComponent implements OnInit {
   Config:any={}
-  femail:any=  {}
+  femail:any=  {Email:''}
   femails:any[]=[]
   displayedColumns: string[] = ['Email', 'CreateAt'];
   dataSource!: MatTableDataSource<any>;
   isEdit:boolean = false
+  TimeSpace:number = 60;//phút
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
@@ -32,8 +33,7 @@ export class FemailComponent implements OnInit {
     ) {}
   ngOnInit() {
     this._LivechatService.getlistExchange().subscribe((data) => {
-      console.log(data);
-      this.femails = data.sort((a, b) => b.CreateAt-a.CreateAt);
+      this.femails = data.sort((a, b) => b.Ngaytao-a.Ngaytao);
       this.dataSource = new MatTableDataSource(this.femails);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;    
@@ -52,36 +52,50 @@ export class FemailComponent implements OnInit {
     else
     {
       data.id = genID(8)
-      data.CreateAt = new Date().getTime();
+      data.Ngaytao = new Date().getTime();
       this._LivechatService.addExchange(data)
       this.ngOnInit();
       this._NotifierService.notify("success","Thêm Thành Công")
     }
   }
-  // Updatefemail()
-  // {
-  //   this.Config.Femail = this.femails      
-  //   this._ConfigService.updateConfig(this.Config).subscribe(()=>
-  //   {
-  //     this.dataSource = new MatTableDataSource(this.Config.Femail);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.dataSource.sort = this.sort;
-  //     this._NotifierService.notify("success","Cập nhật thành công")
-  //     this.femail={}
-  //   })
-  // }
-  // Deletefemail()
-  // {
-  //   this.Config.Femail = this.Config.Femail.filter((v:any)=>v.id!=this.femail.id)   
-  //   this._ConfigService.updateConfig(this.Config).subscribe(()=>
-  //   {
-  //     this.dataSource = new MatTableDataSource(this.Config.Femail);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.dataSource.sort = this.sort;
-  //     this._NotifierService.notify("success","Xóa thành công")
-  //     this.femail={}
-  //   })
-  // }
+    readExcelFile(event: any) {
+      const file = event.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const data = new Uint8Array((e.target as any).result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+        console.log(jsonData);
+        jsonData.forEach((v:any,k:any) => {
+          setTimeout(() => {
+            this.AddFemail(v)
+          }, this.TimeSpace*1000*k); //1000milis
+        });
+      };
+      fileReader.readAsArrayBuffer(file);
+    }
+  
+    writeExcelFile() {
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet([
+        {Email: 'test1@gmail.com'},
+        {Email: 'test2@gmail.com'}
+      ]);
+      const workbook: XLSX.WorkBook = { Sheets: { 'Sheet1': worksheet }, SheetNames: ['Sheet1'] };
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, 'data');
+    }
+    saveAsExcelFile(buffer: any, fileName: string) {
+      const data: Blob = new Blob([buffer], { type: 'application/octet-stream' });
+      const url: string = window.URL.createObjectURL(data);
+      const link: HTMLAnchorElement = document.createElement('a');
+      link.href = url;
+      link.download = `${fileName}.xlsx`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+      link.remove();
+    }
   applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();

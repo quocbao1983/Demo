@@ -46,7 +46,7 @@ export class AuthGuard implements CanActivate {
     return this._authService.checkDangnhap().pipe(
       switchMap((authenticated) => {
         if (!authenticated) {
-          this._router.navigate(['/dangnhap'], { queryParams: { redirectURL } });
+          this._router.navigate(['/login'], { queryParams: { redirectURL } });
           return of(false);
         }
         return of(true);

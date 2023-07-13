@@ -28,6 +28,7 @@ import { environment } from 'apps/site/src/environments/environment';
 })
 export class HompageComponent implements OnInit {
   Config:any={}
+  isLoading: boolean = true;
   ListsExchange: any[] = []
   displayedColumns: string[] = ['Email', 'CreateAt'];
   lang:any={}
@@ -47,12 +48,16 @@ export class HompageComponent implements OnInit {
   ngOnInit() {
     this._ConfigService.getAll().subscribe(data=>
       {
+        if(data)
+        {
+        this.isLoading = false;
         this.Config = data[0]
         this.SelectCoin = this.Config.ListtypeCoin[0]
+        }
       }
       )
       this._LivechatService.getlistExchange().subscribe((data) => {
-        this.ListsExchange = data.sort((a, b) => b.CreateAt-a.CreateAt).slice(0,10)
+        this.ListsExchange = data.sort((a, b) => b.Ngaytao-a.Ngaytao).slice(0,10)
         this.ListsExchange.forEach(v => {
           v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
         });
@@ -61,10 +66,4 @@ export class HompageComponent implements OnInit {
         this.dataSource.sort = this.sort;    
       });
   }
-  // GetTrans(trans:any,value:any)
-  // {
-  //   const result = trans.find((v:any)=>v.key_name==value)
-  //   return result?result.translation_text:''
-  // }
-
 }
