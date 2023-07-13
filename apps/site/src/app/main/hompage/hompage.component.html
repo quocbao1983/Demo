@@ -3,12 +3,13 @@
      <div class="flex flex-col space-y-6">
           <div class="flex flex-col space-y-2 text-center bg-[#441E5B] text-white py-3 rounded px-8">
             <div class="flex flex-row justify-between items-center">
-              <div><img [src]="ImgUrl +Config.Brand.Img.spath" class="h-10"></div>
+              <div><img [src]="ImgUrl + SelectCoin.img.spath" class="h-10"></div>
               <div>
-                <select id="default"
+                <select [(ngModel)]="SelectCoin" [ngModelOptions]="{standalone: true}"
+                 id="default"
                   class="bg-[#291038] border border-[#291038] text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <!-- <option selected>{{trans['Home_Choose_Coin']||'Home_Choose_Coin'}}</option> -->
-                  <option [value]="item" *ngFor="let item of this.Config.ListtypeCoin">{{item.Title}}</option>
+                  <option [value]="item" *ngFor="let item of Config.ListtypeCoin">{{item.Title}}</option>
                 </select>
               </div>
             </div>
@@ -84,13 +85,14 @@
  <div class="lg:hidden w-full py-12 px-6 h-full m-auto">
         <div class="flex flex-col space-y-6">
           <div class="flex flex-col space-y-2 text-center bg-[#441E5B] text-white py-3 rounded">
-            <div class="flex flex-row justify-between items-center px-2">
-              <div><img [src]="ImgUrl +Config.Brand.Img.spath" class="h-10"></div>
+            <div class="flex flex-row justify-between items-center px-4">
+              <div><img [src]="ImgUrl + SelectCoin.img.spath" class="h-10"></div>
               <div>
-                <select id="default"
+                <select [(ngModel)]="SelectCoin" [ngModelOptions]="{standalone: true}"
+                 id="default"
                   class="bg-[#291038] border border-[#291038] text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <!-- <option selected>{{trans['Home_Choose_Coin']||'Home_Choose_Coin'}}</option> -->
-                  <option [value]="item" *ngFor="let item of this.Config.ListtypeCoin">{{item.Title}}</option>
+                  <option [value]="item" *ngFor="let item of Config.ListtypeCoin">{{item.Title}}</option>
                 </select>
               </div>
             </div>

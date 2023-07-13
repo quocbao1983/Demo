@@ -25,7 +25,7 @@ export class TransactionComponent implements OnInit {
     this._ExchangeService.getAll().subscribe(data=>
       {
         console.log(data);
-        
+        data = data.sort((a,b)=>b.CreateAt - a.CreateAt)
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

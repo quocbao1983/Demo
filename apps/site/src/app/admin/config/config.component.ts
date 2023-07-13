@@ -37,11 +37,11 @@ export class ConfigComponent implements OnInit {
       if(data)
       {
         console.log(data);
-        
       this.Config=data[0]
       this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(this.Config.ListtypeCoin);
       }
     });
   }
@@ -68,6 +68,21 @@ export class ConfigComponent implements OnInit {
      this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
     })  
   }
+  UploadIcon(event: any,row:any) {
+    this._ConfigService.uploadDriver(event.addedFiles[0]).subscribe((data)=>
+    {
+      this.Config.ListtypeCoin.find((v:any)=>v.id==row.id).img = data
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+    }
+    )
+  }
+  RemoveIcon(data:any) {
+    this._ConfigService.DeleteuploadDriver(data.img).subscribe(()=>
+    {
+      this.Config.ListtypeCoin.find((v:any)=>v.id==data.id).img ={}
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+    })  
+  }
   AddCoin()
   {
 
@@ -81,7 +96,7 @@ export class ConfigComponent implements OnInit {
         this._NotifierService.notify("success","Update Success")
         this.dataSource = new MatTableDataSource(this.Config.ListtypeCoin); 
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort;        
       })
     }
     else

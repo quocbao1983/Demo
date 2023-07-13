@@ -34,6 +34,7 @@ export class HompageComponent implements OnInit {
   ImgUrl = environment.ImgUrl;
   trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   dataSource!: MatTableDataSource<any>;
+  SelectCoin:any={}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
@@ -47,6 +48,7 @@ export class HompageComponent implements OnInit {
     this._ConfigService.getAll().subscribe(data=>
       {
         this.Config = data[0]
+        this.SelectCoin = this.Config.ListtypeCoin[0]
       }
       )
       this._LivechatService.getlistExchange().subscribe((data) => {
