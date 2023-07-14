@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -12,11 +12,13 @@ export class LivechatService {
   private listEmail: AngularFireList<any>;
   private chatbyid!: AngularFireList<any>;
   private listExchange!: AngularFireList<any>;
+  private chats: AngularFireObject<any>;
   private _isEmail = new BehaviorSubject<string>(sessionStorage.getItem('EmailToken') || '');
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
     this.chatMessagesRef = this.db.list('chatMessages');   
     this.listEmail = this.db.list('listEmail');       
     this.listExchange = this.db.list('listExchange');       
+    this.chats = this.db.object('chatMessages');              
   }
   
   isEmail$ = this._isEmail.asObservable();
@@ -29,7 +31,11 @@ export class LivechatService {
     this.listEmail.push({data});
   }
   getChatMessages(): Observable<any[]> {
-    return this.chatMessagesRef.valueChanges();
+    const result = this.chatMessagesRef.valueChanges();
+    return result    
+  }
+  getChats(): Observable<any[]> {
+    return this.chats.valueChanges();
   }
   getlistEmail(): Observable<any[]> {
     return this.listEmail.valueChanges();
@@ -43,12 +49,8 @@ export class LivechatService {
   {   
     this.listExchange.push(data);
   }
-
-
-  addChatMessagebyID(email: string,message: string, sender: string, type: number): void {
-    this.chatbyid = this.db.list(email);   
-    console.log(this.chatbyid);
-    this.chatMessagesRef.push({email, message, sender,type });
+  updateChatMessage(key: string, updatedMessage: any): void {
+    this.chatMessagesRef.update(key, updatedMessage);
   }
   addChatMessage(email: string,message: string, sender: string, type: number): void {
     const time = new Date().getTime()

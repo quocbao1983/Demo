@@ -12,7 +12,7 @@ import { AdminComponent } from '../admin.component';
 })
 export class TransactionComponent implements OnInit {
   data:any[]=[]
-  displayedColumns: string[] = ['Code','Type','QuantityIn','Fee','QuantityOut','TransHash','TransIdBank','CompanyAccount1', 'CompanyAccount2', 'CustomAccount1', 'CustomAccount2', 'Email', 'Content','Note','Status'];
+  displayedColumns: string[] = ['Code','Type','QuantityIn','Fee','QuantityOut','TransHash','TransIdBank','CompanyAccount1', 'CompanyAccount2', 'CustomAccount1', 'CustomAccount2', 'Email', 'Content','Note','Status','CreateAt'];
    trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

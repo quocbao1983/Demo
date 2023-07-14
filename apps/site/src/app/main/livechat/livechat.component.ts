@@ -41,27 +41,39 @@ export class LivechatComponent implements OnInit {
         this.CUser = data
 
       }})
-
-    this._LivechatService.getChatMessages().subscribe((messages) => {
-      this.chatMessages = messages.sort((a,b)=>b.time-a.time)
-       this.ListEmail = Object.values(messages.reduce((acc, obj) => {
-        const { email } = obj;
+    this._LivechatService.getChats().subscribe(data=>{
+      this.chatMessages = Object.values(data).sort((a,b)=>b.time-a.time)
+      const transformedData = Object.entries(data).reduce((acc:any, [id, value]) => {
+        const email = value.email;
         if (!acc[email]) {
-          acc[email] = {email,chat: []};
-        } 
-        acc[email].chat.push(obj);
+          acc[email] = { email, chat: [] };
+        }
+        value.id = id; // Add ID to each message object
+        acc[email].chat.push(value);
         return acc;
-      }, {}));
-      // this.ListEmail1 =
-      if(this.CUser.id)
+      }, {});
+      this.ListEmail = Object.values(transformedData);
+      if(this.isEmail)
       {
-        this.isEmail  = messages[messages.length-1].email
+        this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat 
       }
-      else {
-        this.isEmail 
+      else if(this.CUser.id)
+      {
+        this.isEmail  = this.ListEmail[0].email
+        this.FilterchatMessages = this.ListEmail[0].chat
       }
-      this.FilterchatMessages = messages.filter(v=>v.email==this.isEmail)      
-    });
+      else {this.FilterchatMessages = []}   
+    })
+  }
+  CheckNew(data:any)
+  {
+    const count = data.chat.reduce((acc:any, chat:any) => {
+      if (chat.type === 0) {
+        acc++;
+      }
+      return acc;
+    }, 0);
+    return count
   }
   onEnterPressed(email: any) {
     this.sendMessage(email)
@@ -75,6 +87,10 @@ export class LivechatComponent implements OnInit {
     }
     this.newMessage = '';
     this.selectedImage = null;
+  }
+  updateMessage(key: string, type: number): void {
+    const update = {type: type};
+    this._LivechatService.updateChatMessage(key, update);
   }
   onFileSelected(event: any): void {
     this.selectedImage = event.target.files[0];
@@ -113,8 +129,13 @@ export class LivechatComponent implements OnInit {
     }
   }
   LoadChat(data:any)
-  {    
+  { 
+    data.chat.forEach((v:any) => {
+      this.updateMessage(v.id,1)
+    });
+    console.log(data);
     
+    this.isEmail = data.email
     this.FilterchatMessages = data.chat
     this._LivechatService.updateisEmail(data.email);
   }

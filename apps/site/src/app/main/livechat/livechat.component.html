@@ -1,36 +1,40 @@
 <div class="flex flex-row !h-screen">
-<div class="!flex flex-col flex-auto relative bg-white">
-  <div class="relative flex flex-row py-2 px-4 items-center justify-between">
-    <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
-    <div class="text-center">Live Chat</div>
-    <div></div>
-  </div>
-  
-  <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
-    <div class="flex flex-row space-x-2">
+  <div class="!flex flex-col flex-auto relative bg-white">
+    <div class="relative flex flex-row py-2 px-4 items-center justify-between">
+      <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
+      <div class="text-center">Live Chat</div>
+      <div></div>
+    </div>
+
+    <div class="relative p-4 flex flex-col h-full w-full overflow-auto bg-gray-200 space-y-2">
+      <div class="flex flex-row space-x-2">
         <div class="flex flex-col space-y-2 w-full">
           <ng-container *ngIf="!isEmail; else elseTemplate">
-              <ng-container *ngIf="this.CUser.email; else elseTemplate1">
-                <div><button mat-raised-button color="primary" (click)="CreateChat(this.CUser.email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button></div>
-              </ng-container>
-              <ng-template #elseTemplate1>
-                <div class="flex flex-col space-y-3 bg-white rounded p-4">
-                  <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>{{trans['live_chat_email']||'live_chat_email'}}</mat-label>
-                    <input [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" type="text" matInput
-                      class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Email'" (keydown.enter)="CreateChat(Email)"/>
-                  </mat-form-field>
-                  <div class="text-center"><button mat-raised-button color="primary" (click)="CreateChat(Email);NotiTele(Email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button>
-                  </div>
+            <ng-container *ngIf="this.CUser.email; else elseTemplate1">
+              <div><button mat-raised-button color="primary"
+                  (click)="CreateChat(ListEmail[0].email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate1>
+              <div class="flex flex-col space-y-3 bg-white rounded p-4">
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>{{trans['live_chat_email']||'live_chat_email'}}</mat-label>
+                  <input [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" type="text" matInput
+                    class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Email'"
+                    (keydown.enter)="CreateChat(Email)" />
+                </mat-form-field>
+                <div class="text-center"><button mat-raised-button color="primary"
+                    (click)="CreateChat(Email);NotiTele(Email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button>
                 </div>
-              </ng-template>
-             </ng-container>
+              </div>
+            </ng-template>
+          </ng-container>
           <ng-template #elseTemplate>
             <div *ngFor="let message of FilterchatMessages"
               class="message max-w-[70%] w-auto p-2 rounded bg-white {{message.sender=='admin'?'ml-auto':'mr-auto'}} ">
               <div class="min-w-4 leading-5">
                 <ng-container *ngIf="message.image; else textMessage">
-                  <strong>{{ message.sender }}:</strong>
+                  <strong>{{ message.sender }}{{ message.key }}:</strong>
                   <img [src]="message.image" class="max-w-xs w-full" />
                 </ng-container>
                 <ng-template #textMessage>
@@ -40,23 +44,31 @@
             </div>
           </ng-template>
         </div>
+      </div>
+    </div>
+    <div class="flex flex-col space-x-2 p-2" *ngIf="isEmail">
+      <img [src]="GetImg(fileURL)" *ngIf="fileURL" class="max-w-xs w-full" />
+      <div class="input-area flex flex-row space-x-2 items-center">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>{{trans['live_chat_message']||'live_chat_message'}}</mat-label>
+          <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded" matInput
+            [(ngModel)]="newMessage" placeholder="{{trans['live_chat_message']||'live_chat_message'}}"
+            (keydown.enter)="onEnterPressed(isEmail)" />
+          <span matSuffix class="material-icons ml-2" (click)="sendMessage(isEmail)">send</span>
+          <span matPrefix class="material-icons mr-2" (click)="image.click()">image</span>
+        </mat-form-field>
+        <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
+      </div>
     </div>
   </div>
-  <div class="flex flex-col space-x-2 p-2" *ngIf="isEmail">
-    <img [src]="GetImg(fileURL)" *ngIf="fileURL" class="max-w-xs w-full"/>
-    <div class="input-area flex flex-row space-x-2 items-center">
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>{{trans['live_chat_message']||'live_chat_message'}}</mat-label>
-        <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded" matInput
-          [(ngModel)]="newMessage" placeholder="{{trans['live_chat_message']||'live_chat_message'}}" (keydown.enter)="onEnterPressed(isEmail)" />
-        <span matSuffix class="material-icons ml-2" (click)="sendMessage(isEmail)">send</span>
-        <span matPrefix class="material-icons mr-2" (click)="image.click()">image</span>
-      </mat-form-field>
-      <input type="file" hidden accept="image/*" (change)="onFileSelected($event)" #image />
+  <div class="h-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded" *ngIf="Role!='user'">
+    <div *ngFor="let item of ListEmail"
+      class="hover:bg-slate-200 p-2 flex space-x-2 items-center {{item.email==SelectEmail?'bg-slate-500 text-white':''}}"
+      (click)="LoadChat(item);SelectEmail=item.email">
+
+      <span> {{item.email}}</span>
+      <span *ngIf="CheckNew(item)>0" class="bg-red-600 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">{{CheckNew(item)}}</span>
+
     </div>
   </div>
-</div>
-<div class="h-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded" *ngIf="Role!='user'">
-  <div *ngFor="let item of ListEmail" class="hover:bg-slate-200 p-2 {{item.email==SelectEmail?'bg-slate-500 text-white':''}}" (click)="LoadChat(item);SelectEmail=item.email">{{item.email}}</div>
-</div>
 </div>
