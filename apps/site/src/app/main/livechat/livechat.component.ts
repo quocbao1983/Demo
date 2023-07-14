@@ -25,6 +25,7 @@ export class LivechatComponent implements OnInit {
   CUser:any={}
   isEmail:any=sessionStorage.getItem('EmailToken') || null;
   trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
+  isShowchat:boolean=false
   constructor(
     private _LivechatService: LivechatService,
     private sanitizer: DomSanitizer,
@@ -42,17 +43,19 @@ export class LivechatComponent implements OnInit {
 
       }})
     this._LivechatService.getChats().subscribe(data=>{
-      this.chatMessages = Object.values(data).sort((a,b)=>b.time-a.time)
-      const transformedData = Object.entries(data).reduce((acc:any, [id, value]) => {
-        const email = value.email;
+      const conver1 = Object.entries(data);
+      const conver2 = conver1.map(([id, obj]) => ({ ...obj, id }));
+      const sortedData = conver2.sort((a, b) => b.time - a.time);
+      const groupedData = sortedData.reduce((acc, obj) => {
+        const email = obj.email;
         if (!acc[email]) {
           acc[email] = { email, chat: [] };
         }
-        value.id = id; // Add ID to each message object
-        acc[email].chat.push(value);
+        acc[email].chat.push(obj);
         return acc;
-      }, {});
-      this.ListEmail = Object.values(transformedData);
+      }, []);     
+      const result = Object.values(groupedData);
+      this.ListEmail = result
       if(this.isEmail)
       {
         this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat 
@@ -133,11 +136,9 @@ export class LivechatComponent implements OnInit {
     data.chat.forEach((v:any) => {
       this.updateMessage(v.id,1)
     });
-    console.log(data);
-    
     this.isEmail = data.email
     this.FilterchatMessages = data.chat
-    this._LivechatService.updateisEmail(data.email);
+   // this._LivechatService.updateisEmail(data.email);
   }
   NotiTele(data:any)
   {
