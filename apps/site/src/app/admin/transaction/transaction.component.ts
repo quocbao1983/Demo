@@ -42,9 +42,9 @@ export class TransactionComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  UpdateTT(data:any)
+  UpdateTT(data:any,status:any)
   {
-    data.Status=!data.Status;
+    data.Status=status;
     this._ExchangeService.updateExchange(data).subscribe(data=>this._NotifierService.notify("success", "Update Success"))
   }  
   CloseDrawer()

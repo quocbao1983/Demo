@@ -2,7 +2,7 @@
   <div class="{{isShowchat?'hidden':''}} w-full lg:!flex flex-col flex-auto relative bg-white">
     <div class="relative flex flex-row py-2 px-4 items-center justify-between">
       <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
-      <div class="text-center">Live Chat</div>
+      <div class="text-center">{{isEmail}}</div>
       <div>
         <div (click)="isShowchat=true" *ngIf="Role!='user'">
           <span class="material-icons">
@@ -30,7 +30,7 @@
                     (keydown.enter)="CreateChat(Email)" />
                 </mat-form-field>
                 <div class="text-center"><button mat-raised-button color="primary"
-                    (click)="CreateChat(Email);NotiTele(Email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button>
+                    (click)="CreateChat(Email)">{{trans['live_chat_begin']||'live_chat_begin'}}</button>
                 </div>
               </div>
             </ng-template>
@@ -41,7 +41,7 @@
               <div class="min-w-4 leading-5">
                 <ng-container *ngIf="message.image; else textMessage">
                   <strong>{{ message.sender }}{{ message.key }}:</strong>
-                  <img [src]="message.image" class="max-w-xs w-full" />
+                  <img [src]="message.image" class="max-w-xs w-full"  (click)="OpenImage(dialogOpenImage);Cimage=message.image" />
                 </ng-container>
                 <ng-template #textMessage>
                   <strong>{{ message.sender }}:</strong> {{ message.message }}
@@ -85,3 +85,16 @@
     </div>
   </div>
 </div>
+
+
+
+<ng-template #dialogOpenImage>
+  <div class="w-full h-screen">
+      <div mat-dialog-content class="!max-h-[85vh]">
+        <img [src]="Cimage" class="w-full max-w-[600px]"/>
+      </div>
+      <div mat-dialog-actions class="justify-center">
+          <button mat-button class="bg-red-400 hover:bg-red-600 text-white" mat-dialog-close="false">Huỷ</button>
+      </div>
+  </div>
+</ng-template>

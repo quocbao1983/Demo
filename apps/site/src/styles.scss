@@ -121,4 +121,8 @@ body
       transform: rotate(360deg);
     }
   }
-  
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell
+  {
+    border: 1px solid rgba(0,0,0,.12);
+    padding: 10px !important;
+  } 

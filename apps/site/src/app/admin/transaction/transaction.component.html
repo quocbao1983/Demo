@@ -52,13 +52,13 @@
           </ng-container>
           <ng-container matColumnDef="TransHash">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_transhash']||'transaction_transhash'}} </th>
-            <td mat-cell *matCellDef="let row" class="text-right"> 
+            <td mat-cell *matCellDef="let row"> 
                 {{row.TransHash}}
               </td>
           </ng-container>
           <ng-container matColumnDef="TransIdBank">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_transidbank']||'transaction_transidbank'}} </th>
-            <td mat-cell *matCellDef="let row" class="text-right"> 
+            <td mat-cell *matCellDef="let row"> 
                 {{row.TransIdBank}}
               </td>
           </ng-container>
@@ -111,14 +111,16 @@
           <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{trans['transaction_trangthai']||'transaction_trangthai'}} </th>
             <td mat-cell *matCellDef="let row"> 
-              <mat-slide-toggle [ngModel]="row.Status" class="text-xs" color="primary" (change)="UpdateTT(row)">
-                <ng-container *ngIf="row.Status==0; else elseTemplate">
-                  {{trans['transaction_waiting']||'transaction_waiting'}}
-                </ng-container>
-                <ng-template #elseTemplate>
-                  {{trans['transaction_done']||'transaction_done'}}
-                </ng-template>
-              </mat-slide-toggle>
+
+              <button mat-button [matMenuTriggerFor]="menu">
+                <span class="{{ row.Status === 0 ?'text-orange-500' : row.Status === 1 ? 'text-blue-600' : 'text-red-600' }}">
+                {{ row.Status === 0 ? trans['transaction_waiting']||'transaction_waiting' : row.Status === 1 ? trans['transaction_done']||'transaction_done' : trans['transaction_fail']||'transaction_fail' }}</span>
+              </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="UpdateTT(row,0)"> {{trans['transaction_waiting']||'transaction_waiting'}}</button>
+                    <button mat-menu-item (click)="UpdateTT(row,1)"> {{trans['transaction_done']||'transaction_done'}}</button>
+                    <button mat-menu-item (click)="UpdateTT(row,2)"> {{trans['transaction_fail']||'transaction_fail'}}</button>
+                  </mat-menu>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

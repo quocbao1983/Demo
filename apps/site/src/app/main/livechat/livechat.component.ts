@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LivechatService } from '../../shared/livechat.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MainComponent } from '../main.component';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UsersService } from '../../shared/users.service';
 import { NotifierService } from 'angular-notifier';
 import { TelegramService } from '../../shared/telegram.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-livechat',
@@ -26,6 +27,7 @@ export class LivechatComponent implements OnInit {
   isEmail:any=sessionStorage.getItem('EmailToken') || null;
   trans:any=JSON.parse(localStorage.getItem('Translate') || '{}');
   isShowchat:boolean=false
+  Cimage:any
   constructor(
     private _LivechatService: LivechatService,
     private sanitizer: DomSanitizer,
@@ -33,6 +35,7 @@ export class LivechatComponent implements OnInit {
     private _UsersService: UsersService,
     private _NotifierService: NotifierService,
     private _TelegramService: TelegramService,
+    private dialog: MatDialog,
     ) {}
   ngOnInit(): void {
     this._UsersService.getProfile().subscribe(data=>
@@ -44,7 +47,9 @@ export class LivechatComponent implements OnInit {
     this._LivechatService.getChats().subscribe(data=>{
       const conver1 = Object.entries(data);
       const conver2 = conver1.map(([id, obj]) => ({ ...obj, id }));
-      const sortedData = conver2.sort((a, b) => b.time - a.time);
+      const sortedData = conver2.sort((a:any, b:any) => Number(b.time) - Number(a.time));
+      console.log(sortedData);
+      
       const groupedData = sortedData.reduce((acc, obj) => {
         const email = obj.email;
         if (!acc[email]) {
@@ -55,14 +60,16 @@ export class LivechatComponent implements OnInit {
       }, []);     
       const result = Object.values(groupedData);
       this.ListEmail = result
+      console.log(result);
+      
       if(this.isEmail)
       {
-        this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat.sort((a:any, b:any) => a.time - b.time); 
+        this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat.sort((a:any, b:any) => b.time - a.time); 
       }
       else if(this.CUser.id)
       {
         this.isEmail  = this.ListEmail[0].email
-        this.FilterchatMessages = this.ListEmail[0].chat.sort((a:any, b:any) => a.time - b.time);
+        this.FilterchatMessages = this.ListEmail[0].chat.sort((a:any, b:any) => b.time - a.time);
       }
       else {this.FilterchatMessages = []}   
     })
@@ -122,12 +129,13 @@ export class LivechatComponent implements OnInit {
   else
     {
    const result = this.ListEmail.find(v=>v.data==email)
-   if(result==undefined)
-   {
-    this.isEmail = email
-    this._LivechatService.addEmail(email);
-   }
-    this._LivechatService.updateisEmail(email);
+      if(result==undefined)
+      {
+        this.isEmail = email
+        this._LivechatService.addEmail(email);
+      }
+      this._LivechatService.updateisEmail(email);
+      this.NotiTele(email)
     }
   }
   LoadChat(data:any)
@@ -138,13 +146,19 @@ export class LivechatComponent implements OnInit {
     console.log(data.chat);
     
     this.isEmail = data.email
-    this.FilterchatMessages = data.chat.sort((a:any, b:any) => a.time - b.time);
-   // this._LivechatService.updateisEmail(data.email);
+    this.FilterchatMessages = data.chat.sort((a:any, b:any) => b.time - a.time);
+    this._LivechatService.updateisEmail(data.email);
   }
   NotiTele(data:any)
   {
+    this._LivechatService.addChatMessage(data,'Hi! Can I Help You', 'admin',0);
+    this.newMessage = '';
     const result = `Có 1 livechat với email ${data}`
     this._TelegramService.createChatTelegram(result).subscribe();
   }
+  OpenImage(teamplate: TemplateRef<any>)
+  {
 
+    const dialogRef = this.dialog.open(teamplate);
+  }
 }
