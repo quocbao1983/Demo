@@ -8,7 +8,6 @@ import { environment } from '../../environments/environment';
 export class TelegramService {
   private APIURL = environment.APIURL;
   private TeleURL = `https://api.telegram.org/bot${environment.Teleram_bao_test_trans_bot}`
-  private TeleChatURL = `https://api.telegram.org/bot${environment.Teleram_bot_token}`
   private _telegram: BehaviorSubject<any | any> = new BehaviorSubject(null);
   private _telegrams: BehaviorSubject<any[] | any> = new BehaviorSubject(null);
   constructor(private _httpClient: HttpClient) { }

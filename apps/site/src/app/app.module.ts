@@ -20,6 +20,7 @@ import { UsersInterceptor } from './shared/users.interceptor';
 import { AuthModule } from './admin/auth/auth.module';
 import { AuthGuard } from './admin/auth/guards/auth.guard';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AdminGuard } from './admin/auth/guards/admin.guard';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -52,12 +53,12 @@ export function HttpLoaderFactory(http: HttpClient) {
           { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule) },
           { 
             path: 'admin', 
-            canActivate:[AuthGuard],
+            canActivate:[AdminGuard],
+            canActivateChild: [AdminGuard],
            loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
            {
             path: 'login',
             canActivate: [GuestGuard],
-            canActivateChild: [GuestGuard],
             component: DangnhapComponent,
           },
         ]
@@ -109,8 +110,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     },),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: false,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
   ],

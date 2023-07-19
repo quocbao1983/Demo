@@ -8,6 +8,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AuthService } from './auth/auth.service';
 import { ConfigService } from '../shared/config.service';
 import { environment } from '../../environments/environment';
+import { UsersService } from '../shared/users.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -25,6 +26,7 @@ export class AdminComponent implements OnInit {
     {id:4,Title:'Giao Dịch',Slug:'transaction'},
     {id:5,Title:'Chart',Slug:'chart'},
     {id:6,Title:'Femail',Slug:'femail'},
+    {id:7,Title:'User',Slug:'caidat'},
   ]
   FilterLists: any[] = [    
     {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
@@ -33,6 +35,7 @@ export class AdminComponent implements OnInit {
     {id:4,Title:'Giao Dịch',Slug:'transaction'},
     {id:5,Title:'Chart',Slug:'chart'},
     {id:6,Title:'Femail',Slug:'femail'},
+    {id:7,Title:'User',Slug:'caidat'},
 ]
   Sitemap: any = { loc: '', priority: '' }
   @ViewChild('drawer', { static: true }) drawer!: MatDrawer;
@@ -42,6 +45,7 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private _CauhinhService: CauhinhService,
     private _AuthService: AuthService,
+    private _UsersService: UsersService,
     private breakpointObserver: BreakpointObserver,
     private _router: Router,
     private _ConfigService: ConfigService,
@@ -53,10 +57,17 @@ export class AdminComponent implements OnInit {
   })
   }
   ngOnInit(): void {
-    this._ConfigService.getAll().subscribe((data)=>
+    this._UsersService.getProfile().subscribe(data=>
     {
-      this.Config=data[0]
-    });
+      if(data)
+      {
+        this.FilterLists = data.Role=="admin"?this.FilterLists:[    
+          {id:4,Title:'Giao Dịch',Slug:'transaction'},
+          {id:6,Title:'Femail',Slug:'femail'},]
+      }
+    })
+    this._ConfigService.getAll().subscribe((data)=>
+    {this.Config=data[0]});
   }
  
   Logout() {

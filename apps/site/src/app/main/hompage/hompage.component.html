@@ -73,7 +73,7 @@
                 </div>
                 <div [@slideInOut]="first ? 'enter' : ''" class="flex flex-row w-full justify-center text-white odd:bg-[#291038] even:bg-[#441E5B] p-4" *ngFor="let item of ListsExchange;let first = first; let last = last">
                   <div class="w-full">{{item.Email}}</div>
-                  <div class="w-full">{{item.Ngaytao|date:'hh:ss:mm dd/MM/yyyy'}}</div>
+                  <div class="w-full">{{item.Ngaytao|date:'hh:mm:ss dd/MM/yyyy'}}</div>
                </div>
               </div>
             </div>

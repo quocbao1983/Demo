@@ -1,62 +1,25 @@
-// -----------------------------------------------------------------------------------------------------
-// @ AUTH UTILITIES
-//
-// Methods are derivations of the Auth0 Angular-JWT helper service methods
-// https://github.com/auth0/angular2-jwt
-// -----------------------------------------------------------------------------------------------------
-
 export class AuthUtils
 {
-    /**
-     * Constructor
-     */
     constructor()
     {
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Is token expired?
-     *
-     * @param token
-     * @param offsetSeconds
-     */
     static isTokenExpired(token: string, offsetSeconds?: number): boolean
     {
-        // Return if there is no token
         if ( !token || token === '' )
         {
             return true;
         }
-
-        // Get the expiration date
         const date = this._getTokenExpirationDate(token);
 
-        offsetSeconds = offsetSeconds || 0;
+     offsetSeconds = offsetSeconds || 0;
 
         if ( date === null )
         {
             return true;
         }
 
-        // Check if the token is expired
         return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Private methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Base64 decoder
-     * Credits: https://github.com/atk
-     *
-     * @param str
-     * @private
-     */
     private static _b64decode(str: string): string
     {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

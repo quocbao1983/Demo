@@ -85,7 +85,9 @@ export class UsersService {
 changepass(data:any): Observable<any> {
      return this._httpClient.post(`${environment.APIURL}/test_auth/changepass`, data).pipe(
         tap((response: any) => {
-                return response;
+          console.log(response);
+          
+              return response;
         })
     );
 }

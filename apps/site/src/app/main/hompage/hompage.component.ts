@@ -57,9 +57,9 @@ export class HompageComponent implements OnInit {
       }
       )
       this._LivechatService.getlistExchange().subscribe((data) => {
-        this.ListsExchange = data.sort((a, b) => b.Ngaytao-a.Ngaytao).slice(0,10)
+        this.ListsExchange = data.sort((a:any, b:any) => new Date(b.Ngaytao).getTime()- new Date(a.Ngaytao).getTime()).slice(0,10)       
         this.ListsExchange.forEach(v => {
-          v.Email = v.Email.replace(/(?<=.).(?=[^@]*?@)/g, "*");
+          v.Email = v.Email.replace(/(.)(.*)(.@)/, '$1***$3');
         });
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;

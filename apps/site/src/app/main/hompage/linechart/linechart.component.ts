@@ -120,7 +120,7 @@ export class LinechartComponent implements OnInit {
       },
       colors: ["#008000", "#ff0000"],
       dataLabels: {
-        enabled: true
+        enabled: false
       },
       stroke: {
         curve: "smooth"

@@ -1,10 +1,10 @@
 <div class="flex flex-row !h-screen ">
-  <div class="{{isShowchat?'':'hidden'}} w-full lg:!flex flex-col flex-auto relative bg-white">
+  <div class="{{isShowchat?'hidden':''}} w-full lg:!flex flex-col flex-auto relative bg-white">
     <div class="relative flex flex-row py-2 px-4 items-center justify-between">
       <div (click)="Closedrawer()"><span class="material-icons">arrow_back</span></div>
       <div class="text-center">Live Chat</div>
       <div>
-        <div (click)="isShowchat=false" class="flex lg:hidden">
+        <div (click)="isShowchat=true" *ngIf="Role!='user'">
           <span class="material-icons">
             list
           </span>
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-  <div class="{{isShowchat?'hidden':'flex'}} h-full w-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded"
+  <div class="{{isShowchat?'flex':'hidden'}} h-full w-full overflow-auto flex flex-col space-y-2 py-4 bg-white rounded"
     *ngIf="Role!='user'">
     <div *ngFor="let item of ListEmail"
       class="hidden lg:flex hover:bg-slate-200 p-2 space-x-2 items-center {{item.email==SelectEmail?'bg-slate-500 text-white':''}}"

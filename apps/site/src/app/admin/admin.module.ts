@@ -6,13 +6,18 @@ import { MaterialModule } from '../shared/material.module';
 import { ConfigComponent } from './config/config.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { DangnhapComponent } from './dangnhap/dangnhap.component';
 import { NgonnguComponent } from './ngonngu/ngonngu.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { UsersInterceptor } from '../shared/users.interceptor';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AdminGuard } from './auth/guards/admin.guard';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,17 +35,35 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
       }
     }),
     RouterModule.forChild([
-      { path: '', redirectTo: 'cauhinh', pathMatch: 'full' },
+      { 
+      path: '', redirectTo: 'transaction', pathMatch: 'full' },
       {
         path: '',
         component: AdminComponent,
-        children: [
-          { path: 'cauhinh', component: ConfigComponent },
+        children: [       
+          { path: 'cauhinh',
+          canActivate:[AdminGuard],
+          canActivateChild: [AdminGuard], 
+          component: ConfigComponent },
           { path: 'transaction', component: TransactionComponent },
-          { path: 'ngonngu', loadChildren: () => import('./ngonngu/ngonngu.module').then(m => m.NgonnguModule) },
-          { path: 'noidung', loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
-          { path: 'chart', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
-          { path: 'femail', loadChildren: () => import('./femail/femail.module').then(m => m.FemailModule) }
+          { path: 'ngonngu', 
+          canActivate:[AdminGuard],
+          canActivateChild: [AdminGuard],
+          loadChildren: () => import('./ngonngu/ngonngu.module').then(m => m.NgonnguModule) },
+          { path: 'noidung',
+          canActivate:[AdminGuard],
+          canActivateChild: [AdminGuard], 
+          loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
+          { path: 'chart', 
+          canActivate:[AdminGuard],
+          canActivateChild: [AdminGuard],
+          loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
+          { path: 'femail', loadChildren: () => import('./femail/femail.module').then(m => m.FemailModule) },
+          { path: 'caidat', 
+          canActivate:[AdminGuard],
+          canActivateChild: [AdminGuard],
+          loadChildren: () => import('./caidat/caidat.module').then(m => m.CaidatModule) },
+          { path: 'changepass', loadChildren: () => import('./changepass/changepass.module').then(m => m.ChangepassModule) }
           // { path: 'noidung', component: NoidungComponent }
         ],
       },

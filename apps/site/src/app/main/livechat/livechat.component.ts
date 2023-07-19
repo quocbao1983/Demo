@@ -40,7 +40,6 @@ export class LivechatComponent implements OnInit {
         if(data){
         this.Role='admin'
         this.CUser = data
-
       }})
     this._LivechatService.getChats().subscribe(data=>{
       const conver1 = Object.entries(data);
@@ -58,12 +57,12 @@ export class LivechatComponent implements OnInit {
       this.ListEmail = result
       if(this.isEmail)
       {
-        this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat 
+        this.FilterchatMessages = this.ListEmail.find(v=>v.email==this.isEmail).chat.sort((a:any, b:any) => a.time - b.time); 
       }
       else if(this.CUser.id)
       {
         this.isEmail  = this.ListEmail[0].email
-        this.FilterchatMessages = this.ListEmail[0].chat
+        this.FilterchatMessages = this.ListEmail[0].chat.sort((a:any, b:any) => a.time - b.time);
       }
       else {this.FilterchatMessages = []}   
     })
@@ -136,8 +135,10 @@ export class LivechatComponent implements OnInit {
     data.chat.forEach((v:any) => {
       this.updateMessage(v.id,1)
     });
+    console.log(data.chat);
+    
     this.isEmail = data.email
-    this.FilterchatMessages = data.chat
+    this.FilterchatMessages = data.chat.sort((a:any, b:any) => a.time - b.time);
    // this._LivechatService.updateisEmail(data.email);
   }
   NotiTele(data:any)

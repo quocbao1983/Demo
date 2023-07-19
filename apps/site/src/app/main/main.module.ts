@@ -41,6 +41,7 @@ import { DangnhapComponent } from '../admin/dangnhap/dangnhap.component';
       { 
       path: 'admin', 
       canActivate:[AuthGuard],
+      canActivateChild:[AuthGuard],
       loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule) },
     ])
   ],
