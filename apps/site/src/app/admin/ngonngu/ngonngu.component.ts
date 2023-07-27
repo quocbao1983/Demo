@@ -35,7 +35,7 @@ export class NgonnguComponent implements OnInit {
   }
   Change(translate: any[]) {
     this.Data[0].translate = translate
-    this._LangService.updateLang(this.Data[0]).subscribe(()=>this._NotifierService.notify("success","Update Thành Công"));
+    this._LangService.updateLang(this.Data[0]).subscribe(()=>this._NotifierService.notify("success","Update Success"));
   }
   createKey(data: any) {
     if (this.NewKey) {

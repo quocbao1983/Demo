@@ -96,7 +96,7 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._CauhinhService.createCauhinh(this.Detail).subscribe((data)=>this._Notification.notify('success','Add mới thành công'))
+        this._CauhinhService.createCauhinh(this.Detail).subscribe((data)=>this._Notification.notify('success','Add new success'))
       }
     });
   }

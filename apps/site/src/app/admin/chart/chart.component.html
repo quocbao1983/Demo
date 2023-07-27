@@ -22,12 +22,12 @@
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Sell Price</mat-label>
           <input [(ngModel)]="chart.Buy" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-            [placeholder]="'Tổng Bán'"/>
+            [placeholder]="'Sell Price'"/>
         </mat-form-field>  
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Buy Price</mat-label>
           <input [(ngModel)]="chart.Sell" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-            [placeholder]="'Tổng Mua'"/>
+            [placeholder]="'Buy Price'"/>
         </mat-form-field> 
     </div>
     <div class="flex flex-row space-x-3 justify-start w-full">
@@ -66,15 +66,15 @@
       <div class="mat-elevation-z8 w-full">
         <table class="w-full" mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="Ngay">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
             <td mat-cell *matCellDef="let row"> {{row.Ngay}} </td>
           </ng-container>
           <ng-container matColumnDef="Buy">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mua </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buy </th>
             <td mat-cell *matCellDef="let row"> {{row.Buy| number:'1.0-2'||'0'}} </td>
           </ng-container>
           <ng-container matColumnDef="Sell">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bán </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sell </th>
             <td mat-cell *matCellDef="let row"> {{row.Sell| number:'1.0-2'||'0'}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

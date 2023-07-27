@@ -94,7 +94,7 @@ export class BuyerComponent implements OnInit {
     this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
-        const result = `Có 1 transaction MUA mới Mã đơn  ${data.Code}`
+        const result = `1 transaction Buy New Code  ${data.Code}`
         this._TelegramService.createTelegram(result).subscribe();
         this._NotifierService.notify("success", this.trans['buy_create_success']||'buy_create_success')
           this.router.navigate(['transfer',data.id]);

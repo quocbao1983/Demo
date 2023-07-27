@@ -104,7 +104,7 @@ export class ChartComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.Config.Chart);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this._NotifierService.notify("success", "Add Thành Công")
+        this._NotifierService.notify("success", "Add Success")
         this.chart = {}
       })
     }
@@ -117,7 +117,7 @@ export class ChartComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.Config.Chart);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this._NotifierService.notify("success", "Update thành công")
+      this._NotifierService.notify("success", "Update success")
       this.chart = {}
     })
   }
@@ -127,7 +127,7 @@ export class ChartComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.Config.Chart);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this._NotifierService.notify("success", "Xóa thành công")
+      this._NotifierService.notify("success", "Xóa success")
       this.chart = {}
     })
   }

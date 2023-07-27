@@ -42,7 +42,7 @@ export class ChangepassComponent implements OnInit {
             type: 'success',
           });
           this._notifierService.show({
-            message:"Vui LòngĐăng nhập lại",
+            message:"Login Again",
             type: 'success',
           });
           setTimeout(() => {

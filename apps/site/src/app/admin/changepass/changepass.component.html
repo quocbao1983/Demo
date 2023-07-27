@@ -3,7 +3,7 @@
     <span class="material-icons p-2 hover:bg-gray-200 rounded-full">
       arrow_back
       </span>
-      <div class="text-xl">Đổi Password</div>
+      <div class="text-xl">Change Password</div>
       <div>
       </div>
   </div>
@@ -11,23 +11,23 @@
     <div class="flex flex-col w-full justify-center">
       <div class="m-auto w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
         <h2 class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Đổi Password
+            Change Password
         </h2>
         <div class="mt-4 space-y-4 lg:mt-5 md:space-y-5 text-center">
     
               <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Password Cũ</mat-label>
-                <input [(ngModel)]="Data.oldpass" matInput placeholder="Password Cũ">
+                <mat-label>Password Old</mat-label>
+                <input [(ngModel)]="Data.oldpass" matInput placeholder="Password Old">
                 </mat-form-field>
               <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Password Mới</mat-label>
-                <input [(ngModel)]="Data.newpass" matInput placeholder="Password Mới">
+                <mat-label>Password New</mat-label>
+                <input [(ngModel)]="Data.newpass" matInput placeholder="Password New">
                 </mat-form-field>
               <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Xác Nhận Password Mới</mat-label>
-                <input [(ngModel)]="Data.newpass2" matInput placeholder="Xác Nhận Password Mới">
+                <mat-label>Confirm Password New</mat-label>
+                <input [(ngModel)]="Data.newpass2" matInput placeholder="Confirm Password New">
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="ChangePass(Data)">Xác Nhận</button>
+                <button mat-raised-button color="primary" (click)="ChangePass(Data)">Confirm</button>
           </div>
     </div>
     </div>

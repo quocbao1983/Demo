@@ -66,7 +66,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Totaltrade']||'Text_Totaltrade'}}</mat-label>
-              <input matInput placeholder="Tổng Transaction" [(ngModel)]="Config.Totaltrade"
+              <input matInput placeholder="{{trans['Text_Totaltrade']||'Text_Totaltrade'}}" [(ngModel)]="Config.Totaltrade"
                 [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-2')||'0'}} {{trans['Text_Totaltrade_Donvitinh']||'Text_Totaltrade_Donvitinh'}}</span></mat-hint>
             </mat-form-field>

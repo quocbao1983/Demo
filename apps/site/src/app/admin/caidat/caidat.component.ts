@@ -39,7 +39,7 @@ export class CaidatComponent implements OnInit {
     this._UsersService.Dangky(User).subscribe((data)=>
     {
     this.User={}
-    this._NotifierService.notify('success','Add Thành Công')
+    this._NotifierService.notify('success','Add Success')
     this.drawer.close();
     }
     );
@@ -49,7 +49,7 @@ export class CaidatComponent implements OnInit {
     this._UsersService.updateUser(User).subscribe((data)=>
     {
       this.User={}
-      this._NotifierService.notify('success','Update Thành Công')
+      this._NotifierService.notify('success','Update Success')
       this.drawer.close();
       }
     );
@@ -60,7 +60,7 @@ export class CaidatComponent implements OnInit {
     this._UsersService.updateUser(data).subscribe((data)=>
     {
       this.User={}
-      this._NotifierService.notify('success','Update Thành Công')
+      this._NotifierService.notify('success','Update Success')
       this.drawer.close();
       }
     );
@@ -73,7 +73,7 @@ export class CaidatComponent implements OnInit {
     this._UsersService.Randompass(data).subscribe((data)=>{
       this.Users[index].Randompass =data[1]
       this._NotifierService.show({
-        message: 'Password Mới : '+data[1],
+        message: 'Password New : '+data[1],
         type: 'success',
       });
     });

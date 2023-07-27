@@ -55,7 +55,7 @@ export class FemailComponent implements OnInit {
       data.Ngaytao = new Date().getTime();
       this._LivechatService.addExchange(data)
       this.ngOnInit();
-      this._NotifierService.notify("success","Add Thành Công")
+      this._NotifierService.notify("success","Add Success")
     }
   }
     readExcelFile(event: any) {
