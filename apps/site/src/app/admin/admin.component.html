@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container flex h-[100vh]" autosize>
     <mat-drawer #drawer mode="side" opened class="h-full">
         <div class="flex flex-col h-full">
-            <!-- <div (click)="openDialog(dialogTemplate)">Thêm</div> -->
+            <!-- <div (click)="openDialog(dialogTemplate)">Add</div> -->
               <div class="flex flex-col {{isMini?'min-w-[80px]':'min-w-[270px]'}} h-full overflow-auto pb-5">
                   <div class="flex flex-row justify-between items-center p-4 bg-[#441E5B]">
                       <img [src]="ImgUrl+Config.Brand.Img.spath" class="max-h-[40px] h-full"/>
@@ -34,12 +34,12 @@
   </mat-drawer-container>
   <ng-template #dialogTemplate>
     <div class="min-w-[672px]">
-    <div mat-dialog-title>Thêm Mới</div>
+    <div mat-dialog-title>Add Mới</div>
     <div mat-dialog-content>
         <div class="flex flex-col w-full space-y-4 p-4">
             <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Tiêu Đề</mat-label>
-            <input matInput [(ngModel)]="Detail.Title" [ngModelOptions]="{standalone: true}" placeholder="Tiêu Đề">
+            <mat-label>Title</mat-label>
+            <input matInput [(ngModel)]="Detail.Title" [ngModelOptions]="{standalone: true}" placeholder="Title">
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-full">
             <mat-label>Slug</mat-label>

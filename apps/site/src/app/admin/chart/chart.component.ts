@@ -93,7 +93,7 @@ export class ChartComponent implements OnInit {
   AddChart(data: any) {
     const check = this.charts.find(v => v.Ngay == this.datePipe.transform(data.Ngayformat, 'dd/MM/yyyy'))
     if (data.Ngayformat == undefined) {
-      this._NotifierService.notify("error", "Vui lòng Chọn Ngày")
+      this._NotifierService.notify("error", "Vui lòng Choosen")
     }
     else if (!check) {
       data.id = genID(8)
@@ -104,7 +104,7 @@ export class ChartComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.Config.Chart);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this._NotifierService.notify("success", "Thêm Thành Công")
+        this._NotifierService.notify("success", "Add Thành Công")
         this.chart = {}
       })
     }
@@ -117,7 +117,7 @@ export class ChartComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.Config.Chart);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this._NotifierService.notify("success", "Cập nhật thành công")
+      this._NotifierService.notify("success", "Update thành công")
       this.chart = {}
     })
   }

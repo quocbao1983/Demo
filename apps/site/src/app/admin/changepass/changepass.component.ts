@@ -25,7 +25,7 @@ export class ChangepassComponent implements OnInit {
     if (data.newpass != data.newpass2) {
       console.log(data);
       this._notifierService.show({
-        message: 'Xác nhận mật khẩu không trùng',
+        message: 'Xác nhận password không trùng',
         type: 'error',
       });
     } else {

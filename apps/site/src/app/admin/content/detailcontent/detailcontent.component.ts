@@ -73,7 +73,7 @@ export class DetailcontentComponent implements OnInit {
   }
   UpdateContent(data:any)
   {
-    this._ContentService.updateContent(data).subscribe(()=>this._NotifierService.notify("success","Cập Nhật Thành Công"))    
+    this._ContentService.updateContent(data).subscribe(()=>this._NotifierService.notify("success","Update Thành Công"))    
   }
 }
 

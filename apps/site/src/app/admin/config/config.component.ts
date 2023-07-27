@@ -57,7 +57,7 @@ export class ConfigComponent implements OnInit {
     this._ConfigService.uploadDriver(event.addedFiles[0]).subscribe((data)=>
     {
       this.Config.Brand.Img= data
-     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Update Thành Công"));
     }
     )
   }
@@ -65,14 +65,14 @@ export class ConfigComponent implements OnInit {
     this._ConfigService.DeleteuploadDriver(data).subscribe(()=>
     {
       this.Config.Brand.Img = {}
-     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Update Thành Công"));
     })  
   }
   UploadIcon(event: any,row:any) {
     this._ConfigService.uploadDriver(event.addedFiles[0]).subscribe((data)=>
     {
       this.Config.ListtypeCoin.find((v:any)=>v.id==row.id).img = data
-     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Update Thành Công"));
     }
     )
   }
@@ -80,7 +80,7 @@ export class ConfigComponent implements OnInit {
     this._ConfigService.DeleteuploadDriver(data.img).subscribe(()=>
     {
       this.Config.ListtypeCoin.find((v:any)=>v.id==data.id).img ={}
-     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Cập Nhật Thành Công"));
+     this._ConfigService.updateConfig(this.Config).subscribe(() => this._NotifierService.notify("success", "Update Thành Công"));
     })  
   }
   AddCoin()

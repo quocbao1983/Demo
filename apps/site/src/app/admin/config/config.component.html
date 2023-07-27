@@ -1,7 +1,7 @@
 <div class="!flex flex-col flex-auto min-w-0 relative bg-white">
   <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
     <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">menu</span>
-    <div class="text-xl">Cấu Hình</div>
+    <div class="text-xl">Config</div>
     <div>
     </div>
   </div>
@@ -66,7 +66,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>{{trans['Text_Totaltrade']||'Text_Totaltrade'}}</mat-label>
-              <input matInput placeholder="Tổng Giao Dịch" [(ngModel)]="Config.Totaltrade"
+              <input matInput placeholder="Tổng Transaction" [(ngModel)]="Config.Totaltrade"
                 [ngModelOptions]="{standalone: true}">
               <mat-hint><span class="text-blue-500">{{(Config.Totaltrade| number:'1.0-2')||'0'}} {{trans['Text_Totaltrade_Donvitinh']||'Text_Totaltrade_Donvitinh'}}</span></mat-hint>
             </mat-form-field>
@@ -89,7 +89,7 @@
           </div>
 
           <div class="text-center space-x-2">
-            <a mat-raised-button color="primary" (click)="Update(Config)">Cập Nhật</a>
+            <a mat-raised-button color="primary" (click)="Update(Config)">Update</a>
           </div>
         </div>
         <div class="flex flex-col space-y-2 w-full">
@@ -122,9 +122,9 @@
 
 
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>{{trans['Text_Vicongty']||'Text_Vicongty'}}</mat-label>
+            <mat-label>{{trans['Text_Address_Wallet']||'Text_Address_Wallet'}}</mat-label>
             <input (change)="Change()" [(ngModel)]="Config.CompanyAccount2" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-              [placeholder]="trans['Text_Vicongty']||'Text_Vicongty'" />
+              [placeholder]="trans['Text_Address_Wallet']||'Text_Address_Wallet'" />
           </mat-form-field> 
 
           <mat-form-field appearance="outline" class="w-full">
@@ -134,10 +134,10 @@
           </mat-form-field>  
             <div class="flex flex-col space-y-2">            
                 <mat-form-field appearance="outline" class="w-full">
-                  <mat-label>Thêm Coin</mat-label>
+                  <mat-label>Add New</mat-label>
                   <input [(ngModel)]="Typecoin.Title" [ngModelOptions]="{standalone: true}"
                    type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
-                    [placeholder]="'Thêm Coin'"/>                   
+                    [placeholder]="'Add New'"/>                   
                   <span matSuffix class="material-icons ml-2" (click)="UpdateCoin()" *ngIf="Typecoin.id">update</span>
                   <span matSuffix class="material-icons ml-2" (click)="DeleteCoin()" *ngIf="Typecoin.id">delete</span>
                   <span matSuffix class="material-icons ml-2" (click)="AddCoin()" *ngIf="!Typecoin.id">add</span>

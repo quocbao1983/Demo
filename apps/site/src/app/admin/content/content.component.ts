@@ -41,7 +41,7 @@ export class ContentComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._ContentService.createContent(this.Detail).subscribe((data)=>this._Notification.notify('success','Thêm mới thành công'))
+        this._ContentService.createContent(this.Detail).subscribe((data)=>this._Notification.notify('success','Add mới thành công'))
       }
     });
   }

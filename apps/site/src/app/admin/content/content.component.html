@@ -3,7 +3,7 @@
     <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
       menu
       </span>
-      <div class="text-xl">Nội Dung</div>
+      <div class="text-xl">Content</div>
       <div>
       </div>
   </div>
@@ -19,19 +19,19 @@
             <div class="relative border-b-2 flex flex-col">
               <div class="flex flex-col p-3 items-center justify-between w-full">
                   <mat-form-field appearance="outline" class="w-full text-xs">
-                      <mat-label>Tiêu Đề</mat-label>
+                      <mat-label>Title</mat-label>
                       <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Mô Tả">
                       <span matPrefix class="material-icons mr-2">search</span>
                   </mat-form-field>
                   <!-- <div class="flex flex-row space-x-3 justify-start w-full">
                         <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
                             <span class="material-icons text-xl"
-                                matTooltip="Tùy Chỉnh">tune</span>
-                            <span class="text-sm">Cấu Hình</span>
+                                matTooltip="Config">tune</span>
+                            <span class="text-sm">Config</span>
                         </div>
                         <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
                             <span class="material-icons text-xl"
-                                matTooltip="Lấy Mẫu">file_download</span>
+                                matTooltip="Download">file_download</span>
                             <span class="text-sm">Download</span>
                         </div>
                         <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
@@ -41,8 +41,8 @@
                         </div>
                         <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg" (click)="openDialog(dialogTemplate)">
                             <span class="material-icons text-xl"
-                                matTooltip="Tạo mới">add_circle</span>
-                            <span class="text-sm">Thêm</span>
+                                matTooltip="Add New">add_circle</span>
+                            <span class="text-sm">Add</span>
                         </div>
                   </div> -->
               </div>
@@ -64,12 +64,12 @@
       </mat-drawer-container>
       <ng-template #dialogTemplate>
         <div class="min-w-[672px]">
-        <div mat-dialog-title>Thêm Mới</div>
+        <div mat-dialog-title>Add Mới</div>
         <div mat-dialog-content>
             <div class="flex flex-col w-full space-y-4 p-4">
                 <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Tiêu Đề</mat-label>
-                <input matInput [(ngModel)]="Detail.Tieude" [ngModelOptions]="{standalone: true}" placeholder="Tiêu Đề">
+                <mat-label>Title</mat-label>
+                <input matInput [(ngModel)]="Detail.Tieude" [ngModelOptions]="{standalone: true}" placeholder="Title">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Oldlink</mat-label>

@@ -20,19 +20,19 @@ export class AdminComponent implements OnInit {
   Config:any={Brand:{Title:'',Img:{spath:''}}}
   ImgUrl=environment.ImgUrl
   Lists: any[] = [
-    {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
-    {id:2,Title:'Nội Dung',Slug:'noidung'},
-    {id:3,Title:'Ngôn Ngữ',Slug:'ngonngu'},
-    {id:4,Title:'Giao Dịch',Slug:'transaction'},
+    {id:1,Title:'Config',Slug:'cauhinh'},
+    {id:2,Title:'Content',Slug:'noidung'},
+    {id:3,Title:'Language',Slug:'ngonngu'},
+    {id:4,Title:'Transaction',Slug:'transaction'},
     {id:5,Title:'Chart',Slug:'chart'},
     {id:6,Title:'Femail',Slug:'femail'},
     {id:7,Title:'User',Slug:'caidat'},
   ]
   FilterLists: any[] = [    
-    {id:1,Title:'Cấu Hình',Slug:'cauhinh'},
-    {id:2,Title:'Nội Dung',Slug:'noidung'},
-    {id:3,Title:'Ngôn Ngữ',Slug:'ngonngu'},
-    {id:4,Title:'Giao Dịch',Slug:'transaction'},
+    {id:1,Title:'Config',Slug:'cauhinh'},
+    {id:2,Title:'Content',Slug:'noidung'},
+    {id:3,Title:'Language',Slug:'ngonngu'},
+    {id:4,Title:'Transaction',Slug:'transaction'},
     {id:5,Title:'Chart',Slug:'chart'},
     {id:6,Title:'Femail',Slug:'femail'},
     {id:7,Title:'User',Slug:'caidat'},
@@ -62,7 +62,7 @@ export class AdminComponent implements OnInit {
       if(data)
       {
         this.FilterLists = data.Role=="admin"?this.FilterLists:[    
-          {id:4,Title:'Giao Dịch',Slug:'transaction'},
+          {id:4,Title:'Transaction',Slug:'transaction'},
           {id:6,Title:'Femail',Slug:'femail'},]
       }
     })
@@ -96,7 +96,7 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._CauhinhService.createCauhinh(this.Detail).subscribe((data)=>this._Notification.notify('success','Thêm mới thành công'))
+        this._CauhinhService.createCauhinh(this.Detail).subscribe((data)=>this._Notification.notify('success','Add mới thành công'))
       }
     });
   }

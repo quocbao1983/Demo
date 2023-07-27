@@ -9,23 +9,23 @@
         <div>
           <div class="text-center items-center">
             <ng-container *ngIf="User.id; else elseTemplate">
-              <button mat-raised-button color="primary" (click)="Update(User)">Cập Nhật</button>
+              <button mat-raised-button color="primary" (click)="Update(User)">Update</button>
             </ng-container>
             <ng-template #elseTemplate>
-              <button mat-raised-button color="primary" (click)="Dangky(User)">Thêm User</button>
+              <button mat-raised-button color="primary" (click)="Dangky(User)">Add User</button>
             </ng-template>
           </div>
         </div>
       </div>
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Họ Tên</mat-label>
+        <mat-label>Name</mat-label>
         <input type="text" [(ngModel)]="User.Hoten" [ngModelOptions]="{standalone: true}" matInput
-          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Họ Tên'" />
+          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Name'" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Số Điện Thoại</mat-label>
+        <mat-label>Phone</mat-label>
         <input type="text" [(ngModel)]="User.SDT" [ngModelOptions]="{standalone: true}" matInput
-          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Số Điện Thoại'" />
+          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Phone'" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Email</mat-label>
@@ -33,9 +33,9 @@
           class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Email'" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-full" *ngIf="!User.id">
-        <mat-label>Mật Khẩu</mat-label>
+        <mat-label>Password</mat-label>
         <input type="password" [(ngModel)]="User.password" [ngModelOptions]="{standalone: true}" matInput
-          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Mật Khẩu'" />
+          class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Password'" />
       </mat-form-field>
     </div>
   </mat-drawer>
@@ -44,26 +44,26 @@
       <div class="flex flex-col w-full p-4 rounded shadow-lg bg-white">
         <div class="flex flex-col justify-between space-y-2">
           <mat-form-field appearance="outline" class="w-full text-xs">
-            <mat-label>Tìm Kiếm</mat-label>
-            <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Tìm Kiếm" #input>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Search" #input>
             <span matPrefix class="material-icons mr-2">search</span>
           </mat-form-field>
           <div class="flex flex-row space-x-3 justify-start w-full">
             <div class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-              <span class="material-icons text-xl" matTooltip="Tùy Chỉnh">tune</span>
-              <span class="text-xs">Cấu Hình</span>
+              <span class="material-icons text-xl" matTooltip="Config">tune</span>
+              <span class="text-xs">Config</span>
             </div>
             <div (click)="drawer.toggle();this.User={}"
               class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-              <span class="material-icons text-xl" matTooltip="Tạo mới">add_circle</span>
-              <span class="text-xs">Thêm</span>
+              <span class="material-icons text-xl" matTooltip="Add New">add_circle</span>
+              <span class="text-xs">Add</span>
             </div>
           </div>
         </div>
         <div class="mat-elevation-z8 w-full">
           <table class="w-full" mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="Hoten">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ Tên </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
               <td mat-cell *matCellDef="let row" (click)="drawer.toggle();User=row"> {{row.Hoten}} </td>
             </ng-container>
             <ng-container matColumnDef="email">
@@ -71,11 +71,11 @@
               <td mat-cell *matCellDef="let row" (click)="drawer.toggle();User=row"> {{row.email}} </td>
             </ng-container>
             <ng-container matColumnDef="SDT">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Số Điện Thoại </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
               <td mat-cell *matCellDef="let row"> {{row.SDT}} </td>
             </ng-container>
             <ng-container matColumnDef="Role">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Phân Quyền </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Permission </th>
               <td mat-cell *matCellDef="let row">
                 <button mat-button [matMenuTriggerFor]="menu" class="border"> {{Role[row.Role]}}</button>
                 <mat-menu #menu="matMenu">

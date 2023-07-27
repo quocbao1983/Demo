@@ -92,7 +92,7 @@ export class SellerComponent implements OnInit {
     this._LivechatService.addExchange(dulieu)
     this._ExchangeService.createExchange(dulieu).subscribe(data => 
       {
-        const result = `Có 1 giao dịch BÁN mới Mã đơn hàng ${data.Code}`
+        const result = `Có 1 transaction BÁN mới Mã đơn hàng ${data.Code}`
         this._TelegramService.createTelegram(result).subscribe();
         this._NotifierService.notify("success", this.trans['sell_create_success']||'sell_create_success')
           this.router.navigate(['transfer',data.id]);

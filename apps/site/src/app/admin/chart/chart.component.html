@@ -9,34 +9,34 @@
   <div class="relative h-full w-full overflow-auto flex flex-col space-y-2 justify-between p-4">
     <div class="grid grid-cols-4 gap-2 text-sm">
       <mat-form-field appearance="outline" class="w-full text-xs p-0">
-        <mat-label>Tìm Kiếm</mat-label>
-        <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Tìm Kiếm" #input>
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Search" #input>
         <span matPrefix class="material-icons mr-2">search</span>
      </mat-form-field>
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Chọn Ngày</mat-label>
+        <mat-label>Choosen</mat-label>
         <input [(ngModel)]="chart.Ngayformat" [ngModelOptions]="{standalone: true}" matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Giá Bán</mat-label>
+          <mat-label>Sell Price</mat-label>
           <input [(ngModel)]="chart.Buy" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
             [placeholder]="'Tổng Bán'"/>
         </mat-form-field>  
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Giá Mua</mat-label>
+          <mat-label>Buy Price</mat-label>
           <input [(ngModel)]="chart.Sell" [ngModelOptions]="{standalone: true}" type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
             [placeholder]="'Tổng Mua'"/>
         </mat-form-field> 
     </div>
     <div class="flex flex-row space-x-3 justify-start w-full">
       <div class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Tùy Chỉnh">tune</span>
-        <span class="text-xs">Cấu Hình</span>
+        <span class="material-icons text-xl" matTooltip="Config">tune</span>
+        <span class="text-xs">Config</span>
       </div>
       <div (click)="writeExcelFile()" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Lấy Mẫu">file_download</span>
+        <span class="material-icons text-xl" matTooltip="Download">file_download</span>
         <span class="text-xs">Download</span>
       </div>
       <div (click)="uploadfile.click()" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
@@ -45,19 +45,19 @@
         <input class="hidden" (change)="readExcelFile($event)" type="file" #uploadfile>
       </div>
       <div *ngIf="!chart.id" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Tạo mới" (click)="AddChart(chart)">add_circle</span>
-        <span class="text-xs">Thêm</span>
+        <span class="material-icons text-xl" matTooltip="Add New" (click)="AddChart(chart)">add_circle</span>
+        <span class="text-xs">Add</span>
       </div>
       <div *ngIf="chart.id" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Tạo mới" (click)="chart={}">close</span>
+        <span class="material-icons text-xl" matTooltip="Add New" (click)="chart={}">close</span>
         <span class="text-xs">Reset</span>
       </div>
       <div *ngIf="chart.id" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Tạo mới" (click)="Updatechart()">update</span>
+        <span class="material-icons text-xl" matTooltip="Add New" (click)="Updatechart()">update</span>
         <span class="text-xs">Sửa</span>
       </div>
       <div *ngIf="chart.id" class="flex flex-col items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-        <span class="material-icons text-xl" matTooltip="Tạo mới" (click)="Deletechart()">delete</span>
+        <span class="material-icons text-xl" matTooltip="Add New" (click)="Deletechart()">delete</span>
         <span class="text-xs">Xoá</span>
       </div>
     </div>

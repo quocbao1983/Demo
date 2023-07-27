@@ -1,12 +1,12 @@
 {
 	"Tong_quy_mua":"TỔNG QUỸ JPY CÓ THỂ MUA",
 	"Tong_quy_ban":"TỔNG QUỸ JPY CÓ THỂ BÁN",
-	"Gia_mua":"Giá Mua :",
+	"Gia_mua":"Buy Price :",
 	"Mua_ngay":"MUA NGAY",
-	"Gia_ban":"Giá Bán :",
+	"Gia_ban":"Sell Price :",
 	"Ban_ngay":"BÁN NGAY",
-	"Noi_dung_trang_chu":"*Hoàn tất giao dịch trong vòng 15 phút hoặc được hoàn tiền",
-	"Cac_giao_dich_thanh_cong":"CÁC GIAO DỊCH THÀNH CÔNG",
+	"Noi_dung_trang_chu":"*Hoàn tất transaction trong vòng 15 phút hoặc được hoàn tiền",
+	"Cac_giao_dich_thanh_cong":"CÁC TRANSACTION THÀNH CÔNG",
 	"Fee":"Phí : ",
 	"So_luong":"Số Lượng : "
 }

@@ -54,12 +54,12 @@ export class DangnhapComponent implements OnInit {
   Dangnhap(user: any) {
     if (user.SDT == undefined || user.SDT == '') {
       this._notifierService.show({
-        message: 'Vui lòng nhập số điện thoại',
+        message: 'Please enter phone',
         type: 'error',
       });
     } else if (user.password == undefined || user.password == '') {
       this._notifierService.show({
-        message: 'Vui lòng nhập Mật Khẩu',
+        message: 'Please enter Password',
         type: 'error',
       });
     } else {

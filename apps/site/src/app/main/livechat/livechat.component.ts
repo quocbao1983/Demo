@@ -121,7 +121,7 @@ export class LivechatComponent implements OnInit {
    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
    if (email=='')
     {
-      this._NotifierService.notify("error", "Vui lòng nhập Email")
+      this._NotifierService.notify("error", "Please enter Email")
     }
     else if (!emailPattern.test(email)) {
       this._NotifierService.notify("error", "Sai Định Dạng Email")

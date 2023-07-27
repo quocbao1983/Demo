@@ -47,7 +47,7 @@ export class FemailComponent implements OnInit {
   {
     if(data.Email=='')
     {
-      this._NotifierService.notify("error","Vui lòng Nhập Email")
+      this._NotifierService.notify("error","Please enter Email")
     }
     else
     {
@@ -55,7 +55,7 @@ export class FemailComponent implements OnInit {
       data.Ngaytao = new Date().getTime();
       this._LivechatService.addExchange(data)
       this.ngOnInit();
-      this._NotifierService.notify("success","Thêm Thành Công")
+      this._NotifierService.notify("success","Add Thành Công")
     }
   }
     readExcelFile(event: any) {

@@ -103,7 +103,7 @@ export class MainComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       // if (result) {
-      //   this._RedirectService.createRedirect(this.Detail).subscribe((data)=>this._Notification.notify('success','Thêm mới thành công'))
+      //   this._RedirectService.createRedirect(this.Detail).subscribe((data)=>this._Notification.notify('success','Add mới thành công'))
       // }
     });
   }
